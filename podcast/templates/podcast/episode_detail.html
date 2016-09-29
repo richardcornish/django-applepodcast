@@ -9,12 +9,10 @@
 {% block content %}
 
 <ul>
-{% if not podcast_singular %}
+    {% if not podcast_singular %}
     <li><a href="{% url 'podcast:show_list' %}">{% trans 'Podcasts' %}</a></li>
-    <li><a href="{% url 'podcast:show_detail' episode.show.slug %}">{{ episode.show.title }}</a></li>
-{% else %}
-    <li><a href="{% url 'podcast:show_detail' %}">{{ episode.show.title }}</a></li>
-{% endif %}
+    {% endif %}
+    <li><a href="{{ episode.show.get_absolute_url }}">{{ episode.show.title }}</a></li>
 </ul>
 
 <h1>{{ episode.title }}</h1>
