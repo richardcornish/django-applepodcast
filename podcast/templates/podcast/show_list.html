@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+
+{% block title %}{% trans 'Podcasts' %} &#183; {{ block.super }}{% endblock %}
+
+
+{% block content %}
+
+<h1>{% trans 'Podcasts' %}</h1>
+
+{% blocktrans count show_count=page_obj.paginator.count %}
+<p>{{ show_count }} show</p>
+{% plural %}
+<p>{{ show_count }} shows</p>
+{% endblocktrans %}
+
+{% if show_list %}
+
+    {% for show in show_list %}
+        <h2><a href="{{ show.get_absolute_url }}">{{ show.title }}</a></h2>
+        <div>
+            <a href="{{ show.get_absolute_url }}"><img src="{{ show.get_image_url }}" alt="{{ show.title }} artwork" width="300"></a>
+        </div>
+        {% if show.description %}
+        <p>{{ show.description|safe }}</p>
+        {% endif %}
+    {% endfor %}
+
+    {% include 'podcast/pagination.html' %}
+
+{% endif %}
+
+{% endblock %}

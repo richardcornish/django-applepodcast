@@ -1,0 +1,32 @@
+[
+{
+    "model": "podcast.show",
+    "pk": 1,
+    "fields": {
+        "title": "All About Everything",
+        "slug": "all-about-everything",
+        "image": "",
+        "description": "All About Everything is a show about everything. Each week we dive into any subject known to man and talk about it as much as we can. Look for our podcast in the Podcasts app or in the iTunes Store",
+        "ttl": "1440",
+        "subtitle": "A show about everything",
+        "summary": "",
+        "author_name": "John Doe",
+        "author_email": "john.doe@example.com",
+        "owner_name": "",
+        "owner_email": "",
+        "copyright": "John Doe & Family",
+        "explicit": false,
+        "block": false,
+        "complete": false,
+        "itunes": "",
+        "categories": [
+            1,
+            19,
+            16,
+            15,
+            64
+        ],
+        "hosts": []
+    }
+}
+]

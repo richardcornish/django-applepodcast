@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
+<channel>
+    <!-- <title></title> -->
+    <!-- <link></link> -->
+    <!-- <description></description> -->
+    <!-- <language></language> -->
+    <!-- <copyright>&#x2117; &amp; &#xA9; 2014 John Doe &amp; Family</copyright> -->
+    <!-- <category></category> -->
+    <!-- <ttl>60</ttl> -->
+    <!-- <image> -->
+        <!-- <url></url> -->
+        <!-- <title></title> -->
+        <!-- <link></link> -->
+    <!-- </image> -->
+    <!-- <itunes:author></itunes:author> -->
+    <!-- <itunes:block>Yes</itunes:block> -->
+    <!-- <itunes:category text="Society &amp; Culture"> -->
+        <!-- <itunes:category text="History" /> -->
+    <!-- </itunes:category> -->
+    <!-- <itunes:category text="Technology"> -->
+        <!-- <itunes:category text="Gadgets" /> -->
+    <!-- </itunes:category> -->
+    <!-- <itunes:image href="" /> -->
+    <!-- <itunes:explicit>Explicit|Clean</itunes:explicit> -->
+    <!-- <itunes:complete>Yes</itunes:complete> -->
+    <!-- <itunes:owner> -->
+        <!-- <itunes:email></itunes:email> -->
+        <!-- <itunes:name></itunes:name> -->
+    <!-- </itunes:owner> -->
+    <!-- <itunes:subtitle></itunes:subtitle> -->
+    <!-- <itunes:summary><![CDATA[<a href="http://www.apple.com">Apple</a>]]></itunes:summary> -->
+    <item>
+        <!-- <title></title> -->
+        <!-- <link></link> -->
+        <!-- <description></description> -->
+        <!-- <author>email@example.com</author> -->
+        <!-- <category>Category 1</category> -->
+        <!-- <category>Category 2</category> -->
+        <!-- <comments></comments> -->
+        <!-- <enclosure url="" length="" type="audio/mpeg" /> -->
+        <!-- <guid></guid> -->
+        <!-- <pubDate>RFC 2822</pubDate> -->
+        <!-- <source url=""></source> -->
+        <!-- <itunes:author></itunes:author> -->
+        <!-- <itunes:block></itunes:block> -->
+        <!-- <itunes:image href="" /> -->
+        <!-- <itunes:duration>H:MM:SS</itunes:duration> -->
+        <!-- <itunes:explicit>Explicit|Clean</itunes:explicit> -->
+        <!-- <itunes:isClosedCaptioned>Yes</itunes:isClosedCaptioned> -->
+        <!-- <itunes:subtitle></itunes:subtitle> -->
+        <!-- <itunes:summary><![CDATA[<a href="http://www.apple.com">Apple</a>]]></itunes:summary> -->
+    </item>
+</channel>
+</rss>

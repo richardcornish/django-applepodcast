@@ -1,0 +1,50 @@
+[
+{
+    "model": "podcast.enclosure",
+    "pk": 1,
+    "fields": {
+        "episode": 1,
+        "file": "podcast/enclosures/files/01_S01_Episode_01__The_Alibi.mp3",
+        "timedelta": "00:53:31",
+        "type": "audio/mpeg",
+        "poster": "",
+        "cc": false
+    }
+},
+{
+    "model": "podcast.enclosure",
+    "pk": 2,
+    "fields": {
+        "episode": 2,
+        "file": "podcast/enclosures/files/02_S01_Episode_02__The_Breakup.mp3",
+        "timedelta": "00:35:45",
+        "type": "audio/mpeg",
+        "poster": "",
+        "cc": false
+    }
+},
+{
+    "model": "podcast.enclosure",
+    "pk": 3,
+    "fields": {
+        "episode": 3,
+        "file": "podcast/enclosures/files/03_S01_Episode_03__Leakin_Park.mp3",
+        "timedelta": "00:27:45",
+        "type": "audio/mpeg",
+        "poster": "",
+        "cc": true
+    }
+},
+{
+    "model": "podcast.enclosure",
+    "pk": 4,
+    "fields": {
+        "episode": 4,
+        "file": "podcast/enclosures/files/04_S01_Episode_04__Inconsistencies.mp3",
+        "timedelta": "00:33:10",
+        "type": "audio/mpeg",
+        "poster": "",
+        "cc": false
+    }
+}
+]

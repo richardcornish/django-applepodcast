@@ -1,0 +1,7 @@
+include LICENSE
+include MANIFEST.in
+include README.rst
+recursive-include docs *
+recursive-include podcast/fixtures *
+recursive-include podcast/static *
+recursive-include podcast/templates *

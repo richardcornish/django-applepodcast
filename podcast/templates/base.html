@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+
+{% load i18n staticfiles %}
+{% get_current_language as LANGUAGE_CODE %}
+
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}Django iTunes Podcast Demo{% endblock %}</title>
+</head>
+<body>
+
+    {% block content %}
+    {% endblock %}
+
+</body>
+</html>

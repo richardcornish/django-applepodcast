@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% load i18n staticfiles %}
+
+
+{% block title %}{{ episode.title }} &#183; {{ block.super }}{% endblock %}
+
+
+{% block content %}
+
+<ul>
+{% if not podcast_singular %}
+    <li><a href="{% url 'podcast:show_list' %}">{% trans 'Podcasts' %}</a></li>
+    <li><a href="{% url 'podcast:show_detail' episode.show.slug %}">{{ episode.show.title }}</a></li>
+{% else %}
+    <li><a href="{% url 'podcast:show_detail' %}">{{ episode.show.title }}</a></li>
+{% endif %}
+</ul>
+
+<h1>{{ episode.title }}</h1>
+
+<p>{% trans 'Episode'%} {{ episode.order }}</p>
+
+<p><time datetime="{{ episode.pub_date|date:'c' }}" title="{{ episode.pub_date|date:'c' }}">{{ episode.pub_date|date:'j F Y' }}</time></p>
+
+{% if episode.enclosure %}
+{% with enclosure=episode.enclosure %}
+
+    {# Audio #}
+    {% if enclosure.type == 'audio/mpeg' or enclosure.type == 'audio/x-m4a' %}
+    <audio src="{{ enclosure.file.url }}" controls>
+        <p><a href="{{ enclosure.file.url }}">{% trans 'Download the audio' %}</a>.</p>
+    </audio>
+    <p>{{ enclosure.get_duration }}</p>
+
+    {# Video #}
+    {% elif enclosure.type == 'video/mp4' or enclosure.type == 'video/x-m4v' or enclosure.type == 'video/quicktime' %}
+    <video poster="{{ enclosure.get_poster_url }}" controls>
+        <source src="{{ enclosure.file.url }}" type="{{ enclosure.type }}">
+        <p><a href="{{ enclosure.file.url }}">{% trans 'Download the video' %}</a>.</p>
+    </video>
+    <p>{{ enclosure.get_duration }}</p>    
+    {% endif %}
+
+    <p><a href="{{ episode.get_absolute_download_url }}">{% trans 'Download the' %} {{ enclosure.get_megabytes }} {% trans 'MB' %} {{ enclosure.get_type_display }}</a>.</p>
+
+{% endwith %}
+{% endif %}
+
+<h2>{% trans 'Artwork' %}</h2>
+<p><a href="{{ episode.show.get_image_url }}"><img src="{{ episode.show.get_image_url }}" alt="{{ episode.title }} artwork" width="300"></a></p>
+
+{% if episode.description %}
+<h2>{% trans 'Description' %}</h2>
+<p>{{ episode.description|safe }}</p>
+{% endif %}
+
+<h2>{% trans 'Subscribe' %}</h2>
+
+<p>{% if episode.show.itunes %}<a href="{{ episode.show.itunes }}">{% endif %}<img src="{% static 'podcast/img/itunes-badge.min.svg' %}" alt="{% trans 'Get it on iTunes' %}">{% if episode.show.itunes %}</a>{% endif %}</p>
+<p><a href="{{ episode.show.get_absolute_feed_url }}">{% trans 'RSS' %}</a></p>
+
+{% if episode.get_previous or episode.get_next %}
+<ul>
+    {% if episode.get_next %}
+    <li><a href="{{ episode.get_next.get_absolute_url }}">&larr; {% trans 'Episode' %} {{ episode.get_next.order }}: {{ episode.get_next.title }}</a></li>
+    {% endif %}
+    {% if episode.get_previous %}
+    <li><a href="{{ episode.get_previous.get_absolute_url }}">{% trans 'Episode' %} {{ episode.get_previous.order }}: {{ episode.get_previous.title }} &rarr;</a></li>
+    {% endif %}
+</ul>
+{% endif %}
+
+{% endblock %}
