@@ -36,7 +36,7 @@
         "image": "podcast/episodes/episode-2.png",
         "explicit": false,
         "block": false,
-        "order": 1,
+        "order": 2,
         "hosts": [],
         "guests": []
     }
@@ -78,7 +78,7 @@
         "image": "podcast/episodes/episode-4.png",
         "explicit": false,
         "block": false,
-        "order": 1,
+        "order": 4,
         "hosts": [],
         "guests": []
     }
