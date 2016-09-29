@@ -15,7 +15,7 @@ register = template.Library()
 def show_url(context, *args, **kwargs):
     """Return the show feed URL with different protocol."""
     if len(kwargs) != 2:
-        raise TemplateSyntaxError(_('"show_feed_url" tag takes exactly two keyword arguments.'))
+        raise TemplateSyntaxError(_('"show_url" tag takes exactly two keyword arguments.'))
     current_site = get_current_site(context['request'])
     url = add_domain(current_site.domain, kwargs['url'])
     return re.sub(r'https?:\/\/', '%s://' % kwargs['protocol'], url)
