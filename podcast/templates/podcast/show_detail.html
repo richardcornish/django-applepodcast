@@ -50,13 +50,13 @@
 <h2>{% trans 'Categories' %}</h2>
 <ul>
     {% for key, value in show.get_categories_dict %}
-        <li>{{ key }}
-            <ul>
-                {% for v in value %}
-                <li>{{ v }}</li>
-                {% endfor %}
-            </ul>
-        </li>
+    <li>{{ key }}
+        <ul>
+            {% for v in value %}
+            <li>{{ v }}</li>
+            {% endfor %}
+        </ul>
+    </li>
     {% endfor %}
 </ul>
 {% endif %}
