@@ -7,7 +7,7 @@ from .views import EpisodeDownloadView, EpisodeDetailView, ShowDetailView, ShowL
 from . import settings
 
 
-# app_name = 'podcast'
+app_name = 'podcast'
 
 singular = [
     url(r'^feed/$', ShowFeed(), name='show_feed'),
