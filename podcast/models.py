@@ -173,7 +173,6 @@ class Episode(models.Model):
     block = models.BooleanField(_("block?"), default=False, help_text=_("Prevents episode from appearing on the iTunes Store"))
     hosts = models.ManyToManyField(Speaker, verbose_name=_("hosts"), related_name="host", blank=True, help_text=_("If different from show hosts"))
     guests = models.ManyToManyField(Speaker, verbose_name=_("guests"), related_name="guest", blank=True)
-    order = models.PositiveIntegerField(_("order"))
 
     class Meta:
         ordering = ["-pub_date"]
@@ -182,15 +181,6 @@ class Episode(models.Model):
 
     def __str__(self):
         return "%s" % self.title
-
-    def save(self, *args, **kwargs):
-        """Not sure this is the best way to auto-update episode orders."""
-        queryset = Episode.objects.filter(show=self.show).order_by('pub_date')
-        try:
-            self.order = list(queryset.values_list('id', flat=True)).index(self.id) + 1
-        except ValueError:
-            self.order = 1
-        super(Episode, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
         if settings.PODCAST_SINGULAR:
