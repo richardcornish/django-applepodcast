@@ -15,7 +15,6 @@
         "image": "podcast/episodes/episode-1.png",
         "explicit": false,
         "block": false,
-        "order": 1,
         "hosts": [],
         "guests": []
     }
@@ -36,7 +35,6 @@
         "image": "podcast/episodes/episode-2.png",
         "explicit": false,
         "block": false,
-        "order": 2,
         "hosts": [],
         "guests": []
     }
@@ -57,7 +55,6 @@
         "image": "podcast/episodes/episode-3.png",
         "explicit": false,
         "block": false,
-        "order": 3,
         "hosts": [],
         "guests": []
     }
@@ -78,7 +75,6 @@
         "image": "podcast/episodes/episode-4.png",
         "explicit": false,
         "block": false,
-        "order": 4,
         "hosts": [],
         "guests": []
     }
