@@ -1,7 +1,7 @@
 .. _index:
 .. module:: podcast
 
-.. image:: _static/img/logo.png
+.. image:: _static/img/logo.svg
 
 Django iTunes Podcast
 *********************

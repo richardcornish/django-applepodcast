@@ -1,4 +1,4 @@
-.. image:: https://raw.githubusercontent.com/richardcornish/django-itunespodcast/master/docs/_static/img/logo.png
+.. image:: https://raw.githubusercontent.com/richardcornish/django-itunespodcast/master/docs/_static/img/logo.svg
 
 Django iTunes Podcast
 *********************
