@@ -60,7 +60,6 @@
 
 {% if episode.get_previous or episode.get_next %}
 <ul>
-    {{ episode.get_next.index }}
     {% if episode.get_next %}
     <li><a href="{{ episode.get_next.get_absolute_url }}">&larr; {% trans 'Episode' %} {{ episode.index_next }}: {{ episode.get_next.title }}</a></li>
     {% endif %}
