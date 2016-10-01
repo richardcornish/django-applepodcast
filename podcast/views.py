@@ -53,16 +53,15 @@ class ShowDetailView(PodcastSingularMixin, SingleObjectMixin, MultipleObjectMixi
 
 
 class EpisodeDetailView(PodcastSingularMixin, DetailView):
-    def get_show(self):
-        if settings.PODCAST_SINGULAR:
-            return Show.objects.get(id=settings.PODCAST_ID)
-        else:
-            return Show.objects.get(slug=self.kwargs['show_slug'])
 
     def get_object(self, queryset=None):
         """Return object with episode number attached to episode."""
-        episode = Episode.objects.get(show=self.get_show(), slug=self.kwargs['slug'])
-        index = Episode.objects.filter(show=self.get_show(), pub_date__lt=episode.pub_date).count()
+        if settings.PODCAST_SINGULAR:
+            show = Show.objects.get(id=settings.PODCAST_ID)
+        else:
+            show = Show.objects.get(slug=self.kwargs['show_slug'])
+        episode = Episode.objects.get(show=show, slug=self.kwargs['slug'])
+        index = Episode.objects.filter(show=show, pub_date__lt=episode.pub_date).count()
         episode.index = index + 1
         episode.index_next = episode.index + 1
         episode.index_previous = episode.index - 1
