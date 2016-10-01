@@ -3,7 +3,7 @@
 Settings
 ********
 
-The app comes offers several settings. By default, they are:
+The app offers several settings. By default, they are:
 
 .. code-block:: python
 
@@ -20,7 +20,7 @@ The app comes offers several settings. By default, they are:
 
 A boolean indicating display of multiple podcast shows.
 
-The app displays a single podcast show by default. If you would like to display multiple shows, set the ``PODCAST_SINGULAR`` variable in ``settings.py``.
+The app displays a single show by default. If you would like to display multiple shows, set the ``PODCAST_SINGULAR`` variable in ``settings.py``.
 
 .. code-block:: python
 
@@ -38,7 +38,7 @@ If you have multiple shows, you might want to edit the URL pattern in ``urls.py`
 ``PODCAST_ID``
 ==============
 
-An integer indicating the primary key of which show to display; used when ``PODCAST_SINGULAR`` is ``True``. Concept modeled after the |SITE_ID|_ setting used in the `Sites <https://docs.djangoproject.com/en/1.10/ref/contrib/sites/>`_ application.
+An integer indicating the primary key of the show to display; used when ``PODCAST_SINGULAR`` is ``True``. Concept modeled after the |SITE_ID|_ setting used in the `Sites <https://docs.djangoproject.com/en/1.10/ref/contrib/sites/>`_ application.
 
 .. |SITE_ID| replace:: ``SITE_ID``
 .. _SITE_ID: https://docs.djangoproject.com/en/1.10/ref/settings/#site-id
@@ -50,7 +50,7 @@ The app displays the first show by default.
 
 A string indicating the path to an image used when artwork is lacking; used for shows, episodes, and video enclosures.
 
-Although the path can be customized in the setting, you're probably better off overriding the image look up at the project level; that is creating a new image at ``myproject/static/podcast/img/no_artwork.png``.
+Although the path can be customized in the setting, you're probably better off overriding the image look up at the project level; that is, creating a new image at ``myproject/static/podcast/img/no_artwork.png``.
 
 ``PODCAST_PAGINATE_BY``
 =======================
