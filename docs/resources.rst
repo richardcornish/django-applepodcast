@@ -9,7 +9,7 @@ Specifications
 ==============
 
 * `RSS 2.0 specification <https://cyber.harvard.edu/rss/rss.html>`_
-* `Apple Podcasts Connect Help <https://help.apple.com/itc/podcasts_connect/#/>`_ (for iTunes-specific tags)
+* `Podcasts Connect Help <https://help.apple.com/itc/podcasts_connect/#/>`_ (for iTunes-specific tags)
 * `Updated iTunes RSS Spec <http://lists.apple.com/archives/syndication-dev/2005/Nov/msg00002.html>`_ (outdated but still useful)
 
 Documentation
@@ -34,4 +34,4 @@ Marketing
 Submission
 ==========
 
-* `Apple Podcasts Connect <https://podcastsconnect.apple.com/>`_
+* `Podcasts Connect <https://podcastsconnect.apple.com/>`_
