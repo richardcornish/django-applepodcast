@@ -52,8 +52,8 @@
     {% for key, value in show.get_categories_dict %}
     <li>{{ key }}
         <ul>
-            {% for v in value %}
-            <li>{{ v }}</li>
+            {% for sub in value %}
+            <li>{{ sub }}</li>
             {% endfor %}
         </ul>
     </li>
