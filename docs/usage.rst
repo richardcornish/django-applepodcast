@@ -51,7 +51,7 @@ Therefore, enclosures are modeled as |OneToOneField|_ s off of episodes, limitin
 .. |OneToOneField| replace:: ``OneToOneField``
 .. _OneToOneField: https://docs.djangoproject.com/en/1.10/ref/models/fields/#onetoonefield
 
-Apple does not host enclosure files; it is the responsibility of the developer to host them. Because an enclosure's file is a |FileField|_, files are uploaded to your |MEDIA_ROOT|_ setting. If you haven't already, your ``urls.py`` should include patterns for interfacing with files in local development.
+The iTunes Store does not host enclosure files; it is the responsibility of the developer to host them. Because an enclosure's file is a |FileField|_, files are uploaded to your |MEDIA_ROOT|_ setting. If you haven't already, your ``urls.py`` should include patterns for interfacing with files in local development.
 
 .. code-block:: python
 
