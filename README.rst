@@ -1,5 +1,3 @@
-.. image:: https://django-itunespodcast.readthedocs.io/en/latest/_images/logo.svg
-
 Django iTunes Podcast
 *********************
 
