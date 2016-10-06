@@ -1,3 +1,5 @@
+.. image:: https://django-itunespodcast.readthedocs.io/en/latest/_images/logo.svg?
+
 Django iTunes Podcast
 *********************
 
@@ -10,8 +12,6 @@ Django iTunes Podcast
 .. |Build status| image::
    https://travis-ci.org/richardcornish/django-itunespodcast.svg?branch=master
 .. _Build status: https://travis-ci.org/richardcornish/django-itunespodcast
-
-.. image:: https://django-itunespodcast.readthedocs.io/en/latest/_images/logo.svg
 
 **Django iTunes Podcast** is a `Django podcast application <https://docs.djangoproject.com/en/1.10/intro/reusable-apps/>`_ optimized for the `iTunes Store <https://podcastsconnect.apple.com/>`_.
 
