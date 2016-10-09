@@ -61,7 +61,8 @@ class ItunesFeed(Rss201rev2Feed):
                 handler.addQuickElement('itunes:category', '', {'text': sub})
             handler.endElement('itunes:category')
         handler.addQuickElement('itunes:explicit', self.feed['itunes']['explicit'])
-        handler.addQuickElement('itunes:block', self.feed['itunes']['block'])
+        if self.feed['itunes']['block'] == 'yes':
+            handler.addQuickElement('itunes:block', self.feed['itunes']['block'])
         handler.addQuickElement('itunes:complete', self.feed['itunes']['complete'])
 
     def add_item_elements(self, handler, item):
@@ -79,7 +80,8 @@ class ItunesFeed(Rss201rev2Feed):
         if item['itunes']['image']:
             handler.addQuickElement('itunes:image', '', {'href': item['itunes']['image']})
         handler.addQuickElement('itunes:explicit', item['itunes']['explicit'])
-        handler.addQuickElement('itunes:block', item['itunes']['block'])
+        if item['itunes']['block'] == 'yes':
+            handler.addQuickElement('itunes:block', item['itunes']['block'])
         if item['itunes']['cc']:
             handler.addQuickElement('itunes:isClosedCaptioned', item['itunes']['cc'])
         if item['itunes']['duration']:
