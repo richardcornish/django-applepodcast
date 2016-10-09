@@ -106,9 +106,6 @@ class ShowFeed(Feed):
     def categories(self, obj):
         return tuple(category.full for category in obj.categories.all())
 
-    def ttl(self, obj):
-        return '%s' % obj.ttl
-
     def feed_extra_kwargs(self, obj):
         copyright = escape('%s & %s %s %s') % ('&#x2117;', '&#xA9;', timezone.now().year, escape(obj.copyright or obj.title))
         return {

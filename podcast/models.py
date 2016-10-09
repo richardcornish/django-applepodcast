@@ -75,16 +75,10 @@ class Category(models.Model):
 
 @python_2_unicode_compatible
 class Show(models.Model):
-    TTL_CHOICES = (
-        ("60", _("1 hour")),
-        ("1440", _("1 day")),
-        ("10080", _("1 week")),
-    )
     title = models.CharField(_("title"), max_length=255)
     slug = models.SlugField(_("slug"), unique=True)
     image = models.ImageField(_("image"), upload_to="podcast/shows/", blank=True, help_text=_("1400&times;1400&ndash;3000&times;3000px; 72DPI; JPG, PNG; RGB; if blank, default <a href=\"%s\">no artwork</a> is used") % staticfiles_storage.url(settings.PODCAST_NO_ARTWORK))
     description = models.TextField(_("description"), help_text=_("Accepts HTML"))
-    ttl = models.CharField(_("TTL"), max_length=255, choices=TTL_CHOICES, default="1440", help_text=_("Time to live; how often the feed is refreshed"))
     subtitle = models.CharField(_("subtitle"), max_length=255, help_text=_("Accepts HTML"))
     summary = models.TextField(_("summary"), blank=True, max_length=4000, help_text=_("Max length of 4,000 characters; accepts HTML; if blank, uses show's description"))
     author_name = models.CharField(_("author name"), max_length=255, help_text=_("Appears as the \"artist\" of the podcast"))
