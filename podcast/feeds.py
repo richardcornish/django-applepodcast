@@ -63,8 +63,6 @@ class ItunesFeed(Rss201rev2Feed):
 
     def add_item_elements(self, handler, item):
         super(ItunesFeed, self).add_item_elements(handler, item)
-        if item['itunes']['author']['email']:
-            handler.addQuickElement('author', item['itunes']['author']['email'])  # item author
         if item['itunes']['subtitle']:
             handler.addQuickElement('itunes:subtitle', item['itunes']['subtitle'], escape=False, cdata=True)
         if item['itunes']['summary']:
