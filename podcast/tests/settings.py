@@ -33,5 +33,7 @@ USE_TZ = True
 
 ROOT_URLCONF = 'podcast.urls'
 
+
 import django
-django.setup()
+if hasattr(django, 'setup'):  # < Django 1.9
+    django.setup()
