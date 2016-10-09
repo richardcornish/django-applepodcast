@@ -38,11 +38,6 @@ class ItunesFeed(Rss201rev2Feed):
     def add_root_elements(self, handler):
         super(ItunesFeed, self).add_root_elements(handler)
         handler.addQuickElement('copyright', self.feed['copyright'], escape=False, cdata=False)
-        handler.startElement('image', {})
-        handler.addQuickElement('url', self.feed['image']['url'])
-        handler.addQuickElement('title', self.feed['image']['title'])
-        handler.addQuickElement('link', self.feed['image']['link'])
-        handler.endElement('image')
         if self.feed['itunes']['subtitle']:
             handler.addQuickElement('itunes:subtitle', self.feed['itunes']['subtitle'], escape=False, cdata=True)
         if self.feed['itunes']['summary']:
@@ -116,16 +111,8 @@ class ShowFeed(Feed):
 
     def feed_extra_kwargs(self, obj):
         copyright = escape('%s & %s %s %s') % ('&#x2117;', '&#xA9;', timezone.now().year, escape(obj.copyright or obj.title))
-        current_site = get_current_site(self.request)
-        image_url = add_domain(current_site.domain, obj.get_image_url(), self.request.is_secure())
-        image_link = add_domain(current_site.domain, obj.get_absolute_url(), self.request.is_secure())
         return {
             'copyright': copyright,
-            'image': {
-                'url': image_url,
-                'title': obj.title,
-                'link': image_link,
-            },
             'itunes': {
                 'subtitle': obj.subtitle,
                 'summary': obj.summary,
