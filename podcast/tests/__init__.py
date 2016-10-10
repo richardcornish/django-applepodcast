@@ -128,7 +128,7 @@ class PodcastTestCase(TestCase):
     def test_show_feed(self):
         response = self.client.get(reverse('podcast:show_feed'))
         with open(os.path.join(os.path.dirname(__file__), 'feeds/itunes.xml'), 'r') as f:
-            xml_1 = response.content.decode('utf-8').replace('http://testserverstatic', 'http://testserver/static')
+            xml_1 = response.content.decode('utf-8').replace('http://testserverpodcast', 'http://testserver/podcast')
             xml_2 = f.read()
             self.maxDiff = None
             self.assertXMLEqual(xml_1, xml_2)
