@@ -53,7 +53,6 @@ class ShowDetailView(PodcastSingularMixin, SingleObjectMixin, MultipleObjectMixi
 
 
 class EpisodeDetailView(PodcastSingularMixin, DetailView):
-
     def get_object(self, queryset=None):
         """Return object with episode number attached to episode."""
         if settings.PODCAST_SINGULAR:
