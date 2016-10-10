@@ -141,9 +141,6 @@ class ShowFeed(Feed):
     def item_pubdate(self, item):
         return item.pub_date
 
-    def item_categories(self, item):
-        return tuple(category.full for category in item.show.categories.all())
-
     def item_enclosure_url(self, item):
         try:
             current_site = get_current_site(self.request)
