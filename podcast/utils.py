@@ -32,6 +32,12 @@ class EscapeFriendlyXMLGenerator(SimplerXMLGenerator):
             self.characters(contents, escape=escape, cdata=cdata)
         self.endElement(name)
 
+    def _finish_pending_start_element(self, endElement=False):
+        """Method not available in < Python 2.7."""
+        if self._pending_start_element:
+            self._write('>')
+            self._pending_start_element = False
+
     def characters(self, content, **kwargs):
         # Django
         if content and re.search(r'[\x00-\x08\x0B-\x0C\x0E-\x1F]', content):
