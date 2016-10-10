@@ -5,3 +5,5 @@ recursive-include docs *
 recursive-include podcast/fixtures *
 recursive-include podcast/static *
 recursive-include podcast/templates *
+recursive-include podcast/tests/feeds *
+recursive-include podcast/tests/static *
