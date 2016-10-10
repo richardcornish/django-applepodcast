@@ -3,7 +3,13 @@ from __future__ import unicode_literals
 import re
 from xml.sax.saxutils import escape as _escape
 
-from django.utils.xmlutils import SimplerXMLGenerator, UnserializableContentError
+from django.utils.xmlutils import SimplerXMLGenerator
+
+try:
+    from django.utils.xmlutils import UnserializableContentError
+except ImportError:  # < Django 1.9
+    class UnserializableContentError(ValueError):
+        pass
 
 
 class EscapeFriendlyXMLGenerator(SimplerXMLGenerator):
