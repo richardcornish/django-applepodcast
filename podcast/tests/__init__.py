@@ -31,7 +31,7 @@ class PodcastTestCase(TestCase):
             author_name='John Doe',
             author_email='john.doe@example.com',
             copyright='John Doe & Family',
-            image='static/everything/AllAboutEverything.jpg',
+            image='podcast/tests/static/everything/AllAboutEverything.jpg',
             explicit=False,
             block=False,
             complete=False,
@@ -46,7 +46,7 @@ class PodcastTestCase(TestCase):
             description='This week we talk about <a href="https://itunes/apple.com/us/book/antique-trader-salt-pepper/id429691295?mt=11">salt and pepper shakers</a>, comparing and contrasting pour rates, construction materials, and overall aesthetics. Come and join the party!',
             pub_date=timezone.make_aware(datetime.datetime.strptime('2016-03-08T12:00:00Z', '%Y-%m-%dT%H:%M:%SZ'), pytz.timezone('UTC')),
             subtitle='A short primer on table spices',
-            image='static/everything/AllAboutEverything/Episode1.jpg',
+            image='podcast/tests/static/everything/AllAboutEverything/Episode1.jpg',
             explicit=False,
             block=False,
         )
@@ -60,7 +60,7 @@ class PodcastTestCase(TestCase):
             pub_date=timezone.make_aware(datetime.datetime.strptime('2016-03-09T13:00:00Z', '%Y-%m-%dT%H:%M:%SZ'), pytz.timezone('America/New_York')),
             subtitle='Comparing socket wrenches is fun!',
             author_name='Jane Doe',
-            image='static/everything/AllAboutEverything/Episode2.jpg',
+            image='podcast/tests/static/everything/AllAboutEverything/Episode2.jpg',
             explicit=False,
             block=False,
         )
@@ -74,7 +74,7 @@ class PodcastTestCase(TestCase):
             pub_date=timezone.make_aware(datetime.datetime.strptime('2016-03-10T02:00:00', '%Y-%m-%dT%H:%M:%S'), pytz.timezone('America/Denver')),
             subtitle='Jane and Eric',
             author_name='Jane Doe',
-            image='static/everything/AllAboutEverything/Episode3.jpg',
+            image='podcast/tests/static/everything/AllAboutEverything/Episode3.jpg',
             explicit=False,
             block=False,
         )
@@ -88,7 +88,7 @@ class PodcastTestCase(TestCase):
             pub_date=timezone.make_aware(datetime.datetime.strptime('2016-03-11T01:15:00', '%Y-%m-%dT%H:%M:%S'), pytz.timezone('Europe/Moscow')),
             subtitle='Red + Blue != Purple',
             author_name='Various',
-            image='static/everything/AllAboutEverything/Episode4.jpg',
+            image='podcast/tests/static/everything/AllAboutEverything/Episode4.jpg',
             explicit=False,
             block=False,
         )
@@ -96,7 +96,7 @@ class PodcastTestCase(TestCase):
         # enclosure 1
         Enclosure.objects.create(
             episode=episode_1,
-            file='static/everything/AllAboutEverythingEpisode3.m4a',
+            file='podcast/tests/static/everything/AllAboutEverythingEpisode3.m4a',
             type='audio/x-m4a',
             cc=False,
         )
@@ -104,7 +104,7 @@ class PodcastTestCase(TestCase):
         # enclosure 2
         Enclosure.objects.create(
             episode=episode_2,
-            file='static/everything/AllAboutEverythingEpisode2.mp4',
+            file='podcast/tests/static/everything/AllAboutEverythingEpisode2.mp4',
             type='video/mp4',
             cc=False,
         )
@@ -112,7 +112,7 @@ class PodcastTestCase(TestCase):
         # enclosure 3
         Enclosure.objects.create(
             episode=episode_3,
-            file='static/everything/AllAboutEverythingEpisode2.m4v',
+            file='podcast/tests/static/everything/AllAboutEverythingEpisode2.m4v',
             type='video/x-m4v',
             cc=True,
         )
@@ -120,7 +120,7 @@ class PodcastTestCase(TestCase):
         # enclosure 4
         Enclosure.objects.create(
             episode=episode_4,
-            file='static/everything/AllAboutEverythingEpisode4.mp3',
+            file='podcast/tests/static/everything/AllAboutEverythingEpisode4.mp3',
             type='audio/mpeg',
             cc=False,
         )
