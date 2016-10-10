@@ -103,6 +103,8 @@ class ShowFeed(Feed):
 
     def feed_extra_kwargs(self, obj):
         copyright = escape('%s & %s %s %s') % ('&#x2117;', '&#xA9;', timezone.now().year, escape(obj.copyright or obj.title))
+        current_site = get_current_site(self.request)
+        image_url = add_domain(current_site.domain, obj.get_image_url(), self.request.is_secure())
         return {
             'copyright': copyright,
             'itunes': {
