@@ -29,9 +29,11 @@ TEMPLATES = [
 
 STATIC_URL = '/static/'
 
+TIME_ZONE = 'UTC'
+
 USE_TZ = True
 
-ROOT_URLCONF = 'podcast.urls'
+ROOT_URLCONF = 'podcast.tests.urls'
 
 
 import django

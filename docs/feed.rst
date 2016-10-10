@@ -3,9 +3,12 @@
 Feed
 ****
 
+Sample
+======
+
 The show feed is optimized for submission to the iTunes Store by adding additional `iTunes-specific tags <https://help.apple.com/itc/podcasts_connect/#/itcb54353390>`_.
 
-The following is the direct output of a show feed following the `RSS feed sample <https://help.apple.com/itc/podcasts_connect/#/itcbaf351599>`_ in the Podcasts Connect documentation as closely as possible. In the absence of the (fake) enclosure files, the enclosure files below were sampled from the `Serial <https://serialpodcast.org/>`_ podcast.
+The following is the direct output of a show feed following the `RSS feed sample <https://help.apple.com/itc/podcasts_connect/#/itcbaf351599>`_ in the Podcasts Connect documentation as closely as possible.
 
 .. code-block:: xml
 
@@ -138,3 +141,33 @@ The following is the direct output of a show feed following the `RSS feed sample
            </item>
        </channel>
    </rss>
+
+Sample differences
+==================
+
+Although every effort was made to recreate the `RSS feed sample <https://help.apple.com/itc/podcasts_connect/#/itcbaf351599>`_ on Podcasts Connnect as closely as possible, the limitations of the way in which Django creates feeds and the occassional stray error in the feed sample itself required small changes:
+
+* The ``RssFeed`` class in Django's deep syndication class hierarchy |adds an <atom:link>|_ to the ``<channel>`` element that would require a significant code duplication and rewrite to eliminate. It does not affect iTunes Store compatibility and thus remains in the show feed.
+* The ``<atom:link>`` previously mentioned can only exist in a correponding XML namespace; i.e. the attribute ``xmlns:atom="http://www.w3.org/2005/Atom"`` in the ``<rss>`` element. The attribute could be easily removed, but would prevent the feed from achieving XML validation. The Atom XML namespace thus remains in the show feed.
+* The ``RssFeed`` class |adds a <lastBuildDate>|_ to the ``<channel>`` element that corresponds to the ``<pubDate>`` of the latest ``<item>``. Due to Django's deep syndication class hierarchy, it remains in the show feed.
+* In the RSS feed sample, the ``<copyright>`` element contains a year of 2014. The sample is replaced with the current year, at the time of this writing, 2016.
+* In the RSS feed sample, ``<itunes:summary>`` tag in the "Shake Shake Shake Your Spices" episode has an errant space in its ``<![CDATA[...]]>`` tag. The sample displays ``<![CDATA[...]] >``. The show feed removes the errant space.
+* In the RSS feed sample, the domain in URLs is ``www.example.com`` or ``example.com``. Django's `testing framework <https://github.com/django/django/blob/1.10/django/test/client.py#L283>`_ uses the server name ``testserver``. The feed test replaces ``www.example.com`` with ``testserver``.
+* In the RSS feed sample, the absolute URL of the show is ``/podcasts/everything/index.html``. In the interest of `clean URLs <https://docs.djangoproject.com/en/1.10/topics/http/urls/>`_, the feed test removes ``index.html``.
+* In the RSS feed sample, only instances of ``<itunes:summary>`` or ``<itunes:subtitle>`` that have HTML contain ``<![CDATA[...]]>`` tags to escape the HTML. Rather than conditionally insert ``<![CDATA[...]]>`` tags, they are inserted in all instances of ``<itunes:summary>`` and ``<itunes:subtitle>``.
+* In the RSS feed sample, the enclosure ``url`` of an ``<item>`` is often different from the ``<guid>``, e.g. ``http://example.com/podcasts/everything/AllAboutEverythingEpisode3.m4a`` vs. ``http://example.com/podcasts/archive/aae20140615.m4a``. The ``<guid>`` of an ``<item>`` is normalized to return the enclosure URL and eliminate a competing, arbitrary URL.
+* In the RSS feed sample, the (fake) enclosure files have accompanying fake values in ``<itunes:duration>`` elements. The app automatically reads the duration of media files using the Python `Mutagen <https://pypi.python.org/pypi/mutagen>`_ package, and their durations are not subject to manual editing.
+* In the RSS feed sample, the enclosure ``length`` of an ``<item>`` is similarly determined by automatically reading the enclosure `size of the file <https://docs.djangoproject.com/en/1.10/ref/files/file/#django.core.files.File.size>`_.
+* In the RSS feed sample, ``<item>`` elements omit ``<link>`` and ``<description>`` elements. While `technically valid <https://cyber.harvard.edu/rss/rss.html#hrelementsOfLtitemgt>`_, Django encourages its use by automatically querying for an item's absolute URL, and thus each item's ``<link>`` and ``<description>`` are preserved.
+* In the RSS feed sample, the ``<item>`` elements contain ``<pubDate>`` values whose time zones are inconsistent: ``GMT`` (which is `obsolete <https://en.wikipedia.org/wiki/Greenwich_Mean_Time>`_), ``EST``, ``-0700``, and ``+3000`` (which should be ``+0300``). Because Django defines ``TIME_ZONE`` at the project level in `settings <https://docs.djangoproject.com/en/1.10/ref/settings/#std:setting-TIME_ZONE>`_, it's impossible to display datetimes in the show feed with different UTC offsets. For example, given a datetime ``2016-03-11T01:15:00+0300`` (which might be, say, ``'Europe/Moscow'``), a setting of ``TIME_ZONE = 'UTC'`` would ultimately result in a display of ``Thu, 10 Mar 2016 22:15:00 +0000``, that is, moving three hours backward to achieve UTC, which would be around 10 p.m. the prior evening. All values of ``<pubDate>`` elements have been converted to the UTC time zone.
+* In the RSS feed sample, the "Red,Whine, & Blue" episode contains a ``<pubDate>`` element whose value is ``Fri, 11 Mar 2016 01:15:00 +3000``. There exists no ``+3000`` UTC time offset, as described in the `list of tz database time zones <https://en.wikipedia.org/wiki/List_of_tz_database_time_zones>`_.
+* The show feed and RSS feed sample only compare semantic differences, i.e. parsed content, and not syntax differences, i.e. various orderings of elements, capitialization, orderings of attributes, and spaces, etc. Django's |assertXMLEqual|_ is used to assert equality.
+
+.. |adds an <atom:link>| replace:: adds an ``<atom:link>``
+.. _adds an <atom:link>: https://github.com/django/django/blob/1.10/django/utils/feedgenerator.py#L265
+
+.. |adds a <lastBuildDate>| replace:: adds a ``<lastBuildDate>``
+.. _adds a <lastBuildDate>: https://github.com/django/django/blob/1.10/django/utils/feedgenerator.py#L272
+
+.. |assertXMLEqual| replace:: ``assertXMLEqual``
+.. _assertXMLEqual: https://docs.djangoproject.com/en/1.10/topics/testing/tools/#django.test.SimpleTestCase.assertXMLEqual

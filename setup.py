@@ -20,6 +20,7 @@ setup(
     install_requires=[
         'mutagen',
         'pillow',
+        'pytz',
         'six',
     ],
     test_suite='podcast.tests',
