@@ -23,6 +23,17 @@ class EscapeFriendlyXMLGenerator(SimplerXMLGenerator):
     https://code.djangoproject.com/ticket/15936
     """
 
+    def __init__(self, *args, **kwargs):
+        """Attribute not available in < Python 2.7."""
+        super(EscapeFriendlyXMLGenerator, self).__init__(*args, **kwargs)
+        self._pending_start_element = False
+
+    def _finish_pending_start_element(self, endElement=False):
+        """Method not available in < Python 2.7."""
+        if self._pending_start_element:
+            self._write('>')
+            self._pending_start_element = False
+
     def addQuickElement(self, name, contents=None, attrs=None, escape=True, cdata=False):
         """Convenience method for adding an element with no children."""
         if attrs is None:
@@ -31,12 +42,6 @@ class EscapeFriendlyXMLGenerator(SimplerXMLGenerator):
         if contents is not None:
             self.characters(contents, escape=escape, cdata=cdata)
         self.endElement(name)
-
-    def _finish_pending_start_element(self, endElement=False):
-        """Method not available in < Python 2.7."""
-        if self._pending_start_element:
-            self._write('>')
-            self._pending_start_element = False
 
     def characters(self, content, **kwargs):
         # Django
