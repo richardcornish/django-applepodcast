@@ -1,0 +1,739 @@
+[
+{
+    "model": "podcast.category",
+    "pk": 1,
+    "fields": {
+        "parent": null,
+        "title": "Arts",
+        "slug": "arts",
+        "full": "Arts",
+        "json": "{\"Arts\": []}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 2,
+    "fields": {
+        "parent": null,
+        "title": "Business",
+        "slug": "business",
+        "full": "Business",
+        "json": "{\"Business\": []}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 3,
+    "fields": {
+        "parent": null,
+        "title": "Comedy",
+        "slug": "comedy",
+        "full": "Comedy",
+        "json": "{\"Comedy\": []}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 4,
+    "fields": {
+        "parent": null,
+        "title": "Education",
+        "slug": "education",
+        "full": "Education",
+        "json": "{\"Education\": []}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 5,
+    "fields": {
+        "parent": null,
+        "title": "Games & Hobbies",
+        "slug": "games-hobbies",
+        "full": "Games & Hobbies",
+        "json": "{\"Games & Hobbies\": []}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 6,
+    "fields": {
+        "parent": null,
+        "title": "Government & Organizations",
+        "slug": "government-organizations",
+        "full": "Government & Organizations",
+        "json": "{\"Government & Organizations\": []}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 7,
+    "fields": {
+        "parent": null,
+        "title": "Health",
+        "slug": "health",
+        "full": "Health",
+        "json": "{\"Health\": []}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 8,
+    "fields": {
+        "parent": null,
+        "title": "Kids & Family",
+        "slug": "kids-family",
+        "full": "Kids & Family",
+        "json": "{\"Kids & Family\": []}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 9,
+    "fields": {
+        "parent": null,
+        "title": "Music",
+        "slug": "music",
+        "full": "Music",
+        "json": "{\"Music\": []}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 10,
+    "fields": {
+        "parent": null,
+        "title": "News & Politics",
+        "slug": "news-politics",
+        "full": "News & Politics",
+        "json": "{\"News & Politics\": []}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 11,
+    "fields": {
+        "parent": null,
+        "title": "Religion & Spirituality",
+        "slug": "religion-spirituality",
+        "full": "Religion & Spirituality",
+        "json": "{\"Religion & Spirituality\": []}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 12,
+    "fields": {
+        "parent": null,
+        "title": "Science & Medicine",
+        "slug": "science-medicine",
+        "full": "Science & Medicine",
+        "json": "{\"Science & Medicine\": []}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 13,
+    "fields": {
+        "parent": null,
+        "title": "Society & Culture",
+        "slug": "society-culture",
+        "full": "Society & Culture",
+        "json": "{\"Society & Culture\": []}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 14,
+    "fields": {
+        "parent": null,
+        "title": "Sports & Recreation",
+        "slug": "sports-recreation",
+        "full": "Sports & Recreation",
+        "json": "{\"Sports & Recreation\": []}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 15,
+    "fields": {
+        "parent": null,
+        "title": "Technology",
+        "slug": "technology",
+        "full": "Technology",
+        "json": "{\"Technology\": []}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 16,
+    "fields": {
+        "parent": null,
+        "title": "TV & Film",
+        "slug": "tv-film",
+        "full": "TV & Film",
+        "json": "{\"TV & Film\": []}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 17,
+    "fields": {
+        "parent": 1,
+        "title": "Design",
+        "slug": "design",
+        "full": "Arts / Design",
+        "json": "{\"Arts\": [\"Design\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 18,
+    "fields": {
+        "parent": 1,
+        "title": "Fashion & Beauty",
+        "slug": "fashion-beauty",
+        "full": "Arts / Fashion & Beauty",
+        "json": "{\"Arts\": [\"Fashion & Beauty\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 19,
+    "fields": {
+        "parent": 1,
+        "title": "Food",
+        "slug": "food",
+        "full": "Arts / Food",
+        "json": "{\"Arts\": [\"Food\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 20,
+    "fields": {
+        "parent": 1,
+        "title": "Literature",
+        "slug": "literature",
+        "full": "Arts / Literature",
+        "json": "{\"Arts\": [\"Literature\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 21,
+    "fields": {
+        "parent": 1,
+        "title": "Performing Arts",
+        "slug": "performing-arts",
+        "full": "Arts / Performing Arts",
+        "json": "{\"Arts\": [\"Performing Arts\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 22,
+    "fields": {
+        "parent": 1,
+        "title": "Visual Arts",
+        "slug": "visual-arts",
+        "full": "Arts / Visual Arts",
+        "json": "{\"Arts\": [\"Visual Arts\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 23,
+    "fields": {
+        "parent": 2,
+        "title": "Business News",
+        "slug": "business-news",
+        "full": "Business / Business News",
+        "json": "{\"Business\": [\"Business News\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 24,
+    "fields": {
+        "parent": 2,
+        "title": "Careers",
+        "slug": "careers",
+        "full": "Business / Careers",
+        "json": "{\"Business\": [\"Careers\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 25,
+    "fields": {
+        "parent": 2,
+        "title": "Investing",
+        "slug": "investing",
+        "full": "Business / Investing",
+        "json": "{\"Business\": [\"Investing\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 26,
+    "fields": {
+        "parent": 2,
+        "title": "Management & Marketing",
+        "slug": "management-marketing",
+        "full": "Business / Management & Marketing",
+        "json": "{\"Business\": [\"Management & Marketing\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 27,
+    "fields": {
+        "parent": 2,
+        "title": "Shopping",
+        "slug": "shopping",
+        "full": "Business / Shopping",
+        "json": "{\"Business\": [\"Shopping\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 28,
+    "fields": {
+        "parent": 4,
+        "title": "Educational Technology",
+        "slug": "educational-technology",
+        "full": "Education / Educational Technology",
+        "json": "{\"Education\": [\"Educational Technology\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 29,
+    "fields": {
+        "parent": 4,
+        "title": "Higher Education",
+        "slug": "higher-education",
+        "full": "Education / Higher Education",
+        "json": "{\"Education\": [\"Higher Education\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 30,
+    "fields": {
+        "parent": 4,
+        "title": "K-12",
+        "slug": "k-12",
+        "full": "Education / K-12",
+        "json": "{\"Education\": [\"K-12\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 31,
+    "fields": {
+        "parent": 4,
+        "title": "Language Courses",
+        "slug": "language-courses",
+        "full": "Education / Language Courses",
+        "json": "{\"Education\": [\"Language Courses\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 32,
+    "fields": {
+        "parent": 4,
+        "title": "Training",
+        "slug": "training",
+        "full": "Education / Training",
+        "json": "{\"Education\": [\"Training\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 33,
+    "fields": {
+        "parent": 5,
+        "title": "Automotive",
+        "slug": "automotive",
+        "full": "Games & Hobbies / Automotive",
+        "json": "{\"Games & Hobbies\": [\"Automotive\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 34,
+    "fields": {
+        "parent": 5,
+        "title": "Aviation",
+        "slug": "aviation",
+        "full": "Games & Hobbies / Aviation",
+        "json": "{\"Games & Hobbies\": [\"Aviation\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 35,
+    "fields": {
+        "parent": 5,
+        "title": "Hobbies",
+        "slug": "hobbies",
+        "full": "Games & Hobbies / Hobbies",
+        "json": "{\"Games & Hobbies\": [\"Hobbies\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 36,
+    "fields": {
+        "parent": 5,
+        "title": "Other Games",
+        "slug": "other-games",
+        "full": "Games & Hobbies / Other Games",
+        "json": "{\"Games & Hobbies\": [\"Other Games\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 37,
+    "fields": {
+        "parent": 5,
+        "title": "Video Games",
+        "slug": "video-games",
+        "full": "Games & Hobbies / Video Games",
+        "json": "{\"Games & Hobbies\": [\"Video Games\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 38,
+    "fields": {
+        "parent": 6,
+        "title": "Local",
+        "slug": "local",
+        "full": "Government & Organizations / Local",
+        "json": "{\"Government & Organizations\": [\"Local\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 39,
+    "fields": {
+        "parent": 6,
+        "title": "National",
+        "slug": "national",
+        "full": "Government & Organizations / National",
+        "json": "{\"Government & Organizations\": [\"National\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 40,
+    "fields": {
+        "parent": 6,
+        "title": "Non-Profit",
+        "slug": "non-profit",
+        "full": "Government & Organizations / Non-Profit",
+        "json": "{\"Government & Organizations\": [\"Non-Profit\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 41,
+    "fields": {
+        "parent": 6,
+        "title": "Regional",
+        "slug": "regional",
+        "full": "Government & Organizations / Regional",
+        "json": "{\"Government & Organizations\": [\"Regional\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 42,
+    "fields": {
+        "parent": 7,
+        "title": "Alternative Health",
+        "slug": "alternative-health",
+        "full": "Health / Alternative Health",
+        "json": "{\"Health\": [\"Alternative Health\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 43,
+    "fields": {
+        "parent": 7,
+        "title": "Fitness & Nutrition",
+        "slug": "fitness-nutrition",
+        "full": "Health / Fitness & Nutrition",
+        "json": "{\"Health\": [\"Fitness & Nutrition\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 44,
+    "fields": {
+        "parent": 7,
+        "title": "Self-Help",
+        "slug": "self-help",
+        "full": "Health / Self-Help",
+        "json": "{\"Health\": [\"Self-Help\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 45,
+    "fields": {
+        "parent": 7,
+        "title": "Sexuality",
+        "slug": "sexuality",
+        "full": "Health / Sexuality",
+        "json": "{\"Health\": [\"Sexuality\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 46,
+    "fields": {
+        "parent": 11,
+        "title": "Buddhism",
+        "slug": "buddhism",
+        "full": "Religion & Spirituality / Buddhism",
+        "json": "{\"Religion & Spirituality\": [\"Buddhism\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 47,
+    "fields": {
+        "parent": 11,
+        "title": "Christianity",
+        "slug": "christianity",
+        "full": "Religion & Spirituality / Christianity",
+        "json": "{\"Religion & Spirituality\": [\"Christianity\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 48,
+    "fields": {
+        "parent": 11,
+        "title": "Hinduism",
+        "slug": "hinduism",
+        "full": "Religion & Spirituality / Hinduism",
+        "json": "{\"Religion & Spirituality\": [\"Hinduism\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 49,
+    "fields": {
+        "parent": 11,
+        "title": "Islam",
+        "slug": "islam",
+        "full": "Religion & Spirituality / Islam",
+        "json": "{\"Religion & Spirituality\": [\"Islam\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 50,
+    "fields": {
+        "parent": 11,
+        "title": "Judaism",
+        "slug": "judaism",
+        "full": "Religion & Spirituality / Judaism",
+        "json": "{\"Religion & Spirituality\": [\"Judaism\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 51,
+    "fields": {
+        "parent": 11,
+        "title": "Other",
+        "slug": "other",
+        "full": "Religion & Spirituality / Other",
+        "json": "{\"Religion & Spirituality\": [\"Other\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 52,
+    "fields": {
+        "parent": 11,
+        "title": "Spirituality",
+        "slug": "spirituality",
+        "full": "Religion & Spirituality / Spirituality",
+        "json": "{\"Religion & Spirituality\": [\"Spirituality\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 53,
+    "fields": {
+        "parent": 12,
+        "title": "Medicine",
+        "slug": "medicine",
+        "full": "Science & Medicine / Medicine",
+        "json": "{\"Science & Medicine\": [\"Medicine\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 54,
+    "fields": {
+        "parent": 12,
+        "title": "Natural Sciences",
+        "slug": "natural-sciences",
+        "full": "Science & Medicine / Natural Sciences",
+        "json": "{\"Science & Medicine\": [\"Natural Sciences\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 55,
+    "fields": {
+        "parent": 12,
+        "title": "Social Sciences",
+        "slug": "social-sciences",
+        "full": "Science & Medicine / Social Sciences",
+        "json": "{\"Science & Medicine\": [\"Social Sciences\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 56,
+    "fields": {
+        "parent": 13,
+        "title": "History",
+        "slug": "history",
+        "full": "Society & Culture / History",
+        "json": "{\"Society & Culture\": [\"History\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 57,
+    "fields": {
+        "parent": 13,
+        "title": "Personal Journals",
+        "slug": "personal-journals",
+        "full": "Society & Culture / Personal Journals",
+        "json": "{\"Society & Culture\": [\"Personal Journals\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 58,
+    "fields": {
+        "parent": 13,
+        "title": "Philosophy",
+        "slug": "philosophy",
+        "full": "Society & Culture / Philosophy",
+        "json": "{\"Society & Culture\": [\"Philosophy\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 59,
+    "fields": {
+        "parent": 13,
+        "title": "Places &amp; Travel",
+        "slug": "places-amp-travel",
+        "full": "Society & Culture / Places &amp; Travel",
+        "json": "{\"Society & Culture\": [\"Places &amp; Travel\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 60,
+    "fields": {
+        "parent": 14,
+        "title": "Amateur",
+        "slug": "amateur",
+        "full": "Sports & Recreation / Amateur",
+        "json": "{\"Sports & Recreation\": [\"Amateur\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 61,
+    "fields": {
+        "parent": 14,
+        "title": "College & High School",
+        "slug": "college-high-school",
+        "full": "Sports & Recreation / College & High School",
+        "json": "{\"Sports & Recreation\": [\"College & High School\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 62,
+    "fields": {
+        "parent": 14,
+        "title": "Outdoor",
+        "slug": "outdoor",
+        "full": "Sports & Recreation / Outdoor",
+        "json": "{\"Sports & Recreation\": [\"Outdoor\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 63,
+    "fields": {
+        "parent": 14,
+        "title": "Professional",
+        "slug": "professional",
+        "full": "Sports & Recreation / Professional",
+        "json": "{\"Sports & Recreation\": [\"Professional\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 64,
+    "fields": {
+        "parent": 15,
+        "title": "Gadgets",
+        "slug": "gadgets",
+        "full": "Technology / Gadgets",
+        "json": "{\"Technology\": [\"Gadgets\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 65,
+    "fields": {
+        "parent": 15,
+        "title": "Tech News",
+        "slug": "tech-news",
+        "full": "Technology / Tech News",
+        "json": "{\"Technology\": [\"Tech News\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 66,
+    "fields": {
+        "parent": 15,
+        "title": "Podcasting",
+        "slug": "podcasting",
+        "full": "Technology / Podcasting",
+        "json": "{\"Technology\": [\"Podcasting\"]}"
+    }
+},
+{
+    "model": "podcast.category",
+    "pk": 67,
+    "fields": {
+        "parent": 15,
+        "title": "Software How-To",
+        "slug": "software-how-to",
+        "full": "Technology / Software How-To",
+        "json": "{\"Technology\": [\"Software How-To\"]}"
+    }
+}
+]
