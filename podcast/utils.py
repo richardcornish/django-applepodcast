@@ -42,7 +42,7 @@ class EscapeFriendlyXMLGenerator(SimplerXMLGenerator):
                 self._finish_pending_start_element()
                 if not isinstance(content, str):
                     content = str(content, self._encoding)
-        except NameError:  # Python 2
+        except AttributeError:  # Python 2
             if not isinstance(content, unicode):
                 content = unicode(content, self._encoding)
         # Custom kwarg
