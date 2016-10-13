@@ -5,6 +5,8 @@ from xml.sax.saxutils import escape as _escape
 
 from django.utils.xmlutils import SimplerXMLGenerator
 
+import six
+
 try:
     from django.utils.xmlutils import UnserializableContentError
 except ImportError:  # < Django 1.9
@@ -22,14 +24,6 @@ class EscapeFriendlyXMLGenerator(SimplerXMLGenerator):
     https://docs.python.org/3/library/xml.sax.utils.html
     https://code.djangoproject.com/ticket/15936
     """
-
-    def _finish_pending_start_element(self, endElement=False):
-        """Method not available in < Python 2.7."""
-        self._pending_start_element = False
-        if self._pending_start_element:
-            self._write('>')
-            self._pending_start_element = False
-
     def addQuickElement(self, name, contents=None, attrs=None, escape=True, cdata=False):
         """Convenience method for adding an element with no children."""
         if attrs is None:
@@ -47,7 +41,8 @@ class EscapeFriendlyXMLGenerator(SimplerXMLGenerator):
             raise UnserializableContentError('Control characters are not supported in XML 1.0')
         # Python
         if content:
-            self._finish_pending_start_element()
+            if six.PY3:
+                self._finish_pending_start_element()
             if not isinstance(content, str):
                 content = str(content, self._encoding)
             if kwargs['escape']:
