@@ -5,8 +5,6 @@ from xml.sax.saxutils import escape as _escape
 
 from django.utils.xmlutils import SimplerXMLGenerator
 
-import six
-
 try:
     from django.utils.xmlutils import UnserializableContentError
 except ImportError:  # < Django 1.9
@@ -39,26 +37,18 @@ class EscapeFriendlyXMLGenerator(SimplerXMLGenerator):
             # See http://www.w3.org/International/questions/qa-controls
             raise UnserializableContentError('Control characters are not supported in XML 1.0')
         # XMLGenerator.characters(self, content)
-
-        # Python 2
-        if six.PY2:
-            # xml.sax.saxutils.XMLGenerator.characters
-            if not isinstance(content, unicode):
-                content = unicode(content, self._encoding)
-
-        # Python 3
-        else:
-            # xml.sax.saxutils.XMLGenerator.characters
+        try:
             if content:
                 self._finish_pending_start_element()
                 if not isinstance(content, str):
                     content = str(content, self._encoding)
-
+        except NameError:  # Python 2
+            if not isinstance(content, unicode):
+                content = unicode(content, self._encoding)
         # Custom kwarg
         if kwargs['escape']:
             content = _escape(content)
         # Custom kwarg
         if kwargs['cdata']:
             content = '<![CDATA[%s]]>' % content
-
         self._write(content)
