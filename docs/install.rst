@@ -31,6 +31,17 @@ Because the app is primarily model driven, you will want to expose the URL of th
        url(r'^podcast/', include('podcast.urls')),
    ]
 
+If you're on Django 1.8 or lower, you will need to add the ``namespace`` keyword argument to the ``include()`` method manually because the convenient ``app_name`` attribute in ``urls.py`` wasn't `added until Django 1.9 <https://docs.djangoproject.com/en/1.9/releases/1.9/#urls>`_.
+
+.. code-block:: python
+
+   from django.conf.urls import url, include
+
+   urlpatterns = [
+       # ...
+       url(r'^podcast/', include('podcast.urls', namespace='podcast')),  # < Django 1.9
+   ]
+
 Add the models to your project by migrating the database.
 
 .. code-block:: bash
