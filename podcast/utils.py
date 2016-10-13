@@ -20,7 +20,7 @@ class EscapeFriendlyXMLGenerator(SimplerXMLGenerator):
     Django's addQuickElement() calls XMLGenerator.characters(), which in turn
     calls xml.sax.saxutils.escape(), which escapes characters too soon.
     This class allows unescaped characters to exist in XML elements.
-    https://github.com/django/django/blob/master/django/utils/xmlutils.py
+    https://github.com/django/django/blob/1.10/django/utils/xmlutils.py
     https://docs.python.org/3/library/xml.sax.utils.html
     https://code.djangoproject.com/ticket/15936
     """
@@ -34,19 +34,31 @@ class EscapeFriendlyXMLGenerator(SimplerXMLGenerator):
         self.endElement(name)
 
     def characters(self, content, **kwargs):
-        # Django
         if content and re.search(r'[\x00-\x08\x0B-\x0C\x0E-\x1F]', content):
             # Fail loudly when content has control chars (unsupported in XML 1.0)
             # See http://www.w3.org/International/questions/qa-controls
             raise UnserializableContentError('Control characters are not supported in XML 1.0')
-        # Python
-        if content:
-            if six.PY3:
+        # XMLGenerator.characters(self, content)
+
+        # Python 2
+        if six.PY2:
+            # xml.sax.saxutils.XMLGenerator.characters
+            if not isinstance(content, unicode):
+                content = unicode(content, self._encoding)
+
+        # Python 3
+        else:
+            # xml.sax.saxutils.XMLGenerator.characters
+            if content:
                 self._finish_pending_start_element()
-            if not isinstance(content, str):
-                content = str(content, self._encoding)
-            if kwargs['escape']:
-                content = _escape(content)
-            if kwargs['cdata']:
-                content = '<![CDATA[%s]]>' % content
-            self._write(content)
+                if not isinstance(content, str):
+                    content = str(content, self._encoding)
+
+        # Custom kwarg
+        if kwargs['escape']:
+            content = _escape(content)
+        # Custom kwarg
+        if kwargs['cdata']:
+            content = '<![CDATA[%s]]>' % content
+
+        self._write(content)
