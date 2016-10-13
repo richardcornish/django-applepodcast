@@ -21,7 +21,6 @@ setup(
         'mutagen',
         'pillow',
         'pytz',
-        'six',
     ],
     test_suite='podcast.tests',
     classifiers=[

@@ -13,7 +13,6 @@ from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
-import six
 from mutagen.mp3 import MP3
 from mutagen.mp4 import MP4
 
@@ -123,13 +122,24 @@ class Show(models.Model):
         old_dicts = [literal_eval(c.json) for c in self.categories.all()]
         new_dict = {}
         for old_dict in old_dicts:
-            for key, value in six.iteritems(old_dict):
-                if key not in new_dict:
-                    new_dict[key] = value
-                else:
-                    for sub in value:
-                        new_dict[key].append(sub)
-        return sorted(six.iteritems(new_dict))
+            try:
+                for key, value in old_dict.iteritems():
+                    if key not in new_dict:
+                        new_dict[key] = value
+                    else:
+                        for sub in value:
+                            new_dict[key].append(sub)
+            except AttributeError:  # Python 3
+                for key, value in old_dict.items():
+                    if key not in new_dict:
+                        new_dict[key] = value
+                    else:
+                        for sub in value:
+                            new_dict[key].append(sub)
+        try:
+            return sorted(new_dict.iteritems())
+        except AttributeError:  # Python 3
+            return sorted(new_dict.items())
 
     def get_explicit(self):
         return "yes" if self.explicit else "no"
