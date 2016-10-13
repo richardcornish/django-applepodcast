@@ -2,8 +2,8 @@ from __future__ import unicode_literals
 
 try:
     from urllib.request import urlopen
-except ImportError:
-    from urllib2 import urlopen  # Python 2
+except ImportError:  # Python 2
+    from urllib2 import urlopen
 
 from django.http import HttpResponse
 from django.contrib.sites.shortcuts import get_current_site

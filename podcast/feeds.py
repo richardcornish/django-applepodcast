@@ -20,8 +20,8 @@ class ItunesFeed(Rss201rev2Feed):
         """
         try:
             handler = EscapeFriendlyXMLGenerator(outfile, encoding, short_empty_elements=True)
-        except TypeError:
-            handler = EscapeFriendlyXMLGenerator(outfile, encoding)  # Python 2
+        except TypeError:  # Python 2
+            handler = EscapeFriendlyXMLGenerator(outfile, encoding)
         handler.startDocument()
         handler.startElement('rss', self.rss_attributes())
         handler.startElement('channel', self.root_attributes())
