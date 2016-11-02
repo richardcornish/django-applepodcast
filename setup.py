@@ -20,7 +20,6 @@ setup(
     install_requires=[
         'mutagen',
         'pillow',
-        'pytz',
     ],
     test_suite='podcast.tests',
     classifiers=[

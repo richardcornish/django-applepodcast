@@ -7,8 +7,6 @@ from django.core.urlresolvers import reverse
 from django.test import TestCase, Client, override_settings
 from django.utils import timezone
 
-import pytz
-
 from ..models import Show, Episode, Enclosure
 
 
@@ -44,7 +42,7 @@ class PodcastTestCase(TestCase):
             title='Shake Shake Shake Your Spices',
             slug='shake-shake-shake-your-spices',
             description='This week we talk about <a href="https://itunes/apple.com/us/book/antique-trader-salt-pepper/id429691295?mt=11">salt and pepper shakers</a>, comparing and contrasting pour rates, construction materials, and overall aesthetics. Come and join the party!',
-            pub_date=timezone.make_aware(datetime.datetime.strptime('2016-03-08T12:00:00Z', '%Y-%m-%dT%H:%M:%SZ'), pytz.timezone('UTC')),
+            pub_date=timezone.make_aware(datetime.datetime.strptime('2016-03-08T12:00:00', '%Y-%m-%dT%H:%M:%S')),
             subtitle='A short primer on table spices',
             image='podcast/tests/static/everything/AllAboutEverything/Episode1.jpg',
             explicit=False,
@@ -57,7 +55,7 @@ class PodcastTestCase(TestCase):
             title='Socket Wrench Shootout',
             slug='socket-wrench-shootout',
             description='This week we talk about metric vs. Old English socket wrenches. Which one is better? Do you really need both? Get all of your answers here.',
-            pub_date=timezone.make_aware(datetime.datetime.strptime('2016-03-09T13:00:00Z', '%Y-%m-%dT%H:%M:%SZ'), pytz.timezone('America/New_York')),
+            pub_date=timezone.make_aware(datetime.datetime.strptime('2016-03-09T18:00:00', '%Y-%m-%dT%H:%M:%S')),
             subtitle='Comparing socket wrenches is fun!',
             author_name='Jane Doe',
             image='podcast/tests/static/everything/AllAboutEverything/Episode2.jpg',
@@ -71,7 +69,7 @@ class PodcastTestCase(TestCase):
             title='The Best Chili',
             slug='best-chili',
             description='This week we talk about the best Chili in the world. Which chili is better?',
-            pub_date=timezone.make_aware(datetime.datetime.strptime('2016-03-10T02:00:00', '%Y-%m-%dT%H:%M:%S'), pytz.timezone('America/Denver')),
+            pub_date=timezone.make_aware(datetime.datetime.strptime('2016-03-10T09:00:00', '%Y-%m-%dT%H:%M:%S')),
             subtitle='Jane and Eric',
             author_name='Jane Doe',
             image='podcast/tests/static/everything/AllAboutEverything/Episode3.jpg',
@@ -85,7 +83,7 @@ class PodcastTestCase(TestCase):
             title='Red,Whine, & Blue',
             slug='red-whine-blue',
             description='This week we talk about surviving in a Red state if you are a Blue person. Or vice versa.',
-            pub_date=timezone.make_aware(datetime.datetime.strptime('2016-03-11T01:15:00', '%Y-%m-%dT%H:%M:%S'), pytz.timezone('Europe/Moscow')),
+            pub_date=timezone.make_aware(datetime.datetime.strptime('2016-03-10T22:15:00', '%Y-%m-%dT%H:%M:%S')),
             subtitle='Red + Blue != Purple',
             author_name='Various',
             image='podcast/tests/static/everything/AllAboutEverything/Episode4.jpg',
