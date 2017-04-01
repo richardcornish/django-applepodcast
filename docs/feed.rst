@@ -21,7 +21,7 @@ The following is the direct output of a show feed following the `RSS feed sample
            <atom:link rel="self" href="http://testserver/podcast/feed/" />
            <language>en-us</language>
            <lastBuildDate>Thu, 10 Mar 2016 22:15:00 +0000</lastBuildDate>
-           <copyright>&#x2117; &amp; &#xA9; 2016 John Doe &amp; Family</copyright>
+           <copyright>&#x2117; &amp; &#xA9; 2017 John Doe &amp; Family</copyright>
            <itunes:subtitle><![CDATA[A show about everything]]></itunes:subtitle>
            <itunes:summary><![CDATA[All About Everything is a show about everything. Each week we dive into any subject known to man and talk about it as much as we can. Look for our podcast in the Podcasts app or in the iTunes Store]]></itunes:summary>
            <itunes:author>John Doe</itunes:author>
@@ -106,7 +106,7 @@ Although every effort was made to recreate the `RSS feed sample <https://help.ap
 * The ``RssFeed`` class in Django's deep syndication class hierarchy |adds an <atom:link>|_ to the ``<channel>`` element that would require a significant code duplication and rewrite to eliminate. It does not affect iTunes Store compatibility and thus remains in the show feed.
 * The ``<atom:link>`` previously mentioned can only exist in a correponding XML namespace; i.e. the attribute ``xmlns:atom="http://www.w3.org/2005/Atom"`` in the ``<rss>`` element. The attribute could be easily removed, but would prevent the feed from achieving XML validation. The Atom XML namespace thus remains in the show feed.
 * The ``RssFeed`` class |adds a <lastBuildDate>|_ to the ``<channel>`` element that corresponds to the ``<pubDate>`` of the latest ``<item>``. Due to Django's deep syndication class hierarchy, it remains in the show feed.
-* In the RSS feed sample, the ``<copyright>`` element contains a year of 2014. The sample is replaced with the current year, at the time of this writing, 2016.
+* In the RSS feed sample, the ``<copyright>`` element contains a year of 2014. The sample is replaced with the current year, at the time of this writing, 2017.
 * In the RSS feed sample, ``<itunes:summary>`` tag in the "Shake Shake Shake Your Spices" episode has an errant space in its ``<![CDATA[...]]>`` tag. The sample displays ``<![CDATA[...]] >``. The show feed removes the errant space.
 * In the RSS feed sample, the domain in URLs is ``www.example.com`` or ``example.com``. Django's `testing framework <https://github.com/django/django/blob/1.10/django/test/client.py#L283>`_ uses the server name ``testserver``. The feed test replaces ``www.example.com`` with ``testserver``.
 * In the RSS feed sample, the absolute URL of the show is ``/podcasts/everything/index.html``. In the interest of `clean URLs <https://docs.djangoproject.com/en/1.10/topics/http/urls/>`_, the feed test removes ``index.html``.
