@@ -11,6 +11,8 @@ The app offers several settings. By default, they are:
 
    PODCAST_ID = 1
 
+   PODCAST_EPISODE_LIMIT = None
+
    PODCAST_NO_ARTWORK = 'podcast/img/no_artwork.png'
 
    PODCAST_PAGINATE_BY = 10
@@ -44,6 +46,13 @@ An integer indicating the primary key of the show to display; used when ``PODCAS
 .. _SITE_ID: https://docs.djangoproject.com/en/1.10/ref/settings/#site-id
 
 The app displays the first show by default.
+
+``PODCAST_EPISODE_LIMIT``
+=========================
+
+An integer indicating the number of episodes to display in a show feed or `None` to display all episodes. Formerly the limit was an arbitrary 50 episodes.
+
+The app displays all episodes in a show feed by default.
 
 ``PODCAST_NO_ARTWORK``
 ======================
