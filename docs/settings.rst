@@ -50,7 +50,7 @@ The app displays the first show by default.
 ``PODCAST_EPISODE_LIMIT``
 =========================
 
-An integer indicating the number of episodes to display in a show feed or `None` to display all episodes. Formerly the limit was an arbitrary 50 episodes.
+An integer indicating the number of episodes to display in a show feed or ``None`` to display all episodes. Formerly the limit was an arbitrary 50 episodes.
 
 The app displays all episodes in a show feed by default.
 
