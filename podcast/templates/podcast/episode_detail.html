@@ -6,6 +6,11 @@
 {% block title %}{{ episode.title }} &#183; {{ block.super }}{% endblock %}
 
 
+{% block feed %}
+<link rel="alternate" type="application/rss+xml" href="{{ episode.show.get_absolute_feed_url }}" title="{{ episode.show.title }}">
+{% endblock %}
+
+
 {% block content %}
 
 <ul>
