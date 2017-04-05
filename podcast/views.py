@@ -1,13 +1,5 @@
 from __future__ import unicode_literals
 
-try:
-    from urllib.request import urlopen
-except ImportError:  # Python 2
-    from urllib2 import urlopen
-
-from django.http import HttpResponse
-from django.contrib.sites.shortcuts import get_current_site
-from django.contrib.syndication.views import add_domain
 from django.views.generic import ListView, DetailView, TemplateView
 from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.list import MultipleObjectMixin
@@ -70,13 +62,3 @@ class EpisodeDetailView(DetailView):
         context = super(EpisodeDetailView, self).get_context_data(**kwargs)
         context['podcast_singular'] = settings.PODCAST_SINGULAR
         return context
-
-
-class EpisodeDownloadView(EpisodeDetailView):
-    def get(self, request, *args, **kwargs):
-        episode = self.get_object()
-        current_site = get_current_site(request)
-        domain_url = add_domain(current_site.domain, episode.enclosure.file.url, self.request.is_secure())
-        response = HttpResponse(urlopen(domain_url), content_type=episode.enclosure.type)
-        response['Content-Disposition'] = 'attachment; filename="%s.%s%s"' % (episode.show.slug, episode.slug, episode.enclosure.get_extension())
-        return response

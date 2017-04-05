@@ -14,7 +14,6 @@ URL                                    URL name                      View       
 ``/podcast/``                          ``podcast:show_detail``       ``podcast.views.ShowDetailView``      ``Show``    ``podcast/show_detail.html``    ``show``, ``episode_list`` ``{{ show.get_absolute_url }}``
 ``/podcast/feed/``                     ``podcast:show_feed``         ``podcast.views.ShowFeed``            ``Show``                                                               ``{{ show.get_absolute_feed_url }}``
 ``/podcast/<episode-slug>/``           ``podcast:episode_detail``    ``podcast.views.EpisodeDetailView``   ``Episode`` ``podcast/episode_detail.html`` ``episode``                ``{{ episode.get_absolute_url }}``
-``/podcast/<episode-slug>/download/``  ``podcast:episode_download``  ``podcast.views.EpisodeDownloadView`` ``Episode``                                                            ``{{ episode.get_absolute_download_url }}``
 =====================================  ============================  ===================================== =========== =============================== ========================== =====================================
 
 And if you chose ``podcasts`` and set ``PODCAST_SINGULAR = False`` to display multiple shows:
@@ -26,7 +25,6 @@ URL                                                 URL name                    
 ``/podcasts/<show-slug>/``                          ``podcast:show_detail``       ``podcast.views.ShowDetailView``      ``Show``    ``podcast/show_detail.html``    ``show``, ``episode_list`` ``{{ show.get_absolute_url }}``
 ``/podcasts/<show-slug>/feed/``                     ``podcast:show_feed``         ``podcast.views.ShowFeed``            ``Show``                                                               ``{{ show.get_absolute_feed_url }}``
 ``/podcasts/<show-slug>/<episode-slug>/``           ``podcast:episode_detail``    ``podcast.views.EpisodeDetailView``   ``Episode`` ``podcast/episode_detail.html`` ``episode``                ``{{ episode.get_absolute_url }}``
-``/podcasts/<show-slug>/<episode-slug>/download/``  ``podcast:episode_download``  ``podcast.views.EpisodeDownloadView`` ``Episode``                                                            ``{{ episode.get_absolute_download_url }}``
 ==================================================  ============================  ===================================== =========== =============================== ========================== =====================================
 
 Enclosures
@@ -76,8 +74,6 @@ Although file management in production is out of scope of this documentation, co
 
 .. |MEDIA_ROOT| replace:: ``MEDIA_ROOT``
 .. _MEDIA_ROOT: https://docs.djangoproject.com/en/1.10/ref/settings/#std:setting-MEDIA_ROOT
-
-A nicety of enclosure download URLs in templates is that they are `forced into the web browser's "Save as..." dialogue <https://docs.djangoproject.com/en/1.10/ref/request-response/#telling-the-browser-to-treat-the-response-as-a-file-attachment>`_ by setting the the ``Content-Disposition`` header.
 
 Protocols
 =========

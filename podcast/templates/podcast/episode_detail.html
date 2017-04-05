@@ -45,7 +45,7 @@
     <p>{{ enclosure.get_duration }}</p>    
     {% endif %}
 
-    <p><a href="{{ episode.get_absolute_download_url }}">{% trans 'Download the' %} {{ enclosure.get_megabytes }} {% trans 'MB' %} {{ enclosure.get_type_display }}</a>.</p>
+    <p><a href="{{ enclosure.file.url }}">{% trans 'Download the' %} {{ enclosure.get_megabytes }} {% trans 'MB' %} {{ enclosure.get_type_display }}</a>.</p>
 
 {% endwith %}
 {% endif %}

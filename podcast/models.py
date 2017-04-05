@@ -192,12 +192,6 @@ class Episode(models.Model):
         else:
             return reverse("podcast:episode_detail", args=[self.show.slug, self.slug])
 
-    def get_absolute_download_url(self):
-        if settings.PODCAST_SINGULAR:
-            return reverse("podcast:episode_download", args=[self.slug])
-        else:
-            return reverse("podcast:episode_download", args=[self.show.slug, self.slug])
-
     def validate_unique(self, exclude=None):
         """Episode slugs don't need to be unique *unless* in the same show."""
         if Episode.objects.filter(show=self.show, slug=self.slug).count() > 1:
