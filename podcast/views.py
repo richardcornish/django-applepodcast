@@ -13,7 +13,6 @@ from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.list import MultipleObjectMixin
 
 from .models import Show, Episode
-from .mixins import PodcastSingularMixin
 from . import settings
 
 
@@ -22,7 +21,7 @@ class ShowListView(ListView):
     paginate_by = settings.PODCAST_PAGINATE_BY
 
 
-class ShowDetailView(PodcastSingularMixin, SingleObjectMixin, MultipleObjectMixin, TemplateView):
+class ShowDetailView(SingleObjectMixin, MultipleObjectMixin, TemplateView):
     paginate_by = settings.PODCAST_PAGINATE_BY
     template_name = 'podcast/show_detail.html'
 
@@ -49,10 +48,11 @@ class ShowDetailView(PodcastSingularMixin, SingleObjectMixin, MultipleObjectMixi
     def get_context_data(self, **kwargs):
         context = super(ShowDetailView, self).get_context_data(**kwargs)
         context['episode_list'] = context['object_list']
+        context['podcast_singular'] = settings.PODCAST_SINGULAR
         return context
 
 
-class EpisodeDetailView(PodcastSingularMixin, DetailView):
+class EpisodeDetailView(DetailView):
     def get_object(self, queryset=None):
         """Return object with episode number attached to episode."""
         if settings.PODCAST_SINGULAR:
@@ -65,6 +65,11 @@ class EpisodeDetailView(PodcastSingularMixin, DetailView):
         episode.index_next = episode.index + 1
         episode.index_previous = episode.index - 1
         return episode
+
+    def get_context_data(self, **kwargs):
+        context = super(EpisodeDetailView, self).get_context_data(**kwargs)
+        context['podcast_singular'] = settings.PODCAST_SINGULAR
+        return context
 
 
 class EpisodeDownloadView(EpisodeDetailView):
