@@ -40,7 +40,6 @@ class ShowDetailView(SingleObjectMixin, MultipleObjectMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super(ShowDetailView, self).get_context_data(**kwargs)
         context['episode_list'] = context['object_list']
-        context['podcast_singular'] = settings.PODCAST_SINGULAR
         return context
 
 
@@ -57,8 +56,3 @@ class EpisodeDetailView(DetailView):
         episode.index_next = episode.index + 1
         episode.index_previous = episode.index - 1
         return episode
-
-    def get_context_data(self, **kwargs):
-        context = super(EpisodeDetailView, self).get_context_data(**kwargs)
-        context['podcast_singular'] = settings.PODCAST_SINGULAR
-        return context

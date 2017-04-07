@@ -13,6 +13,8 @@
 
 {% block content %}
 
+{% get_podcast_singular as podcast_singular %}
+
 {% if not podcast_singular %}
     <ul>
         <li><a href="{% url 'podcast:show_list' %}">{% trans 'Podcasts' %}</a></li>

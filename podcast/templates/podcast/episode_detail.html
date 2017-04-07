@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load i18n staticfiles %}
+{% load i18n staticfiles podcast_tags %}
 
 
 {% block title %}{{ episode.title }} &#183; {{ block.super }}{% endblock %}
@@ -12,6 +12,8 @@
 
 
 {% block content %}
+
+{% get_podcast_singular as podcast_singular %}
 
 <ul>
     {% if not podcast_singular %}

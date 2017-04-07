@@ -8,6 +8,8 @@ from django.contrib.syndication.views import add_domain
 from django.template import TemplateSyntaxError
 from django.utils.translation import ugettext_lazy as _
 
+from .. import settings
+
 register = template.Library()
 
 
@@ -20,3 +22,8 @@ def show_url(context, **kwargs):
     current_site = get_current_site(request)
     url = add_domain(current_site.domain, kwargs['url'])
     return re.sub(r'https?:\/\/', '%s://' % kwargs['protocol'], url)
+
+
+@register.simple_tag
+def get_podcast_singular():
+    return settings.PODCAST_SINGULAR
