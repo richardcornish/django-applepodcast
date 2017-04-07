@@ -20,7 +20,7 @@ The following is the direct output of a show feed following the `RSS feed sample
            <description>All About Everything is a show about everything. Each week we dive into any subject known to man and talk about it as much as we can. Look for our podcast in the Podcasts app or in the iTunes Store</description>
            <atom:link rel="self" href="http://testserver/podcast/feed/" />
            <language>en-us</language>
-           <lastBuildDate>Thu, 10 Mar 2016 22:15:00 +0000</lastBuildDate>
+           <lastBuildDate>Thu, 10 Mar 2017 22:15:00 +0000</lastBuildDate>
            <copyright>&#x2117; &amp; &#xA9; 2017 John Doe &amp; Family</copyright>
            <itunes:subtitle><![CDATA[A show about everything]]></itunes:subtitle>
            <itunes:summary><![CDATA[All About Everything is a show about everything. Each week we dive into any subject known to man and talk about it as much as we can. Look for our podcast in the Podcasts app or in the iTunes Store]]></itunes:summary>
