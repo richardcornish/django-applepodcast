@@ -16,10 +16,7 @@ def show_url(context, *args, **kwargs):
     """Return the show feed URL with different protocol."""
     if len(kwargs) != 2:
         raise TemplateSyntaxError(_('"show_url" tag takes exactly two keyword arguments.'))
-    try:
-        request = context['request']
-    except IndexError:
-        raise TemplateSyntaxError(_('"show_url" tag requires request in the template context. Add the request context processor to settings.'))
+    request = context['request']
     current_site = get_current_site(request)
     url = add_domain(current_site.domain, kwargs['url'])
     return re.sub(r'https?:\/\/', '%s://' % kwargs['protocol'], url)
