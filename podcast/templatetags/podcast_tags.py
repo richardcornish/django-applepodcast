@@ -12,7 +12,7 @@ register = template.Library()
 
 
 @register.simple_tag(takes_context=True)
-def show_url(context, *args, **kwargs):
+def show_url(context, **kwargs):
     """Return the show feed URL with different protocol."""
     if len(kwargs) != 2:
         raise TemplateSyntaxError(_('"show_url" tag takes exactly two keyword arguments.'))
