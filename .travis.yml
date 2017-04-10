@@ -1,19 +1,29 @@
 language: python
 python:
+    - "3.6"
     - "3.5"
     - "3.4"
     - "3.3"
     - "2.7"
 env:
-    - DJANGO_VERSION=1.8.14
-    - DJANGO_VERSION=1.9.9
-    - DJANGO_VERSION=1.10
+    - DJANGO_VERSION=1.8.18
+    - DJANGO_VERSION=1.9.13
+    - DJANGO_VERSION=1.10.7
+    - DJANGO_VERSION=1.11
 matrix:
   exclude:
+    - python: "3.6"
+      env: DJANGO_VERSION=1.8.18
     - python: "3.3"
-      env: DJANGO_VERSION=1.9.9
+      env: DJANGO_VERSION=1.9.13
+    - python: "3.6"
+      env: DJANGO_VERSION=1.9.13
     - python: "3.3"
-      env: DJANGO_VERSION=1.10
+      env: DJANGO_VERSION=1.10.7
+    - python: "3.6"
+      env: DJANGO_VERSION=1.10.7
+    - python: "3.3"
+      env: DJANGO_VERSION=1.11
 before_install:
     - export DJANGO_SETTINGS_MODULE="podcast.tests.settings"
 install:
