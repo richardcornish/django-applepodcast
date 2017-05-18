@@ -642,10 +642,10 @@
     "pk": 59,
     "fields": {
         "parent": 13,
-        "title": "Places &amp; Travel",
+        "title": "Places & Travel",
         "slug": "places-amp-travel",
-        "full": "Society & Culture / Places &amp; Travel",
-        "json": "{\"Society & Culture\": [\"Places &amp; Travel\"]}"
+        "full": "Society & Culture / Places & Travel",
+        "json": "{\"Society & Culture\": [\"Places & Travel\"]}"
     }
 },
 {
