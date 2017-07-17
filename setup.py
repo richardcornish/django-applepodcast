@@ -7,7 +7,7 @@ from setuptools import find_packages, setup
 
 setup(
     name='django-applepodcast',
-    version='0.2.0',
+    version='0.2.1',
     description='A Django podcast app optimized for Apple Podcasts',
     long_description=open(os.path.join(os.path.dirname(__file__), 'README.rst')).read(),
     author='Richard Cornish',
