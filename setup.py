@@ -6,13 +6,13 @@ from setuptools import find_packages, setup
 
 
 setup(
-    name='django-itunespodcast',
+    name='django-applepodcast',
     version='0.1.9',
-    description='A Django podcast application optimized for the iTunes Store',
+    description='A Django podcast app optimized for Apple Podcasts',
     long_description=open(os.path.join(os.path.dirname(__file__), 'README.rst')).read(),
     author='Richard Cornish',
     author_email='rich@richardcornish.com',
-    url='https://github.com/richardcornish/django-itunespodcast',
+    url='https://github.com/richardcornish/django-applepodcast',
     license='BSD License',
     zip_safe=False,
     include_package_data=True,

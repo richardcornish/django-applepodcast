@@ -14,7 +14,7 @@ Specifications
 ==============
 
 * `RSS 2.0 specification <https://cyber.harvard.edu/rss/rss.html>`_
-* `Podcasts Connect Help <https://help.apple.com/itc/podcasts_connect/#/>`_ (for iTunes-specific tags)
+* `Podcasts Connect Help <https://help.apple.com/itc/podcasts_connect/#/>`_ (for Apple Podcasts-specific tags)
 
 Validators
 ==========
@@ -27,8 +27,7 @@ Validators
 Marketing
 =========
 
-* `Link to iTunes <http://www.apple.com/itunes/link/>`_
-* `iTunes Identity Guidelines <http://www.apple.com/itunes/marketing-on-itunes/identity-guidelines.html>`_
+* `Apple Podcasts Identity Guidelines <https://www.apple.com/itunes/marketing-on-podcasts/identity-guidelines.html>`_
 
 Submission
 ==========

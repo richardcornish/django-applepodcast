@@ -3,7 +3,7 @@
 Documentation
 *************
 
-`Full documentation <https://django-itunespodcast.readthedocs.io/>`_ is available online.
+`Full documentation <https://django-applepodcast.readthedocs.io/>`_ is available online.
 
 However, you can also build the documentation from source. Enter your `virtual environment <https://virtualenv.pypa.io/>`_.
 
@@ -15,8 +15,8 @@ Clone the code repository.
 
 .. code-block:: bash
 
-   $ git clone git@github.com:richardcornish/django-itunespodcast.git
-   $ cd django-itunespodcast/
+   $ git clone git@github.com:richardcornish/django-applepodcast.git
+   $ cd django-applepodcast/
 
 Install `Sphinx <http://www.sphinx-doc.org/>`_, |sphinx-autobuild|_, and |sphinx_rtd_theme|_.
 

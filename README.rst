@@ -1,24 +1,24 @@
-.. image:: https://django-itunespodcast.readthedocs.io/en/latest/_images/logo.svg?
+.. image:: https://django-applepodcast.readthedocs.io/en/latest/_images/logo.svg?
 
-Django iTunes Podcast
+Django Apple Podcast
 *********************
 
 |PyPI version|_ |Build status|_
 
 .. |PyPI version| image::
-   https://badge.fury.io/py/django-itunespodcast.svg
-.. _PyPI version: https://pypi.python.org/pypi/django-itunespodcast
+   https://badge.fury.io/py/django-applepodcast.svg
+.. _PyPI version: https://pypi.python.org/pypi/django-applepodcast
 
 .. |Build status| image::
-   https://travis-ci.org/richardcornish/django-itunespodcast.svg?branch=master
-.. _Build status: https://travis-ci.org/richardcornish/django-itunespodcast
+   https://travis-ci.org/richardcornish/django-applepodcast.svg?branch=master
+.. _Build status: https://travis-ci.org/richardcornish/django-applepodcast
 
-**Django iTunes Podcast** is a `Django <https://www.djangoproject.com/>`_ podcast `application <https://docs.djangoproject.com/en/1.11/intro/reusable-apps/>`_ optimized for the `iTunes Store <https://podcastsconnect.apple.com/>`_.
+**Django Apple Podcast** is a `Django <https://www.djangoproject.com/>`_ podcast `application <https://docs.djangoproject.com/en/1.11/intro/reusable-apps/>`_ optimized for the `Apple Podcasts <https://podcastsconnect.apple.com/>`_.
 
-* `Package distribution <https://pypi.python.org/pypi/django-itunespodcast>`_
-* `Code repository <https://github.com/richardcornish/django-itunespodcast>`_
-* `Documentation <https://django-itunespodcast.readthedocs.io/>`_
-* `Tests <https://travis-ci.org/richardcornish/django-itunespodcast>`_
+* `Package distribution <https://pypi.python.org/pypi/django-applepodcast>`_
+* `Code repository <https://github.com/richardcornish/django-applepodcast>`_
+* `Documentation <https://django-applepodcast.readthedocs.io/>`_
+* `Tests <https://travis-ci.org/richardcornish/django-applepodcast>`_
 
 An online demo also exists.
 
@@ -30,7 +30,7 @@ Install
 
 .. code-block:: bash
 
-   $ pip install django-itunespodcast
+   $ pip install django-applepodcast
 
 Add to ``settings.py``.
 

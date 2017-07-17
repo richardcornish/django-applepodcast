@@ -9,7 +9,7 @@ Install with the `pip <https://pip.pypa.io/en/stable/>`_ package manager.
 
    $ mkvirtualenv myvenv -p python3
    $ pip install django
-   $ pip install django-itunespodcast
+   $ pip install django-applepodcast
 
 After `creating a project <https://docs.djangoproject.com/en/1.11/intro/tutorial01/>`_, add ``podcast`` to ``INSTALLED_APPS`` in ``settings.py``.
 
@@ -20,7 +20,7 @@ After `creating a project <https://docs.djangoproject.com/en/1.11/intro/tutorial
        'podcast',
    ]
 
-Because the app is primarily model driven, you will want to expose the URL of the show's feed for submission to the iTunes Store. Add the URL conf to ``urls.py``.
+Because the app is primarily model driven, you will want to expose the URL of the show's feed for submission to Apple Podcasts. Add the URL conf to ``urls.py``.
 
 .. code-block:: python
 
@@ -48,7 +48,7 @@ Add the models to your project by migrating the database.
 
    $ python manage.py migrate
 
-Add the default `iTunes Store categories <https://help.apple.com/itc/podcasts_connect/#/itc9267a2f12>`_ by loading the fixtures.
+Add the default `Apple Podcasts categories <https://help.apple.com/itc/podcasts_connect/#/itc9267a2f12>`_ by loading the fixtures.
 
 .. code-block:: bash
 

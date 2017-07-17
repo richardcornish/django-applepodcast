@@ -6,7 +6,7 @@ Feed
 Sample
 ======
 
-The show feed is optimized for submission to the iTunes Store by adding additional `iTunes-specific tags <https://help.apple.com/itc/podcasts_connect/#/itcb54353390>`_.
+The show feed is optimized for submission to the Apple Podcasts by adding additional `Apple Podcast-specific tags <https://help.apple.com/itc/podcasts_connect/#/itcb54353390>`_.
 
 The following is the direct output of a show feed following the `RSS feed sample <https://help.apple.com/itc/podcasts_connect/#/itcbaf351599>`_ in the Podcasts Connect documentation as closely as possible.
 
@@ -103,7 +103,7 @@ Sample differences
 
 Although every effort was made to recreate the `RSS feed sample <https://help.apple.com/itc/podcasts_connect/#/itcbaf351599>`_ on Podcasts Connnect as closely as possible, the limitations of the way in which Django creates feeds and the occassional stray error in the feed sample itself required small changes:
 
-* The ``RssFeed`` class in Django's deep syndication class hierarchy |adds an <atom:link>|_ to the ``<channel>`` element that would require a significant code duplication and rewrite to eliminate. It does not affect iTunes Store compatibility and thus remains in the show feed.
+* The ``RssFeed`` class in Django's deep syndication class hierarchy |adds an <atom:link>|_ to the ``<channel>`` element that would require a significant code duplication and rewrite to eliminate. It does not affect Apple Podcasts compatibility and thus remains in the show feed.
 * The ``<atom:link>`` previously mentioned can only exist in a correponding XML namespace; i.e. the attribute ``xmlns:atom="http://www.w3.org/2005/Atom"`` in the ``<rss>`` element. The attribute could be easily removed, but would prevent the feed from achieving XML validation. The Atom XML namespace thus remains in the show feed.
 * The ``RssFeed`` class |adds a <lastBuildDate>|_ to the ``<channel>`` element that corresponds to the ``<pubDate>`` of the latest ``<item>``. Due to Django's deep syndication class hierarchy, it remains in the show feed.
 * In the RSS feed sample, the ``<copyright>`` element contains a year of 2014. The sample is replaced with the current year, at the time of this writing, 2017.

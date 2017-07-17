@@ -3,7 +3,7 @@
 Tests
 *****
 
-`Continuous integration test results <https://travis-ci.org/richardcornish/django-itunespodcast>`_ are available online.
+`Continuous integration test results <https://travis-ci.org/richardcornish/django-applepodcast>`_ are available online.
 
 However, you can also test the source code. Note that because the app stores media files, you will have to change to the directory above the source code directory before testing, typically ``site-packages`` after installing with pip.
 

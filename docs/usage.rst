@@ -49,7 +49,7 @@ Therefore, enclosures are modeled as |OneToOneField|_ s off of episodes, limitin
 .. |OneToOneField| replace:: ``OneToOneField``
 .. _OneToOneField: https://docs.djangoproject.com/en/1.11/ref/models/fields/#onetoonefield
 
-The iTunes Store does not host enclosure files; it is the responsibility of the developer to host them. Because an enclosure's file is a |FileField|_, files are uploaded to your |MEDIA_ROOT|_ setting. If you haven't already, your ``urls.py`` should include patterns for interfacing with files in local development.
+Apple Podcasts does not host enclosure files; it is the responsibility of the developer to host them. Because an enclosure's file is a |FileField|_, files are uploaded to your |MEDIA_ROOT|_ setting. If you haven't already, your ``urls.py`` should include patterns for interfacing with files in local development.
 
 .. code-block:: python
 
@@ -93,7 +93,7 @@ Result:
 
    itpc://127.0.0.1:8000/podcast/feed/
 
-Beware that these URLs are purely interaction based; you would not be required to submit the show feed to the iTunes Store, but you would also not be able to track users' behavior in Podcasts Connect. For this reason, you're probably better off in a traditional submission to the iTunes Store, saving your new URL in the ``Show`` model, and using the ``show.itunes`` variable in your template.
+Beware that these URLs are purely interaction based; you would not be required to submit the show feed to Apple Podcasts, but you would also not be able to track users' behavior in Podcasts Connect. For this reason, you're probably better off in a traditional submission to Apple Podcasts, saving your new URL in the ``Show`` model, and using the ``show.itunes`` variable in your template.
 
 .. code-block:: django
 
@@ -119,7 +119,7 @@ Submit the show feed to `Podcasts Connect <https://podcastsconnect.apple.com/>`_
 Badges
 ======
 
-After the iTunes Store approves your podcast, feel free to use the "Get it on iTunes" badge, the U.S. version of which is included as a minified static file. You can also download it from the `iTunes Identity Guidelines <http://www.apple.com/itunes/marketing-on-itunes/identity-guidelines.html#itunes-badge>`_. The SVG was minified with `SVGO <https://www.npmjs.com/package/svgo>`_.
+After Apple Podcasts approves your podcast, feel free to use the "Listen on Apple Podcasts" badge, the U.S. version of which is included as a minified static file. You can also download it from the `Apple Podcasts Identity Guidelines <https://www.apple.com/itunes/marketing-on-podcasts/identity-guidelines.html>`_. The SVG was minified with `SVGO <https://www.npmjs.com/package/svgo>`_.
 
 Badge
 -----
