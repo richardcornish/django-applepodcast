@@ -69,7 +69,7 @@
 {% endif %}
 
 <h2>{% trans 'Subscribe' %}</h2>
-{% if show.itunes %}<p><a href="{{ show.itunes }}"><img src="{% static 'podcast/img/badge.min.svg' %}" alt="{% trans 'Get it on iTunes' %}"></a></p>{% endif %}
+{% if show.itunes %}<p><a href="{{ show.itunes }}"><img src="{% static 'podcast/img/badge.svg' %}" alt="{% trans 'Get it on iTunes' %}"></a></p>{% endif %}
 <p><a href="{{ show.get_absolute_feed_url }}">{% trans 'RSS' %}</a></p>
 
 {% endblock %}
