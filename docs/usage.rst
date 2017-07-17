@@ -6,7 +6,7 @@ Usage
 Structure
 =========
 
-The best way to understand the app is to simply browse the `online demo <https://djangoitunespodcastdemo.herokuapp.com/podcasts/>`_ or locally after adding a show and a few episodes in the admin. But for reference, assuming you chose ``podcast`` as the base of your URL conf, the structure is:
+The best way to understand the app is to simply browse the `online demo <https://djangoapplepodcastdemo.herokuapp.com/podcasts/>`_ or locally after adding a show and a few episodes in the admin. But for reference, assuming you chose ``podcast`` as the base of your URL conf, the structure is:
 
 =====================================  ============================  ===================================== =========== =============================== ========================== =====================================
 URL                                    URL name                      View                                  Model       Template                        Context                    Absolute URLs

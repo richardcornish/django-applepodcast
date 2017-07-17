@@ -25,8 +25,8 @@ Django Apple Podcast
 
 An online demo also exists.
 
-* `Online demo <https://djangoitunespodcastdemo.herokuapp.com/podcasts/>`_
-* `Online demo code repository <https://github.com/richardcornish/djangoitunespodcastdemo>`_
+* `Online demo <https://djangoapplepodcastdemo.herokuapp.com/podcasts/>`_
+* `Online demo code repository <https://github.com/richardcornish/djangoapplepodcastdemo>`_
 
 Install
 =======
