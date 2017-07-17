@@ -119,7 +119,7 @@ Submit the show feed to `Podcasts Connect <https://podcastsconnect.apple.com/>`_
 Badges
 ======
 
-After Apple Podcasts approves your podcast, feel free to use the "Listen on Apple Podcasts" badge, the U.S. version of which is included as a minified static file. You can also download it from the `Apple Podcasts Identity Guidelines <https://www.apple.com/itunes/marketing-on-podcasts/identity-guidelines.html>`_. The SVG was minified with `SVGO <https://www.npmjs.com/package/svgo>`_.
+After Apple Podcasts approves your podcast, feel free to use the "Listen on Apple Podcasts" badge or icon, the U.S. versions of which are included as minified static files. You can also download them from the `Apple Podcasts Identity Guidelines <https://www.apple.com/itunes/marketing-on-podcasts/identity-guidelines.html>`_. The SVGs were minified with `SVGO <https://www.npmjs.com/package/svgo>`_.
 
 Badge
 -----
@@ -130,3 +130,13 @@ Badge
 
    {% load i18n staticfiles %}
    <img src="{% static 'podcast/img/badge.svg' %}" alt="{% trans 'Get it on iTunes' %}">
+
+Icon
+-----
+
+.. image:: _static/img/icon.svg
+
+.. code-block:: django
+
+   {% load i18n staticfiles %}
+   <img src="{% static 'podcast/img/icon.svg' %}" alt="{% trans 'Get it on iTunes' %}">
