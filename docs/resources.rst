@@ -15,7 +15,6 @@ Specifications
 
 * `RSS 2.0 specification <https://cyber.harvard.edu/rss/rss.html>`_
 * `Podcasts Connect Help <https://help.apple.com/itc/podcasts_connect/#/>`_ (for iTunes-specific tags)
-* `Updated iTunes RSS Spec <http://lists.apple.com/archives/syndication-dev/2005/Nov/msg00002.html>`_ (outdated but still useful)
 
 Validators
 ==========
