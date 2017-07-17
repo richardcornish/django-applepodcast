@@ -129,7 +129,7 @@ Badge
 .. code-block:: django
 
    {% load i18n staticfiles %}
-   <img src="{% static 'podcast/img/badge.svg' %}" alt="{% trans 'Get it on iTunes' %}">
+   <img src="{% static 'podcast/img/badge.svg' %}" alt="{% trans 'Listen on Apple Podcasts' %}">
 
 Icon
 -----
