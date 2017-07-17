@@ -119,9 +119,9 @@ Submit the show feed to `Podcasts Connect <https://podcastsconnect.apple.com/>`_
 Badges
 ======
 
-After the iTunes Store approves your podcast, feel free to use either of the "Get it on iTunes" badges, the U.S. versions of which are included as static files. You can also download them from the `iTunes Identity Guidelines <http://www.apple.com/itunes/marketing-on-itunes/identity-guidelines.html#itunes-badge>`_.
+After the iTunes Store approves your podcast, feel free to use the "Get it on iTunes" badge, the U.S. version of which is included as a static file. You can also download it from the `iTunes Identity Guidelines <http://www.apple.com/itunes/marketing-on-itunes/identity-guidelines.html#itunes-badge>`_.
 
-Apple did not minify the final SVGs, so it's probably better to use the minified equivalents, which are also included as static files. SVGs were minified with `SVGO <https://www.npmjs.com/package/svgo>`_.
+Apple did not minify the final SVG, so it's probably better to use the minified equivalent, which is also included as a static file. SVG was minified with `SVGO <https://www.npmjs.com/package/svgo>`_.
 
 Badge
 -----
@@ -135,16 +135,3 @@ Badge
 
    {# Unminified version #}
    <img src="{% static 'podcast/img/badge.svg' %}" alt="{% trans 'Get it on iTunes' %}">
-
-Small badge
------------
-
-.. image:: _static/img/badge-small.min.svg
-
-.. code-block:: django
-
-   {% load i18n staticfiles %}
-   <img src="{% static 'podcast/img/badge-small.min.svg' %}" alt="{% trans 'iTunes' %}">
-
-   {# Unminified version #}
-   <img src="{% static 'podcast/img/badge-small.svg' %}" alt="{% trans 'iTunes' %}">
