@@ -126,25 +126,25 @@ Apple did not minify the final SVGs, so it's probably better to use the minified
 Badge
 -----
 
-.. image:: _static/img/itunes-badge.min.svg
+.. image:: _static/img/badge.min.svg
 
 .. code-block:: django
 
    {% load i18n staticfiles %}
-   <img src="{% static 'podcast/img/itunes-badge.min.svg' %}" alt="{% trans 'Get it on iTunes' %}">
+   <img src="{% static 'podcast/img/badge.min.svg' %}" alt="{% trans 'Get it on iTunes' %}">
 
    {# Unminified version #}
-   <img src="{% static 'podcast/img/itunes-badge.svg' %}" alt="{% trans 'Get it on iTunes' %}">
+   <img src="{% static 'podcast/img/badge.svg' %}" alt="{% trans 'Get it on iTunes' %}">
 
 Small badge
 -----------
 
-.. image:: _static/img/itunes-badge-small.min.svg
+.. image:: _static/img/badge-small.min.svg
 
 .. code-block:: django
 
    {% load i18n staticfiles %}
-   <img src="{% static 'podcast/img/itunes-badge-small.min.svg' %}" alt="{% trans 'iTunes' %}">
+   <img src="{% static 'podcast/img/badge-small.min.svg' %}" alt="{% trans 'iTunes' %}">
 
    {# Unminified version #}
-   <img src="{% static 'podcast/img/itunes-badge-small.svg' %}" alt="{% trans 'iTunes' %}">
+   <img src="{% static 'podcast/img/badge-small.svg' %}" alt="{% trans 'iTunes' %}">
