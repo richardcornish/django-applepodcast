@@ -18,7 +18,7 @@ class EscapeFriendlyXMLGenerator(SimplerXMLGenerator):
     Django's addQuickElement() calls XMLGenerator.characters(), which in turn
     calls xml.sax.saxutils.escape(), which escapes characters too soon.
     This class allows unescaped characters to exist in XML elements.
-    https://github.com/django/django/blob/1.10/django/utils/xmlutils.py
+    https://github.com/django/django/blob/1.11/django/utils/xmlutils.py
     https://docs.python.org/3/library/xml.sax.utils.html
     https://code.djangoproject.com/ticket/15936
     """

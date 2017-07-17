@@ -11,7 +11,7 @@ Install with the `pip <https://pip.pypa.io/en/stable/>`_ package manager.
    $ pip install django
    $ pip install django-itunespodcast
 
-After `creating a project <https://docs.djangoproject.com/en/1.10/intro/tutorial01/>`_, add ``podcast`` to ``INSTALLED_APPS`` in ``settings.py``.
+After `creating a project <https://docs.djangoproject.com/en/1.11/intro/tutorial01/>`_, add ``podcast`` to ``INSTALLED_APPS`` in ``settings.py``.
 
 .. code-block:: python
 

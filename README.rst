@@ -13,7 +13,7 @@ Django iTunes Podcast
    https://travis-ci.org/richardcornish/django-itunespodcast.svg?branch=master
 .. _Build status: https://travis-ci.org/richardcornish/django-itunespodcast
 
-**Django iTunes Podcast** is a `Django <https://www.djangoproject.com/>`_ podcast `application <https://docs.djangoproject.com/en/1.10/intro/reusable-apps/>`_ optimized for the `iTunes Store <https://podcastsconnect.apple.com/>`_.
+**Django iTunes Podcast** is a `Django <https://www.djangoproject.com/>`_ podcast `application <https://docs.djangoproject.com/en/1.11/intro/reusable-apps/>`_ optimized for the `iTunes Store <https://podcastsconnect.apple.com/>`_.
 
 * `Package distribution <https://pypi.python.org/pypi/django-itunespodcast>`_
 * `Code repository <https://github.com/richardcornish/django-itunespodcast>`_
