@@ -46,7 +46,7 @@
 {% endif %}
 
 <h2>{% trans 'Artwork' %}</h2>
-<p><a href="{{ show.get_image_url }}"><img src="{{ show.get_image_url }}" alt="{{ episode.title }} artwork" width="300"></a></p>
+<p><a href="{{ show.get_image_url }}"><img src="{{ show.get_image_url }}" alt="{{ show.title }} artwork" width="300"></a></p>
 
 {% if show.description %}
 <h2>{% trans 'Description' %}</h2>
