@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 
+from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView, TemplateView
 from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.list import MultipleObjectMixin
@@ -19,9 +20,9 @@ class ShowDetailView(SingleObjectMixin, MultipleObjectMixin, TemplateView):
 
     def get_object(self, queryset=None):
         if settings.PODCAST_SINGULAR:
-            return Show.objects.get(id=settings.PODCAST_ID)
+            return get_object_or_404(Show, id=settings.PODCAST_ID)
         else:
-            return Show.objects.get(slug=self.kwargs['show_slug'])
+            return get_object_or_404(Show, slug=self.kwargs['show_slug'])
 
     def get_queryset(self):
         """Return list with episode number attached to each episode."""
@@ -47,9 +48,9 @@ class EpisodeDetailView(DetailView):
     def get_object(self, queryset=None):
         """Return object with episode number attached to episode."""
         if settings.PODCAST_SINGULAR:
-            show = Show.objects.get(id=settings.PODCAST_ID)
+            show = get_object_or_404(Show, id=settings.PODCAST_ID)
         else:
-            show = Show.objects.get(slug=self.kwargs['show_slug'])
+            show = get_object_or_404(Show, slug=self.kwargs['show_slug'])
         episode = Episode.objects.get(show=show, slug=self.kwargs['slug'])
         index = Episode.objects.filter(show=show, pub_date__lt=episode.pub_date).count()
         episode.index = index + 1
