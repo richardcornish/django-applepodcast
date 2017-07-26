@@ -51,6 +51,12 @@ Therefore, enclosures are modeled as |OneToOneField|_ s off of episodes, limitin
 
 Apple Podcasts does not host enclosure files; it is the responsibility of the developer to host them. Because an enclosure's file is a |FileField|_, files are uploaded to your |MEDIA_ROOT|_ setting. If you haven't already, your ``urls.py`` should include patterns for interfacing with files in local development.
 
+.. |FileField| replace:: ``FileField``
+.. _FileField: https://docs.djangoproject.com/en/1.11/ref/models/fields/#django.db.models.FileField
+
+.. |MEDIA_ROOT| replace:: ``MEDIA_ROOT``
+.. _MEDIA_ROOT: https://docs.djangoproject.com/en/1.11/ref/settings/#std:setting-MEDIA_ROOT
+
 .. code-block:: python
 
    from django.conf import settings
@@ -67,13 +73,9 @@ Apple Podcasts does not host enclosure files; it is the responsibility of the de
    if getattr(settings, 'DEBUG', False):
        urlpatterns += staticfiles_urlpatterns() + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-Although file management in production is out of scope of this documentation, consider using Amazon Web Service's `S3 (Simple Storage Service) <https://console.aws.amazon.com/s3/home>`_ to host files and `Django Storages Redux <https://pypi.python.org/pypi/django-storages-redux>`_ and `Boto <https://github.com/boto/boto>`_ (and, if using Python 3, `Boto 3 <https://github.com/boto/boto3>`_), to interface with them.
+Although file management in production is out of scope of this documentation, consider using Amazon Web Service's `S3 (Simple Storage Service) <https://console.aws.amazon.com/s3/home>`_ to host files and `Django Storages <https://pypi.python.org/pypi/django-storages>`_ and `Boto <https://github.com/boto/boto>`_ (and, if using Python 3, `Boto 3 <https://github.com/boto/boto3>`_), to interface with them.
 
-.. |FileField| replace:: ``FileField``
-.. _FileField: https://docs.djangoproject.com/en/1.11/ref/models/fields/#django.db.models.FileField
-
-.. |MEDIA_ROOT| replace:: ``MEDIA_ROOT``
-.. _MEDIA_ROOT: https://docs.djangoproject.com/en/1.11/ref/settings/#std:setting-MEDIA_ROOT
+The `code repository <https://github.com/richardcornish/django-applepodcast-demo>`_ of the `online demo <https://djangoapplepodcastdemo.herokuapp.com/podcast/>`_ is worth looking at for a complete implementation, especially the `settings file <https://github.com/richardcornish/django-applepodcast-demo/blob/master/demo/demo/settings.py>`_ if you expect to use AWS's S3.
 
 Protocols
 =========
