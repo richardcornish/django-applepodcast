@@ -23,15 +23,42 @@
 
 <h1>{{ show.title }}</h1>
 
-{% blocktrans count episode_count=page_obj.paginator.count %}
-<p>{{ episode_count }} episode</p>
-{% plural %}
-<p>{{ episode_count }} episodes</p>
-{% endblocktrans %}
+<p><a href="{{ show.get_image_url }}"><img src="{{ show.get_image_url }}" alt="{{ show.title }} artwork" width="300"></a></p>
+
+{% if show.description %}
+<p>{{ show.description }}</p>
+{% endif %}
+
+{% if show.itunes %}<p><a href="{{ show.itunes }}"><img src="{% static 'podcast/img/badge.svg' %}" alt="{% trans 'Listen on Apple Podcasts' %}"></a></p>{% endif %}
+<p><a href="{{ show.get_absolute_feed_url }}" title="Really Simple Syndication">{% trans 'Subscribe to RSS' %}</a></p>
+
+{% if show.categories %}
+<h2>{% trans 'Categories' %}</h2>
+<ul>
+    {% for key, value in show.get_categories_dict %}
+    <li>{{ key }}
+        {% if value %}
+        <ul>
+            {% for sub in value %}
+            <li>{{ sub }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
 
 {% if episode_list %}
 
     <h2>{% trans 'Episodes' %}</h2>
+
+    {% blocktrans count episode_count=page_obj.paginator.count %}
+    <p>{{ episode_count }} episode</p>
+    {% plural %}
+    <p>{{ episode_count }} episodes</p>
+    {% endblocktrans %}
+
     {% for episode in episode_list %}
         <h3><a href="{{ episode.get_absolute_url }}">{{ episode.title }}</a></h3>
         <p>{% trans 'Episode'%} {{ episode.index }}</p>
@@ -44,32 +71,5 @@
     {% include 'podcast/pagination.html' %}
 
 {% endif %}
-
-<h2>{% trans 'Artwork' %}</h2>
-<p><a href="{{ show.get_image_url }}"><img src="{{ show.get_image_url }}" alt="{{ show.title }} artwork" width="300"></a></p>
-
-{% if show.description %}
-<h2>{% trans 'Description' %}</h2>
-<p>{{ show.description }}</p>
-{% endif %}
-
-{% if show.categories %}
-<h2>{% trans 'Categories' %}</h2>
-<ul>
-    {% for key, value in show.get_categories_dict %}
-    <li>{{ key }}
-        <ul>
-            {% for sub in value %}
-            <li>{{ sub }}</li>
-            {% endfor %}
-        </ul>
-    </li>
-    {% endfor %}
-</ul>
-{% endif %}
-
-<h2>{% trans 'Subscribe' %}</h2>
-{% if show.itunes %}<p><a href="{{ show.itunes }}"><img src="{% static 'podcast/img/badge.svg' %}" alt="{% trans 'Listen on Apple Podcasts' %}"></a></p>{% endif %}
-<p><a href="{{ show.get_absolute_feed_url }}">{% trans 'RSS' %}</a></p>
 
 {% endblock %}

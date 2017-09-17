@@ -28,6 +28,10 @@
 
 <p><time datetime="{{ episode.pub_date|date:'c' }}" title="{{ episode.pub_date|date:'c' }}">{{ episode.pub_date|date:'j F Y' }}</time></p>
 
+{% if episode.description %}
+<p>{{ episode.description|safe }}</p>
+{% endif %}
+
 {% if episode.enclosure %}
 {% with enclosure=episode.enclosure %}
 
@@ -52,17 +56,8 @@
 {% endwith %}
 {% endif %}
 
-<h2>{% trans 'Artwork' %}</h2>
-<p><a href="{{ episode.show.get_image_url }}"><img src="{{ episode.show.get_image_url }}" alt="{{ episode.title }} artwork" width="300"></a></p>
-
-{% if episode.description %}
-<h2>{% trans 'Description' %}</h2>
-<p>{{ episode.description|safe }}</p>
-{% endif %}
-
-<h2>{% trans 'Subscribe' %}</h2>
 {% if episode.show.itunes %}<p><a href="{{ episode.show.itunes }}"><img src="{% static 'podcast/img/badge.svg' %}" alt="{% trans 'Listen on Apple Podcasts' %}"></a></p>{% endif %}
-<p><a href="{{ episode.show.get_absolute_feed_url }}">{% trans 'RSS' %}</a></p>
+<p><a href="{{ episode.show.get_absolute_feed_url }}" title="Really Simple Syndication">{% trans 'Subscribe to RSS' %}</a></p>
 
 {% if episode.get_previous or episode.get_next %}
 <ul>
