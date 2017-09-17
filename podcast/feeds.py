@@ -136,7 +136,7 @@ class ShowFeed(Feed):
         return '%s' % item.description
 
     def item_guid(self, item):
-        return self.item_enclosure_url(item)
+        return item.guid
 
     def item_pubdate(self, item):
         return item.pub_date
