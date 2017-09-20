@@ -14,6 +14,7 @@ from django.utils import timezone
 from django.utils.encoding import force_bytes, python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
+import bleach
 from mutagen.mp3 import MP3
 from mutagen.mp4 import MP4
 
@@ -170,7 +171,7 @@ class Episode(models.Model):
     description = models.TextField(_("description"), help_text=_("Accepts HTML"))
     pub_date = models.DateTimeField(_("pub date"),)
     subtitle = models.CharField(_("subtitle"), max_length=255, blank=True, help_text=_("Accepts HTML"))
-    summary = models.TextField(_("summary"), blank=True, max_length=4000, help_text=_("Max length of 4,000 characters; accepts HTML; if blank, uses description"))
+    notes = models.TextField(_("notes"), blank=True, max_length=4000, help_text=_("Max length of 4,000 characters; accepts &lt;p&gt; &lt;ol&gt; &lt;ul&gt; &lt;li&gt; &lt;a&gt; &lt;em&gt; &lt;i&gt; &lt;b&gt; &lt;strong&gt;; if blank, uses description"))
     author_name = models.CharField(_("author name"), max_length=255, blank=True, help_text=_("Appears as the \"artist\" of the episode; if blank, uses show's author name"))
     author_email = models.EmailField(_("author e-mail"), blank=True, help_text=_("If blank, uses show's author email"))
     image = models.ImageField(_("image"), upload_to="podcast/episodes/", blank=True, help_text=_("1400&times;1400&ndash;3000&times;3000px, 72DPI, JPG/PNG, RGB; if blank, uses show's image"))
@@ -189,8 +190,15 @@ class Episode(models.Model):
         return "%s" % self.title
 
     def save(self, *args, **kwargs):
-        # Save unique but reproducible hash of object ID
+
+        # Strip non-standard HTML from notes
+        tags = settings.PODCAST_ALLOWED_TAGS
+        self.notes = bleach.clean(self.notes, tags=tags, strip=True)
+
+        # Save instance now to obtain object ID
         super(Episode, self).save(*args, **kwargs)
+
+        # Save unique but reproducible hash of object ID
         if not self.guid:
             bytes_id = force_bytes(self.id)
             self.guid = hashlib.sha256(bytes_id).hexdigest()

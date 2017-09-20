@@ -33,6 +33,7 @@ class ItunesFeed(Rss201rev2Feed):
     def rss_attributes(self):
         attrs = super(ItunesFeed, self).rss_attributes()
         attrs['xmlns:itunes'] = 'http://www.itunes.com/dtds/podcast-1.0.dtd'
+        attrs['xmlns:content'] = 'http://purl.org/rss/1.0/modules/content/'
         return attrs
 
     def add_root_elements(self, handler):
@@ -65,10 +66,10 @@ class ItunesFeed(Rss201rev2Feed):
         super(ItunesFeed, self).add_item_elements(handler, item)
         if item['itunes']['subtitle']:
             handler.addQuickElement('itunes:subtitle', item['itunes']['subtitle'], escape=False, cdata=True)
-        if item['itunes']['summary']:
-            handler.addQuickElement('itunes:summary', item['itunes']['summary'], escape=False, cdata=True)
+        if item['itunes']['notes']:
+            handler.addQuickElement('content:encoded', item['itunes']['notes'], escape=False, cdata=True)
         else:
-            handler.addQuickElement('itunes:summary', item['description'], escape=False, cdata=True)
+            handler.addQuickElement('content:encoded', item['description'], escape=False, cdata=True)
         if item['itunes']['author']['name']:
             handler.addQuickElement('itunes:author', item['itunes']['author']['name'])
         if item['itunes']['image']:
@@ -175,7 +176,7 @@ class ShowFeed(Feed):
         return {
             'itunes': {
                 'subtitle': item.subtitle,
-                'summary': item.summary,
+                'notes': item.notes,
                 'author': {
                     'name': item.get_author_name(),
                     'email': item.get_author_email(),

@@ -12,3 +12,7 @@ PODCAST_EPISODE_LIMIT = getattr(settings, 'PODCAST_EPISODE_LIMIT', None)
 PODCAST_NO_ARTWORK = getattr(settings, 'PODCAST_NO_ARTWORK', 'podcast/img/no_artwork.png')
 
 PODCAST_PAGINATE_BY = getattr(settings, 'PODCAST_PAGINATE_BY', 10)
+
+PODCAST_ALLOWED_TAGS = getattr(settings, 'PODCAST_ALLOWED_TAGS', [
+    'p', 'ol', 'ul', 'a', 'em', 'i', 'b', 'li', 'strong'
+])

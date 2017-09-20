@@ -20,6 +20,7 @@ setup(
     install_requires=[
         'mutagen',
         'pillow',
+        'bleach',
     ],
     test_suite='podcast.tests',
     classifiers=[

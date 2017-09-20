@@ -45,7 +45,7 @@ class EpisodeAdmin(admin.ModelAdmin):
             'fields': ('show', 'title', 'slug', 'description', 'pub_date',)
         }),
         ('iTunes', {
-            'fields': ('subtitle', 'summary', 'author_name', 'author_email', 'image', 'explicit', 'block',),
+            'fields': ('subtitle', 'notes', 'author_name', 'author_email', 'image', 'explicit', 'block',),
         }),
         ('Speakers', {
             'fields': ('hosts', 'guests',),
