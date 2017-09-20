@@ -203,7 +203,7 @@ class Episode(models.Model):
             return reverse("podcast:episode_detail", args=[self.show.slug, self.slug])
 
     def validate_unique(self, exclude=None):
-        """Episode slugs don't need to be unique *unless* in the same show."""
+        # Episode slugs don't need to be unique *unless* in the same show.
         if Episode.objects.filter(show=self.show, slug=self.slug).count() > 1:
             raise ValidationError(_("Episode titles must be unique within the same show."))
         super(Episode, self).validate_unique(exclude=None)
