@@ -4,7 +4,6 @@ from __future__ import unicode_literals
 import os
 from ast import literal_eval
 from datetime import timedelta
-import uuid
 
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.core.exceptions import ValidationError
@@ -178,7 +177,6 @@ class Episode(models.Model):
     block = models.BooleanField(_("block?"), default=False, help_text=_("Prevents episode from appearing on the iTunes Store"))
     hosts = models.ManyToManyField(Speaker, verbose_name=_("hosts"), related_name="host", blank=True, help_text=_("If different from show hosts"))
     guests = models.ManyToManyField(Speaker, verbose_name=_("guests"), related_name="guest", blank=True)
-    guid = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
 
     class Meta:
         ordering = ["-pub_date"]
