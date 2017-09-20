@@ -7,7 +7,7 @@ from .models import Speaker, Category, Show, Episode, Enclosure
 
 class EnclosureInline(admin.TabularInline):
     model = Enclosure
-    fields = ('file', 'type', 'poster', 'get_duration', 'cc',)
+    fields = ('file', 'type', 'poster', 'cc', 'get_duration',)
     readonly_fields = ('get_duration',)
 
 
@@ -58,7 +58,7 @@ class EpisodeAdmin(admin.ModelAdmin):
 
 class EnclosureAdmin(admin.ModelAdmin):
     list_display = ('episode', 'get_duration', 'type', 'file',)
-    fields = ('episode', 'file', 'type', 'poster', 'get_duration', 'cc',)
+    fields = ('episode', 'type', 'file', 'poster', 'cc', 'get_duration',)
     readonly_fields = ('get_duration',)
 
 
