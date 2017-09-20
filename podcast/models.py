@@ -1,6 +1,7 @@
 from __future__ import division
 from __future__ import unicode_literals
 
+import hashlib
 import os
 from ast import literal_eval
 from datetime import timedelta
@@ -10,7 +11,7 @@ from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils import timezone
-from django.utils.encoding import python_2_unicode_compatible
+from django.utils.encoding import force_bytes, python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 from mutagen.mp3 import MP3
@@ -177,6 +178,7 @@ class Episode(models.Model):
     block = models.BooleanField(_("block?"), default=False, help_text=_("Prevents episode from appearing on the iTunes Store"))
     hosts = models.ManyToManyField(Speaker, verbose_name=_("hosts"), related_name="host", blank=True, help_text=_("If different from show hosts"))
     guests = models.ManyToManyField(Speaker, verbose_name=_("guests"), related_name="guest", blank=True)
+    guid = models.CharField(_("GUID"), max_length=64, editable=False)
 
     class Meta:
         ordering = ["-pub_date"]
@@ -185,6 +187,14 @@ class Episode(models.Model):
 
     def __str__(self):
         return "%s" % self.title
+
+    def save(self, *args, **kwargs):
+        # Save unique but reproducible hash of object ID
+        super(Episode, self).save(*args, **kwargs)
+        if not self.guid:
+            bytes_id = force_bytes(self.id)
+            self.guid = hashlib.sha256(bytes_id).hexdigest()
+            self.save(update_fields=['guid'])
 
     def get_absolute_url(self):
         if settings.PODCAST_SINGULAR:
