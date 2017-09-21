@@ -191,10 +191,6 @@ class Episode(models.Model):
 
     def save(self, *args, **kwargs):
 
-        # Strip non-standard HTML from notes
-        tags = settings.PODCAST_ALLOWED_TAGS
-        self.notes = bleach.clean(self.notes, tags=tags, strip=True)
-
         # Save instance now to obtain object ID
         super(Episode, self).save(*args, **kwargs)
 
@@ -215,6 +211,11 @@ class Episode(models.Model):
         if Episode.objects.filter(show=self.show, slug=self.slug).count() > 1:
             raise ValidationError(_("Episode titles must be unique within the same show."))
         super(Episode, self).validate_unique(exclude=None)
+
+    def get_notes(self):
+        tags = settings.PODCAST_ALLOWED_TAGS
+        text = self.notes if self.notes else self.description
+        return bleach.clean(text, tags=tags, strip=True)
 
     def get_author_name(self):
         return self.author_name if self.author_name else self.show.author_name

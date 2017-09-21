@@ -68,8 +68,6 @@ class ItunesFeed(Rss201rev2Feed):
             handler.addQuickElement('itunes:subtitle', item['itunes']['subtitle'], escape=False, cdata=True)
         if item['itunes']['notes']:
             handler.addQuickElement('content:encoded', item['itunes']['notes'], escape=False, cdata=True)
-        else:
-            handler.addQuickElement('content:encoded', item['description'], escape=False, cdata=True)
         if item['itunes']['author']['name']:
             handler.addQuickElement('itunes:author', item['itunes']['author']['name'])
         if item['itunes']['image']:
@@ -176,7 +174,7 @@ class ShowFeed(Feed):
         return {
             'itunes': {
                 'subtitle': item.subtitle,
-                'notes': item.notes,
+                'notes': item.get_notes(),
                 'author': {
                     'name': item.get_author_name(),
                     'email': item.get_author_email(),
