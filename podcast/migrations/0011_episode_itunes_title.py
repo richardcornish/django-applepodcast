@@ -15,6 +15,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='episode',
             name='itunes_title',
-            field=models.CharField(blank=True, help_text='A clear, concise name of the episode; do not specify show title, episode number, or season number; if blank, uses original title', max_length=255, verbose_name='title'),
+            field=models.CharField(blank=True, help_text='Do not specify show title, episode number, or season number; if blank, uses original title', max_length=255, verbose_name='title'),
         ),
     ]
