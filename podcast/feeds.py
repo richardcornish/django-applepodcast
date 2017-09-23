@@ -37,10 +37,8 @@ class ItunesFeed(Rss201rev2Feed):
     def add_root_elements(self, handler):
         super(ItunesFeed, self).add_root_elements(handler)
         handler.addQuickElement('copyright', self.feed['copyright'], escape=False, cdata=False)
-        if self.feed['itunes']['subtitle']:
-            handler.addQuickElement('itunes:subtitle', self.feed['itunes']['subtitle'], escape=False, cdata=True)
-        if self.feed['itunes']['summary']:
-            handler.addQuickElement('itunes:summary', self.feed['itunes']['summary'], escape=False, cdata=True)
+        handler.addQuickElement('itunes:subtitle', self.feed['itunes']['subtitle'], escape=False, cdata=True)
+        handler.addQuickElement('itunes:summary', self.feed['itunes']['summary'], escape=False, cdata=True)
         handler.addQuickElement('itunes:author', self.feed['itunes']['author']['name'])
         handler.startElement('itunes:owner', {})
         handler.addQuickElement('itunes:name', self.feed['itunes']['owner']['name'])
@@ -53,29 +51,21 @@ class ItunesFeed(Rss201rev2Feed):
                 handler.addQuickElement('itunes:category', '', {'text': sub})
             handler.endElement('itunes:category')
         handler.addQuickElement('itunes:explicit', self.feed['itunes']['explicit'])
-        if self.feed['itunes']['block'] == 'yes':
-            handler.addQuickElement('itunes:block', self.feed['itunes']['block'])
-        if self.feed['itunes']['complete'] == 'yes':
-            handler.addQuickElement('itunes:complete', self.feed['itunes']['complete'])
+        handler.addQuickElement('itunes:block', self.feed['itunes']['block'])
+        handler.addQuickElement('itunes:complete', self.feed['itunes']['complete'])
 
     def add_item_elements(self, handler, item):
         super(ItunesFeed, self).add_item_elements(handler, item)
-        if item['itunes']['summary']:
-            handler.addQuickElement('itunes:summary', item['itunes']['summary'])
-            handler.addQuickElement('itunes:subtitle', item['itunes']['summary'])  # legacy iTunes
-        if item['itunes']['notes']:
-            handler.addQuickElement('content:encoded', item['itunes']['notes'], escape=False, cdata=True)
-        if item['itunes']['author']['name']:
-            handler.addQuickElement('itunes:author', item['itunes']['author']['name'])
-        if item['itunes']['image']:
-            handler.addQuickElement('itunes:image', '', {'href': item['itunes']['image']})
+        handler.addQuickElement('itunes:summary', item['itunes']['summary'])
+        handler.addQuickElement('itunes:subtitle', item['itunes']['summary'])  # legacy iTunes
+        handler.addQuickElement('content:encoded', item['itunes']['notes'], escape=False, cdata=True)
+        handler.addQuickElement('itunes:author', item['itunes']['author']['name'])
+        handler.addQuickElement('itunes:image', '', {'href': item['itunes']['image']})
         handler.addQuickElement('itunes:explicit', item['itunes']['explicit'])
-        if item['itunes']['block'] == 'yes':
-            handler.addQuickElement('itunes:block', item['itunes']['block'])
+        handler.addQuickElement('itunes:block', item['itunes']['block'])
+        handler.addQuickElement('itunes:isClosedCaptioned', item['itunes']['cc'])
         if item['itunes']['duration']:
             handler.addQuickElement('itunes:duration', item['itunes']['duration'])
-        if item['itunes']['cc'] == 'yes':
-            handler.addQuickElement('itunes:isClosedCaptioned', item['itunes']['cc'])
 
 
 class ShowFeed(Feed):
@@ -97,9 +87,11 @@ class ShowFeed(Feed):
     def description(self, obj):
         return '%s' % obj.description
 
-    def feed_extra_kwargs(self, obj):
+    def image(self, obj):
         current_site = get_current_site(self.request)
-        image_url = add_domain(current_site.domain, obj.get_image_url(), self.request.is_secure())
+        return add_domain(current_site.domain, obj.get_image_url(), self.request.is_secure())
+
+    def feed_extra_kwargs(self, obj):
         return {
             'copyright': obj.get_copyright(),
             'itunes': {
@@ -110,10 +102,10 @@ class ShowFeed(Feed):
                     'email': obj.author_email,
                 },
                 'owner': {
-                    'name': obj.owner_name or obj.author_name,
-                    'email': obj.owner_email or obj.author_email,
+                    'name': obj.get_owner_name(),
+                    'email': obj.get_owner_email(),
                 },
-                'image': image_url,
+                'image': self.image(obj),
                 'categories': obj.get_categories_dict(),
                 'explicit': obj.get_explicit(),
                 'block': obj.get_block(),
@@ -156,17 +148,27 @@ class ShowFeed(Feed):
         except Enclosure.DoesNotExist:
             return None
 
-    def item_extra_kwargs(self, item):
+    def item_image(self, item):
         current_site = get_current_site(self.request)
         image_url = item.image.url if item.image else item.show.get_image_url()
-        image = add_domain(current_site.domain, image_url, self.request.is_secure())
+        image_absolute_url = add_domain(current_site.domain, image_url, self.request.is_secure())
+        return image_absolute_url
+
+    def item_cc(self, item):
         try:
             enclosure = Enclosure.objects.get(episode=item)
-            cc = enclosure.get_cc()
-            duration = enclosure.get_duration()
+            return enclosure.get_cc()
         except Enclosure.DoesNotExist:
-            cc = None
-            duration = None
+            return None
+
+    def item_duration(self, item):
+        try:
+            enclosure = Enclosure.objects.get(episode=item)
+            return enclosure.get_duration()
+        except Enclosure.DoesNotExist:
+            return None
+
+    def item_extra_kwargs(self, item):
         return {
             'itunes': {
                 'summary': item.get_summary(),
@@ -175,10 +177,10 @@ class ShowFeed(Feed):
                     'name': item.get_author_name(),
                     'email': item.get_author_email(),
                 },
-                'image': image,
+                'image': self.item_image(item),
                 'explicit': item.get_explicit(),
                 'block': item.get_block(),
-                'cc': cc,
-                'duration': duration,
+                'cc': self.item_cc(item),
+                'duration': self.item_duration(item),
             }
         }

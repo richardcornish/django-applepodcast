@@ -121,6 +121,12 @@ class Show(models.Model):
         else:
             return staticfiles_storage.url(settings.PODCAST_NO_ARTWORK)
 
+    def get_owner_name(self):
+        return self.owner_name if self.owner_name else self.author_name
+
+    def get_owner_email(self):
+        return self.owner_email if self.owner_email else self.author_email
+
     def get_copyright(self):
         year = timezone.now().year
         title = escape(self.copyright or self.title)
@@ -287,7 +293,7 @@ class Enclosure(models.Model):
                 self.type == "video/mp4" or \
                 self.type == "video/x-m4v" or \
                 self.type == "video/quicktime":
-                media = MP4(self.file)
+            media = MP4(self.file)
         self.timedelta = timedelta(seconds=int(media.info.length))
         super(Enclosure, self).save(*args, **kwargs)
 
