@@ -77,6 +77,11 @@ class Category(models.Model):
 
 @python_2_unicode_compatible
 class Show(models.Model):
+    TYPE_CHOICES = (
+        ("episodic", _("Episodic")),
+        ("serial", _("Serial")),
+    )
+    type = models.CharField(_("type"), max_length=255, choices=TYPE_CHOICES, default="episodic", help_text=_("Episodic presents episodes by latest, serial presents episodes by episode number; both support seasons"))
     title = models.CharField(_("title"), max_length=255)
     slug = models.SlugField(_("slug"), unique=True)
     image = models.ImageField(_("image"), upload_to="podcast/shows/", blank=True, help_text=_("1400&times;1400&ndash;3000&times;3000px; 72DPI; JPG, PNG; RGB; if blank, default <a href=\"%s\">no artwork</a> is used") % staticfiles_storage.url(settings.PODCAST_NO_ARTWORK))

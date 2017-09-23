@@ -37,6 +37,7 @@ class ItunesFeed(Rss201rev2Feed):
     def add_root_elements(self, handler):
         super(ItunesFeed, self).add_root_elements(handler)
         handler.addQuickElement('copyright', self.feed['copyright'], escape=False, cdata=False)
+        handler.addQuickElement('itunes:type', self.feed['itunes']['type'])
         handler.addQuickElement('itunes:subtitle', self.feed['itunes']['subtitle'], escape=False, cdata=True)
         handler.addQuickElement('itunes:summary', self.feed['itunes']['summary'], escape=False, cdata=True)
         handler.addQuickElement('itunes:author', self.feed['itunes']['author']['name'])
@@ -101,6 +102,7 @@ class ShowFeed(Feed):
         return {
             'copyright': obj.get_copyright(),
             'itunes': {
+                'type': obj.type,
                 'subtitle': obj.subtitle,
                 'summary': obj.get_summary(),
                 'author': {
