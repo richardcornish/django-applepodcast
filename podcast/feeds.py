@@ -2,8 +2,6 @@ from __future__ import unicode_literals
 
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.syndication.views import Feed, add_domain
-from django.utils import timezone
-from django.utils.html import escape
 from django.utils.feedgenerator import Rss201rev2Feed
 
 from .models import Show, Episode, Enclosure
@@ -101,11 +99,10 @@ class ShowFeed(Feed):
         return '%s' % obj.description
 
     def feed_extra_kwargs(self, obj):
-        copyright = escape('%s & %s %s %s') % ('&#x2117;', '&#xA9;', timezone.now().year, escape(obj.copyright or obj.title))
         current_site = get_current_site(self.request)
         image_url = add_domain(current_site.domain, obj.get_image_url(), self.request.is_secure())
         return {
-            'copyright': copyright,
+            'copyright': obj.get_copyright(),
             'itunes': {
                 'subtitle': obj.subtitle,
                 'summary': obj.summary,

@@ -11,6 +11,7 @@ from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils import timezone
+from django.utils.html import escape
 from django.utils.encoding import force_bytes, python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
@@ -119,6 +120,11 @@ class Show(models.Model):
             return self.image.url
         else:
             return staticfiles_storage.url(settings.PODCAST_NO_ARTWORK)
+
+    def get_copyright(self):
+        year = timezone.now().year
+        title = escape(self.copyright or self.title)
+        return '&#x2117; &amp; &#xA9; %s %s' % (year, title)
 
     def get_categories_dict(self):
         old_dicts = [literal_eval(c.json) for c in self.categories.all()]
