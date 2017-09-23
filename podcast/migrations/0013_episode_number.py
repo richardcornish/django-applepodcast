@@ -15,6 +15,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='episode',
             name='number',
-            field=models.PositiveIntegerField(blank=True, help_text='Number of the episode within the season', null=True, verbose_name='number'),
+            field=models.PositiveIntegerField(blank=True, help_text='If a serialized show, number of the episode within the season', null=True, verbose_name='number'),
         ),
     ]
