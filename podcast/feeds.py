@@ -56,6 +56,7 @@ class ItunesFeed(Rss201rev2Feed):
 
     def add_item_elements(self, handler, item):
         super(ItunesFeed, self).add_item_elements(handler, item)
+        handler.addQuickElement('itunes:episodeType', item['itunes']['type'])
         handler.addQuickElement('itunes:title', item['itunes']['title'])
         handler.addQuickElement('itunes:summary', item['itunes']['summary'])
         handler.addQuickElement('itunes:subtitle', item['itunes']['summary'])  # legacy iTunes
@@ -172,6 +173,7 @@ class ShowFeed(Feed):
     def item_extra_kwargs(self, item):
         return {
             'itunes': {
+                'type': item.type,
                 'title': item.get_title(),
                 'summary': item.get_summary(),
                 'notes': item.get_notes(),

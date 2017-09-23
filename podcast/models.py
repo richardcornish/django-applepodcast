@@ -182,11 +182,17 @@ class Show(models.Model):
 
 @python_2_unicode_compatible
 class Episode(models.Model):
+    TYPE_CHOICES = (
+        ("full", _("Full")),
+        ("trailer", _("Trailer")),
+        ("bonus", _("Bonus")),
+    )
     show = models.ForeignKey(Show, verbose_name=_("show"))
     title = models.CharField(_("title"), max_length=255)
     slug = models.SlugField(_("slug"),)
     description = models.TextField(_("description"), help_text=_("Accepts HTML"))
     pub_date = models.DateTimeField(_("pub date"),)
+    type = models.CharField(_("type"), max_length=255, choices=TYPE_CHOICES, default="full", help_text=_("Full is for episodes, trailer is for promotional previews, and bonus is for extra content"))
     itunes_title = models.CharField(_("title"), max_length=255, blank=True, help_text=_("Do not specify show title, episode number, or season number; if blank, uses original title"))
     summary = models.CharField(_("summary"), max_length=255, blank=True, help_text=_("A single, descriptive sentence of the episode"))
     notes = models.TextField(_("notes"), blank=True, max_length=4000, help_text=_("Max length of 4,000 characters; accepts &lt;p&gt; &lt;ol&gt; &lt;ul&gt; &lt;li&gt; &lt;a&gt; &lt;em&gt; &lt;i&gt; &lt;b&gt; &lt;strong&gt;; if blank, uses description"))
