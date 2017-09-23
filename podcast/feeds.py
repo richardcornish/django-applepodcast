@@ -57,6 +57,8 @@ class ItunesFeed(Rss201rev2Feed):
     def add_item_elements(self, handler, item):
         super(ItunesFeed, self).add_item_elements(handler, item)
         handler.addQuickElement('itunes:episodeType', item['itunes']['type'])
+        if item['itunes']['season']:
+            handler.addQuickElement('itunes:season', item['itunes']['season'])
         if item['itunes']['number']:
             handler.addQuickElement('itunes:episode', item['itunes']['number'])
         handler.addQuickElement('itunes:title', item['itunes']['title'])
@@ -176,6 +178,7 @@ class ShowFeed(Feed):
         return {
             'itunes': {
                 'type': item.type,
+                'season': str(item.season),
                 'number': str(item.number),
                 'title': item.get_title(),
                 'summary': item.get_summary(),
