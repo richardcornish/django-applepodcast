@@ -39,6 +39,7 @@ class ShowAdmin(admin.ModelAdmin):
 
 class EpisodeAdmin(admin.ModelAdmin):
     list_display = ('title', 'get_duration', 'pub_date', 'show', 'explicit',)
+    list_filter = ('show',)
     prepopulated_fields = {'slug': ('title',)}
     fieldsets = (
         (None, {
