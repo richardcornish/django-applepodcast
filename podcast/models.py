@@ -16,8 +16,7 @@ from django.utils.encoding import force_bytes, python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 import bleach
-from mutagen.mp3 import MP3
-from mutagen.mp4 import MP4
+import mutagen
 
 from . import settings
 
@@ -310,14 +309,11 @@ class Enclosure(models.Model):
         return "%s: %s" % (self.episode, self.type)
 
     def save(self, *args, **kwargs):
-        if self.type == "audio/mpeg":
-            media = MP3(self.file)
-        elif self.type == "audio/x-m4a" or \
-                self.type == "video/mp4" or \
-                self.type == "video/x-m4v" or \
-                self.type == "video/quicktime":
-            media = MP4(self.file)
-        self.timedelta = timedelta(seconds=int(media.info.length))
+        media = mutagen.File(self.file)
+        try:
+            self.timedelta = timedelta(seconds=int(media.info.length))
+        except AttributeError:
+            pass
         super(Enclosure, self).save(*args, **kwargs)
 
     def get_poster_url(self):
@@ -338,13 +334,13 @@ class Enclosure(models.Model):
         return os.path.splitext(self.file.url)[1]
 
     def get_duration(self):
-        if self.timedelta:
+        try:
             m, s = divmod(self.timedelta.total_seconds(), 60)
             h, m = divmod(m, 60)
             if h:
                 return "%02d:%02d:%02d" % (h, m, s)
             else:
                 return "%02d:%02d" % (m, s)
-        else:
+        except AttributeError:
             return None
     get_duration.short_description = _("duration")
