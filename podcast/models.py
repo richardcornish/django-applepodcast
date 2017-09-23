@@ -187,6 +187,7 @@ class Episode(models.Model):
     slug = models.SlugField(_("slug"),)
     description = models.TextField(_("description"), help_text=_("Accepts HTML"))
     pub_date = models.DateTimeField(_("pub date"),)
+    itunes_title = models.CharField(_("title"), max_length=255, blank=True, help_text=_("Do not specify show title, episode number, or season number; if blank, uses original title"))
     summary = models.CharField(_("summary"), max_length=255, blank=True, help_text=_("A single, descriptive sentence of the episode"))
     notes = models.TextField(_("notes"), blank=True, max_length=4000, help_text=_("Max length of 4,000 characters; accepts &lt;p&gt; &lt;ol&gt; &lt;ul&gt; &lt;li&gt; &lt;a&gt; &lt;em&gt; &lt;i&gt; &lt;b&gt; &lt;strong&gt;; if blank, uses description"))
     author_name = models.CharField(_("author name"), max_length=255, blank=True, help_text=_("Appears as the \"artist\" of the episode; if blank, uses show's author name"))
@@ -228,6 +229,9 @@ class Episode(models.Model):
         if Episode.objects.filter(show=self.show, slug=self.slug).count() > 1:
             raise ValidationError(_("Episode titles must be unique within the same show."))
         super(Episode, self).validate_unique(exclude=None)
+
+    def get_title(self):
+        return self.itunes_title if self.itunes_title else self.title
 
     def get_summary(self):
         return bleach.clean(self.summary, tags=[], strip=True)
