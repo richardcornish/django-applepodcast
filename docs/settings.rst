@@ -17,6 +17,9 @@ The app offers several settings. By default, they are:
 
    PODCAST_PAGINATE_BY = 10
 
+   PODCAST_ALLOWED_TAGS = ['p', 'ol', 'ul', 'a', 'em', 'i', 'b', 'li', 'strong']
+
+
 ``PODCAST_SINGULAR``
 ====================
 
@@ -65,3 +68,10 @@ Although the path can be customized in the setting, you're probably better off o
 =======================
 
 An integer indicating how many items to display in a list view or in a detail view of related objects; used for shows and episodes.
+
+``PODCAST_ALLOWED_TAGS``
+=======================
+
+A list indicating which HTML tags are allowed for display in output; used for show summaries and episode notes. The database can store HTML, but tags not specified in the list are stripped out, and the remaining output is wrapped in ``<![CDATA[...]]>`` tags. Uses the `Bleach <https://pypi.python.org/pypi/bleach>`_ Python package.
+
+The list allows HTML tags as specified by the iOS 11 `Apple Podcasts specification <http://podcasts.apple.com/resources/spec/ApplePodcastsSpecUpdatesiOS11.pdf>`_ by default. The list also includes the conspicuously absent ``<li>`` and ``<strong>`` tags, which appear to be an oversight on Apple's part because ``<ol>``, ``<ul>``, and ``<b>`` are present in the original list.
