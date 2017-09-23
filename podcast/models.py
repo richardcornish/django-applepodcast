@@ -125,6 +125,11 @@ class Show(models.Model):
         else:
             return staticfiles_storage.url(settings.PODCAST_NO_ARTWORK)
 
+    def get_summary(self):
+        tags = settings.PODCAST_ALLOWED_TAGS
+        text = self.summary if self.summary else self.description
+        return bleach.clean(text, tags=tags, strip=True)
+
     def get_owner_name(self):
         return self.owner_name if self.owner_name else self.author_name
 
@@ -135,11 +140,6 @@ class Show(models.Model):
         year = timezone.now().year
         title = escape(self.copyright or self.title)
         return '&#x2117; &amp; &#xA9; %s %s' % (year, title)
-
-    def get_summary(self):
-        tags = settings.PODCAST_ALLOWED_TAGS
-        text = self.summary if self.summary else self.description
-        return bleach.clean(text, tags=tags, strip=True)
 
     def get_categories_dict(self):
         old_dicts = [literal_eval(c.json) for c in self.categories.all()]
