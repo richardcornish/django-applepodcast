@@ -126,6 +126,11 @@ class Show(models.Model):
         title = escape(self.copyright or self.title)
         return '&#x2117; &amp; &#xA9; %s %s' % (year, title)
 
+    def get_summary(self):
+        tags = settings.PODCAST_ALLOWED_TAGS
+        text = self.summary if self.summary else self.description
+        return bleach.clean(text, tags=tags, strip=True)
+
     def get_categories_dict(self):
         old_dicts = [literal_eval(c.json) for c in self.categories.all()]
         new_dict = {}
