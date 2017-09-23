@@ -64,7 +64,6 @@ class ItunesFeed(Rss201rev2Feed):
             handler.addQuickElement('itunes:episode', item['itunes']['number'])
         handler.addQuickElement('itunes:title', item['itunes']['title'])
         handler.addQuickElement('itunes:summary', item['itunes']['summary'])
-        handler.addQuickElement('itunes:subtitle', item['itunes']['summary'])  # legacy iTunes
         handler.addQuickElement('content:encoded', item['itunes']['notes'], escape=False, cdata=True)
         handler.addQuickElement('itunes:author', item['itunes']['author']['name'])
         handler.addQuickElement('itunes:image', '', {'href': item['itunes']['image']})
