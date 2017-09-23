@@ -328,7 +328,7 @@ class Enclosure(models.Model):
         return "yes" if self.cc else "no"
 
     def get_megabytes(self):
-        return "%.1f" % (self.file.size / 1048576)
+        return "%.1f" % round(self.file.size / 1048576, 1)
 
     def get_extension(self):
         return os.path.splitext(self.file.url)[1]
