@@ -243,6 +243,12 @@ class Episode(models.Model):
             raise ValidationError(_("Episode titles must be unique within the same show."))
         super(Episode, self).validate_unique(exclude=None)
 
+    def get_season(self):
+        return str(self.season) if self.season else ""
+
+    def get_number(self):
+        return str(self.number) if self.number else ""
+
     def get_title(self):
         return self.itunes_title if self.itunes_title else self.title
 

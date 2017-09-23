@@ -180,8 +180,8 @@ class ShowFeed(Feed):
         return {
             'itunes': {
                 'type': item.type,
-                'season': str(item.season),
-                'number': str(item.number),
+                'season': item.get_season(),
+                'number': item.get_number(),
                 'title': item.get_title(),
                 'summary': item.get_summary(),
                 'notes': item.get_notes(),
