@@ -96,7 +96,7 @@ class Show(models.Model):
     explicit = models.BooleanField(_("explicit?"), default=False, help_text=_("Indicates explicit language or adult content"))
     block = models.BooleanField(_("block?"), default=False, help_text=_("Prevents entire podcast from appearing on the iTunes Store"))
     complete = models.BooleanField(_("complete?"), default=False, help_text=_("Indicates entire podcast is complete and no future episodes will be created"))
-    itunes = models.URLField(_("iTunes URL"), blank=True, help_text=_("Paste iTunes URL here after <a href=\"https://podcastsconnect.apple.com/\">submission of show feed URL</a> to Podcasts Connect"))
+    itunes = models.URLField(_("iTunes URL"), blank=True, help_text=_("Paste iTunes URL here after submission of show feed URL to <a href=\"https://podcastsconnect.apple.com/\">iTunes Connect</a>"))
     hosts = models.ManyToManyField(Speaker, verbose_name=_("hosts"), blank=True)
 
     class Meta:
