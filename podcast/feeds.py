@@ -60,8 +60,9 @@ class ItunesFeed(Rss201rev2Feed):
 
     def add_item_elements(self, handler, item):
         super(ItunesFeed, self).add_item_elements(handler, item)
-        if item['itunes']['subtitle']:
-            handler.addQuickElement('itunes:subtitle', item['itunes']['subtitle'], escape=False, cdata=True)
+        if item['itunes']['summary']:
+            handler.addQuickElement('itunes:summary', item['itunes']['summary'])
+            handler.addQuickElement('itunes:subtitle', item['itunes']['summary'])  # legacy iTunes
         if item['itunes']['notes']:
             handler.addQuickElement('content:encoded', item['itunes']['notes'], escape=False, cdata=True)
         if item['itunes']['author']['name']:
@@ -168,7 +169,7 @@ class ShowFeed(Feed):
             duration = None
         return {
             'itunes': {
-                'subtitle': item.subtitle,
+                'summary': item.get_summary(),
                 'notes': item.get_notes(),
                 'author': {
                     'name': item.get_author_name(),
