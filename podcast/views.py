@@ -1,10 +1,11 @@
 from __future__ import unicode_literals
 
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, TemplateView
 from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.list import MultipleObjectMixin
 
+from .feeds import ShowFeed
 from .models import Show, Episode
 from . import settings
 
@@ -57,3 +58,12 @@ class EpisodeDetailView(DetailView):
         episode.index_next = episode.index + 1
         episode.index_previous = episode.index - 1
         return episode
+
+
+class ShowFeedView(ShowDetailView):
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if self.object.going:
+            return redirect(self.object.going, permanent=True)
+        else:
+            return ShowFeed()(request)

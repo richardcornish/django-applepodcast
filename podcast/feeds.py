@@ -54,6 +54,8 @@ class ItunesFeed(Rss201rev2Feed):
         handler.addQuickElement('itunes:explicit', self.feed['itunes']['explicit'])
         handler.addQuickElement('itunes:block', self.feed['itunes']['block'])
         handler.addQuickElement('itunes:complete', self.feed['itunes']['complete'])
+        if self.feed['itunes']['coming']:
+            handler.addQuickElement('itunes:new-feed-url', self.feed['feed_url'])
 
     def add_item_elements(self, handler, item):
         super(ItunesFeed, self).add_item_elements(handler, item)
@@ -117,6 +119,7 @@ class ShowFeed(Feed):
                 'explicit': obj.get_explicit(),
                 'block': obj.get_block(),
                 'complete': obj.get_complete(),
+                'coming': obj.coming,
             }
         }
 

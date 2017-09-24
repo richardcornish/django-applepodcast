@@ -96,6 +96,8 @@ class Show(models.Model):
     block = models.BooleanField(_("block?"), default=False, help_text=_("Prevents entire podcast from appearing on the iTunes Store"))
     complete = models.BooleanField(_("complete?"), default=False, help_text=_("Indicates entire podcast is complete and no future episodes will be created"))
     itunes = models.URLField(_("iTunes URL"), blank=True, help_text=_("Paste iTunes URL here after submission of show feed URL to <a href=\"https://podcastsconnect.apple.com/\">iTunes Connect</a>"))
+    coming = models.BooleanField(_("coming"), default=False, help_text=_("Indicates whether users are coming from an old feed; if set, leave for four weeks; see <a href=\"https://help.apple.com/itc/podcasts_connect/#/itca489031e0\">documentation</a>"))
+    going = models.URLField(_("going"), blank=True, help_text=_("Permanently redirect users to URL of a new feed; see <a href=\"https://help.apple.com/itc/podcasts_connect/#/itca489031e0\">documentation</a>"))
     hosts = models.ManyToManyField(Speaker, verbose_name=_("hosts"), blank=True)
 
     class Meta:

@@ -31,6 +31,12 @@ class ShowAdmin(admin.ModelAdmin):
         ('iTunes', {
             'fields': ('subtitle', 'summary', 'author_name', 'author_email', 'owner_name', 'owner_email', 'copyright', 'categories', 'explicit', 'block', 'complete', 'itunes',),
         }),
+        ('Arrivals', {
+            'fields': ('coming',),
+        }),
+        ('Departures', {
+            'fields': ('going',),
+        }),
         ('Speakers', {
             'fields': ('hosts',),
         }),
