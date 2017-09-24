@@ -37,7 +37,7 @@ class ShowDetailView(SingleObjectMixin, MultipleObjectMixin, TemplateView):
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()
         self.object_list = self.get_queryset()
-        return super(ShowDetailView, self).get(self, request, *args, **kwargs)
+        return super(ShowDetailView, self).get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(ShowDetailView, self).get_context_data(**kwargs)
