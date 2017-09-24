@@ -13,7 +13,7 @@ except ImportError:  # < Django 1.9
         pass
 
 
-class EscapeFriendlyXMLGenerator(SimplerXMLGenerator):
+class EscapeFriendlyXMLGenerator(SimplerXMLGenerator, object):
     """Subclass of Django's SimplerXMLGenerator.
 
     Django's addQuickElement() calls XMLGenerator.characters(), which in turn
@@ -70,4 +70,4 @@ class EscapeFriendlyXMLGenerator(SimplerXMLGenerator):
         try:
             super().startElement(name, sorted_attrs)
         except TypeError:
-            EscapeFriendlyXMLGenerator.startElement(self, name, sorted_attrs)
+            super(EscapeFriendlyXMLGenerator, self).startElement(name, sorted_attrs)
