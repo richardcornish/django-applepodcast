@@ -38,7 +38,7 @@ class ItunesFeed(Rss201rev2Feed):
         super(ItunesFeed, self).add_root_elements(handler)
         handler.addQuickElement('copyright', self.feed['copyright'], escape=False, cdata=False)
         handler.addQuickElement('itunes:type', self.feed['itunes']['type'])
-        handler.addQuickElement('itunes:subtitle', self.feed['itunes']['subtitle'], escape=False, cdata=True)
+        handler.addQuickElement('itunes:subtitle', self.feed['itunes']['subtitle'])
         handler.addQuickElement('itunes:summary', self.feed['itunes']['summary'], escape=False, cdata=True)
         handler.addQuickElement('itunes:author', self.feed['itunes']['author']['name'])
         handler.startElement('itunes:owner', {})
@@ -58,10 +58,6 @@ class ItunesFeed(Rss201rev2Feed):
     def add_item_elements(self, handler, item):
         super(ItunesFeed, self).add_item_elements(handler, item)
         handler.addQuickElement('itunes:episodeType', item['itunes']['type'])
-        if item['itunes']['season']:
-            handler.addQuickElement('itunes:season', item['itunes']['season'])
-        if item['itunes']['number']:
-            handler.addQuickElement('itunes:episode', item['itunes']['number'])
         handler.addQuickElement('itunes:title', item['itunes']['title'])
         handler.addQuickElement('itunes:summary', item['itunes']['summary'])
         handler.addQuickElement('content:encoded', item['itunes']['notes'], escape=False, cdata=True)
@@ -70,6 +66,10 @@ class ItunesFeed(Rss201rev2Feed):
         handler.addQuickElement('itunes:explicit', item['itunes']['explicit'])
         handler.addQuickElement('itunes:block', item['itunes']['block'])
         handler.addQuickElement('itunes:isClosedCaptioned', item['itunes']['cc'])
+        if item['itunes']['season']:
+            handler.addQuickElement('itunes:season', item['itunes']['season'])
+        if item['itunes']['number']:
+            handler.addQuickElement('itunes:episode', item['itunes']['number'])
         if item['itunes']['duration']:
             handler.addQuickElement('itunes:duration', item['itunes']['duration'])
 
@@ -102,7 +102,7 @@ class ShowFeed(Feed):
             'copyright': obj.get_copyright(),
             'itunes': {
                 'type': obj.type,
-                'subtitle': obj.subtitle,
+                'subtitle': obj.get_subtitle(),
                 'summary': obj.get_summary(),
                 'author': {
                     'name': obj.author_name,

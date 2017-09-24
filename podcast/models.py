@@ -85,7 +85,7 @@ class Show(models.Model):
     slug = models.SlugField(_("slug"), unique=True)
     image = models.ImageField(_("image"), upload_to="podcast/shows/", blank=True, help_text=_("1400&times;1400&ndash;3000&times;3000px; 72DPI; JPG, PNG; RGB; if blank, default <a href=\"%s\">no artwork</a> is used") % staticfiles_storage.url(settings.PODCAST_NO_ARTWORK))
     description = models.TextField(_("description"), help_text=_("Accepts HTML"))
-    subtitle = models.CharField(_("subtitle"), max_length=255, help_text=_("Accepts HTML"))
+    subtitle = models.CharField(_("subtitle"), max_length=255, help_text=_("A single, descriptive sentence of the show"))
     summary = models.TextField(_("summary"), blank=True, max_length=4000, help_text=_("Max length of 4,000 characters; accepts HTML; if blank, uses show's description"))
     author_name = models.CharField(_("author name"), max_length=255, help_text=_("Appears as the \"artist\" of the podcast"))
     author_email = models.EmailField(_("author e-mail"))
@@ -124,6 +124,9 @@ class Show(models.Model):
             return self.image.url
         else:
             return staticfiles_storage.url(settings.PODCAST_NO_ARTWORK)
+
+    def get_subtitle(self):
+        return bleach.clean(self.subtitle, tags=[], strip=True)
 
     def get_summary(self):
         tags = settings.PODCAST_ALLOWED_TAGS
@@ -220,10 +223,8 @@ class Episode(models.Model):
         return "%s" % self.title
 
     def save(self, *args, **kwargs):
-
         # Save instance now to obtain object ID
         super(Episode, self).save(*args, **kwargs)
-
         # Save unique but reproducible hash of object ID
         if not self.guid:
             bytes_id = force_bytes(self.id)
