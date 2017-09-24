@@ -2,7 +2,6 @@ from __future__ import division
 from __future__ import unicode_literals
 
 import hashlib
-import os
 from ast import literal_eval
 from datetime import timedelta
 
