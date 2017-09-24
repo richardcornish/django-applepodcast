@@ -135,7 +135,7 @@ class ShowFeed(Feed):
     def item_guid(self, item):
         return item.guid
 
-    def item_guid_is_permalink(self, obj):
+    def item_guid_is_permalink(self, item):
         return False
 
     def item_pubdate(self, item):
