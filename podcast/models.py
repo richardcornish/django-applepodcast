@@ -266,6 +266,12 @@ class Episode(models.Model):
     def get_author_email(self):
         return self.author_email if self.author_email else self.show.author_email
 
+    def get_image_url(self):
+        if self.image:
+            return self.image.url
+        else:
+            return self.show.get_image_url()
+
     def get_explicit(self):
         return "yes" if self.explicit else "no"
 
@@ -320,10 +326,8 @@ class Enclosure(models.Model):
     def get_poster_url(self):
         if self.poster:
             return self.poster.url
-        elif self.episode.image:
-            return self.episode.image.url
         else:
-            return staticfiles_storage.url(settings.PODCAST_NO_ARTWORK)
+            return self.episode.get_image_url()
 
     def get_cc(self):
         return "yes" if self.cc else "no"

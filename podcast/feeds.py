@@ -157,9 +157,7 @@ class ShowFeed(Feed):
 
     def item_image(self, item):
         current_site = get_current_site(self.request)
-        image_url = item.image.url if item.image else item.show.get_image_url()
-        image_absolute_url = add_domain(current_site.domain, image_url, self.request.is_secure())
-        return image_absolute_url
+        return add_domain(current_site.domain, item.get_image_url(), self.request.is_secure())
 
     def item_cc(self, item):
         try:
