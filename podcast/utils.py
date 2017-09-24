@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 
 import re
+from collections import OrderedDict
 from xml.sax.saxutils import escape as _escape
 
 from django.utils.xmlutils import SimplerXMLGenerator
@@ -22,6 +23,7 @@ class EscapeFriendlyXMLGenerator(SimplerXMLGenerator):
     https://docs.python.org/3/library/xml.sax.utils.html
     https://code.djangoproject.com/ticket/15936
     """
+
     def addQuickElement(self, name, contents=None, attrs=None, escape=True, cdata=False):
         """Convenience method for adding an element with no children."""
         if attrs is None:
@@ -37,18 +39,32 @@ class EscapeFriendlyXMLGenerator(SimplerXMLGenerator):
             # See http://www.w3.org/International/questions/qa-controls
             raise UnserializableContentError('Control characters are not supported in XML 1.0')
         # XMLGenerator.characters(self, content)
+
+        # Python 3
+        # https://github.com/python/cpython/blob/3.6/Lib/xml/sax/saxutils.py#L209
         try:
             if content:
                 self._finish_pending_start_element()
                 if not isinstance(content, str):
                     content = str(content, self._encoding)
-        except AttributeError:  # Python 2
+
+        # Python 2
+        # https://github.com/python/cpython/blob/2.7/Lib/xml/sax/saxutils.py#L185
+        except AttributeError:
             if not isinstance(content, unicode):
                 content = unicode(content, self._encoding)
+
         # Custom kwarg
         if kwargs['escape']:
             content = _escape(content)
+
         # Custom kwarg
         if kwargs['cdata']:
             content = '<![CDATA[%s]]>' % content
+
         self._write(content)
+
+    def startElement(self, name, attrs):
+        # Sort attrs for a deterministic output.
+        sorted_attrs = OrderedDict(sorted(attrs.items())) if attrs else attrs
+        super().startElement(name, sorted_attrs)
