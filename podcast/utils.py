@@ -67,4 +67,4 @@ class EscapeFriendlyXMLGenerator(SimplerXMLGenerator):
     def startElement(self, name, attrs):
         # Sort attrs for a deterministic output.
         sorted_attrs = OrderedDict(sorted(attrs.items())) if attrs else attrs
-        super(EscapeFriendlyXMLGenerator, self).startElement(name, sorted_attrs)
+        return super(EscapeFriendlyXMLGenerator, self).startElement(name, sorted_attrs)
