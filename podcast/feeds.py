@@ -104,10 +104,14 @@ class ShowFeed(Feed):
         current_site = get_current_site(self.request)
         return add_domain(current_site.domain, obj.get_image_url(), self.request.is_secure())
 
+    def docs(self, obj):
+        return 'http://blogs.law.harvard.edu/tech/rss'
+
     def feed_extra_kwargs(self, obj):
         return {
             'copyright': obj.get_copyright(),
             'image': self.image(obj),
+            'docs': self.docs(obj),
             'itunes': {
                 'type': obj.type,
                 'subtitle': obj.get_subtitle(),
