@@ -37,6 +37,7 @@ class ItunesFeed(Rss201rev2Feed):
     def add_root_elements(self, handler):
         super(ItunesFeed, self).add_root_elements(handler)
         handler.addQuickElement('copyright', self.feed['copyright'], escape=False, cdata=False)
+        handler.addQuickElement('docs', self.feed['docs'])
         handler.startElement('image', {})
         handler.addQuickElement('url', self.feed['image'])
         handler.addQuickElement('title', self.feed['title'])
