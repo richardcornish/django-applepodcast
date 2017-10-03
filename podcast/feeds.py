@@ -178,15 +178,13 @@ class ShowFeed(Feed):
 
     def item_cc(self, item):
         try:
-            enclosure = Enclosure.objects.get(episode=item)
-            return enclosure.get_cc()
+            return Enclosure.objects.get(episode=item).get_cc()
         except Enclosure.DoesNotExist:
             return None
 
     def item_duration(self, item):
         try:
-            enclosure = Enclosure.objects.get(episode=item)
-            return enclosure.get_duration()
+            return Enclosure.objects.get(episode=item).get_duration()
         except Enclosure.DoesNotExist:
             return None
 
