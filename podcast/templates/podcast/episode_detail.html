@@ -37,21 +37,21 @@
 
     {# Audio #}
     {% if enclosure.type == 'audio/mpeg' or enclosure.type == 'audio/x-m4a' %}
-    <audio src="{{ enclosure.file.url }}" controls>
-        <p><a href="{{ enclosure.file.url }}">{% trans 'Download the audio' %}</a>.</p>
+    <audio src="{{ episode.get_absolute_download_url }}" controls>
+        <p><a href="{{ episode.get_absolute_download_url }}">{% trans 'Download the audio' %}</a>.</p>
     </audio>
     <p>{{ enclosure.get_duration }}</p>
 
     {# Video #}
     {% elif enclosure.type == 'video/mp4' or enclosure.type == 'video/x-m4v' or enclosure.type == 'video/quicktime' %}
     <video poster="{{ enclosure.get_poster_url }}" controls>
-        <source src="{{ enclosure.file.url }}" type="{{ enclosure.type }}">
-        <p><a href="{{ enclosure.file.url }}">{% trans 'Download the video' %}</a>.</p>
+        <source src="{{ episode.get_absolute_download_url }}" type="{{ enclosure.type }}">
+        <p><a href="{{ episode.get_absolute_download_url }}">{% trans 'Download the video' %}</a>.</p>
     </video>
     <p>{{ enclosure.get_duration }}</p>    
     {% endif %}
 
-    <p><a href="{{ enclosure.file.url }}">{% trans 'Download the' %} {{ enclosure.get_megabytes }} {% trans 'MB' %} {{ enclosure.get_type_display }}</a>.</p>
+    <p><a href="{{ episode.get_absolute_download_url }}">{% trans 'Download the' %} {{ enclosure.get_megabytes }} {% trans 'MB' %} {{ enclosure.get_type_display }}</a>.</p>
 
 {% endwith %}
 {% endif %}

@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import get_object_or_404, redirect
-from django.views.generic import ListView, DetailView, TemplateView
+from django.views.generic import ListView, DetailView, RedirectView, TemplateView
 from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.list import MultipleObjectMixin
 
@@ -58,6 +58,21 @@ class EpisodeDetailView(DetailView):
         episode.index_next = episode.index + 1
         episode.index_previous = episode.index - 1
         return episode
+
+
+class EpisodeDownloadView(RedirectView):
+    def get_redirect_url(self, *args, **kwargs):
+        if settings.PODCAST_SINGULAR:
+            show = get_object_or_404(Show, id=settings.PODCAST_ID)
+        else:
+            show = get_object_or_404(Show, slug=self.kwargs['show_slug'])
+        episode = get_object_or_404(Episode, show=show, slug=self.kwargs['slug'])
+        try:
+            from podcast.models import Enclosure
+            enclosure = Enclosure.objects.get(episode=episode)
+            return enclosure.file.url
+        except Enclosure.DoesNotExist:
+            return None
 
 
 class ShowFeedView(ShowDetailView):
