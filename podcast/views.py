@@ -1,12 +1,12 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import get_object_or_404, redirect
-from django.views.generic import ListView, DetailView, RedirectView, TemplateView
+from django.views.generic import DetailView, ListView, RedirectView, TemplateView
 from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.list import MultipleObjectMixin
 
 from .feeds import ShowFeed
-from .models import Show, Episode
+from .models import Enclosure, Episode, Show
 from . import settings
 
 
@@ -68,7 +68,6 @@ class EpisodeDownloadView(RedirectView):
             show = get_object_or_404(Show, slug=self.kwargs['show_slug'])
         episode = get_object_or_404(Episode, show=show, slug=self.kwargs['slug'])
         try:
-            from podcast.models import Enclosure
             enclosure = Enclosure.objects.get(episode=episode)
             return enclosure.file.url
         except Enclosure.DoesNotExist:

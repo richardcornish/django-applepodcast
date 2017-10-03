@@ -4,7 +4,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.syndication.views import Feed, add_domain
 from django.utils.feedgenerator import Rss201rev2Feed
 
-from .models import Show, Episode, Enclosure
+from .models import Enclosure, Episode, Show
 from .utils import EscapeFriendlyXMLGenerator
 from . import settings
 

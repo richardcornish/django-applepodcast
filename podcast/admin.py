@@ -2,7 +2,7 @@ from __future__ import unicode_literals
 
 from django.contrib import admin
 
-from .models import Speaker, Category, Show, Episode, Enclosure
+from .models import Category, Enclosure, Episode, Show, Speaker
 
 
 class EnclosureInline(admin.TabularInline):
