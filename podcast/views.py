@@ -52,7 +52,7 @@ class EpisodeDetailView(DetailView):
             show = get_object_or_404(Show, id=settings.PODCAST_ID)
         else:
             show = get_object_or_404(Show, slug=self.kwargs['show_slug'])
-        episode = Episode.objects.get(show=show, slug=self.kwargs['slug'])
+        episode = get_object_or_404(Episode, show=show, slug=self.kwargs['slug'])
         index = Episode.objects.filter(show=show, pub_date__lt=episode.pub_date).count()
         episode.index = index + 1
         episode.index_next = episode.index + 1
