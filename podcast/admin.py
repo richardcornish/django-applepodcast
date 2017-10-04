@@ -31,13 +31,12 @@ class ShowAdmin(admin.ModelAdmin):
         ('iTunes', {
             'fields': ('subtitle', 'summary', 'author_name', 'author_email', 'owner_name', 'owner_email', 'copyright', 'categories', 'explicit', 'block', 'complete', 'itunes',),
         }),
-        ('Arrivals', {
-            'fields': ('coming',),
-        }),
-        ('Departures', {
-            'fields': ('going',),
+        ('Arrivals & departures', {
+            'classes': ('collapse',),
+            'fields': ('coming', 'going',),
         }),
         ('Speakers', {
+            'classes': ('collapse',),
             'fields': ('hosts',),
         }),
     )
@@ -55,6 +54,7 @@ class EpisodeAdmin(admin.ModelAdmin):
             'fields': ('type', 'season', 'number', 'itunes_title', 'summary', 'notes', 'author_name', 'author_email', 'image', 'explicit', 'block',),
         }),
         ('Speakers', {
+            'classes': ('collapse',),
             'fields': ('hosts', 'guests',),
         }),
     )
