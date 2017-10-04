@@ -57,20 +57,20 @@ class Category(models.Model):
         self.json = self.get_json(self)
         super(Category, self).save(*args, **kwargs)
 
-    def get_full(self, object):
-        if object.parent is None:
-            return object.title
+    def get_full(self, obj):
+        if obj.parent is None:
+            return obj.title
         else:
-            return "%s / %s" % (self.get_full(object.parent), object.title)
+            return "%s / %s" % (self.get_full(obj.parent), obj.title)
 
-    def get_json(self, object, children=False):
-        if object.parent is None:
+    def get_json(self, obj, children=False):
+        if obj.parent is None:
             if not children:
-                return '{"%s": []}' % object.title
+                return '{"%s": []}' % obj.title
             else:
-                return "%s" % object.title
+                return "%s" % obj.title
         else:
-            return '{"%s": ["%s"]}' % (self.get_json(object.parent, children=True), object.title)
+            return '{"%s": ["%s"]}' % (self.get_json(obj.parent, children=True), obj.title)
 
 
 @python_2_unicode_compatible
@@ -127,11 +127,13 @@ class Show(models.Model):
             return staticfiles_storage.url(settings.PODCAST_NO_ARTWORK)
 
     def get_subtitle(self):
-        return bleach.clean(self.subtitle, tags=[], strip=True)
+        text = self.subtitle
+        tags = []
+        return bleach.clean(text, tags=tags, strip=True)
 
     def get_summary(self):
-        tags = settings.PODCAST_ALLOWED_TAGS
         text = self.summary if self.summary else self.description
+        tags = settings.PODCAST_ALLOWED_TAGS
         return bleach.clean(text, tags=tags, strip=True)
 
     def get_owner_name(self):
@@ -260,11 +262,13 @@ class Episode(models.Model):
         return self.itunes_title if self.itunes_title else self.title
 
     def get_summary(self):
-        return bleach.clean(self.summary, tags=[], strip=True)
+        text = self.summary
+        tags = []
+        return bleach.clean(text, tags=tags, strip=True)
 
     def get_notes(self):
-        tags = settings.PODCAST_ALLOWED_TAGS
         text = self.notes if self.notes else self.description
+        tags = settings.PODCAST_ALLOWED_TAGS
         return bleach.clean(text, tags=tags, strip=True)
 
     def get_author_name(self):
@@ -325,9 +329,10 @@ class Enclosure(models.Model):
     def save(self, *args, **kwargs):
         media = mutagen.File(self.file)
         try:
-            self.timedelta = timedelta(seconds=int(media.info.length))
+            length = media.info.length
         except AttributeError:
             pass
+        self.timedelta = timedelta(seconds=int(length))
         super(Enclosure, self).save(*args, **kwargs)
 
     def get_poster_url(self):
@@ -344,12 +349,13 @@ class Enclosure(models.Model):
 
     def get_duration(self):
         try:
-            m, s = divmod(self.timedelta.total_seconds(), 60)
-            h, m = divmod(m, 60)
-            if h:
-                return "%02d:%02d:%02d" % (h, m, s)
-            else:
-                return "%02d:%02d" % (m, s)
+            seconds = self.timedelta.total_seconds()
         except AttributeError:
             return None
+        m, s = divmod(seconds, 60)
+        h, m = divmod(m, 60)
+        if h:
+            return "%02d:%02d:%02d" % (h, m, s)
+        else:
+            return "%02d:%02d" % (m, s)
     get_duration.short_description = _("duration")

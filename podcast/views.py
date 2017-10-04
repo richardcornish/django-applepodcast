@@ -45,6 +45,15 @@ class ShowDetailView(SingleObjectMixin, MultipleObjectMixin, TemplateView):
         return context
 
 
+class ShowFeedView(ShowDetailView):
+    def get(self, request, *args, **kwargs):
+        show = self.get_object()
+        if show.going:
+            return redirect(show.going, permanent=True)
+        else:
+            return ShowFeed()(request)
+
+
 class EpisodeDetailView(DetailView):
     def get_object(self, queryset=None):
         """Return object with episode number attached to episode."""
@@ -69,15 +78,6 @@ class EpisodeDownloadView(RedirectView):
         episode = get_object_or_404(Episode, show=show, slug=self.kwargs['slug'])
         try:
             enclosure = Enclosure.objects.get(episode=episode)
-            return enclosure.file.url
         except Enclosure.DoesNotExist:
             return None
-
-
-class ShowFeedView(ShowDetailView):
-    def get(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        if self.object.going:
-            return redirect(self.object.going, permanent=True)
-        else:
-            return ShowFeed()(request)
+        return enclosure.file.url
