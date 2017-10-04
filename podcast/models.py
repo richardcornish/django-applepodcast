@@ -331,7 +331,7 @@ class Enclosure(models.Model):
         try:
             length = media.info.length
         except AttributeError:
-            pass
+            length = 0
         self.timedelta = timedelta(seconds=int(length))
         super(Enclosure, self).save(*args, **kwargs)
 
@@ -348,10 +348,7 @@ class Enclosure(models.Model):
         return "%.1f" % round(self.file.size / 1048576, 1)
 
     def get_duration(self):
-        try:
-            seconds = self.timedelta.total_seconds()
-        except AttributeError:
-            return None
+        seconds = self.timedelta.total_seconds()
         m, s = divmod(seconds, 60)
         h, m = divmod(m, 60)
         if h:
