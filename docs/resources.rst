@@ -16,6 +16,7 @@ Specifications
 * `RSS 2.0 specification <https://cyber.harvard.edu/rss/rss.html>`_
 * `Podcasts Connect help (iTunes-specific tags) <https://help.apple.com/itc/podcasts_connect/#/itcb54353390>`_
 * `iOS 11 specification update <http://podcasts.apple.com/resources/spec/ApplePodcastsSpecUpdatesiOS11.pdf>`_
+* `Google Play Music <https://support.google.com/googleplay/podcasts/answer/6260341>`_
 
 Validators
 ==========
@@ -40,3 +41,4 @@ Submission
 ==========
 
 * `iTunes Connect <https://itunesconnect.apple.com/login>`_
+* `Google Play Music Podcast Portal <https://play.google.com/music/podcasts/portal>`_
