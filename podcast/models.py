@@ -324,7 +324,7 @@ class Enclosure(models.Model):
         verbose_name_plural = _("enclosures")
 
     def __str__(self):
-        return "%s: %s" % (self.episode, self.type)
+        return "%s (%s)" % (self.episode, self.get_type_display())
 
     def save(self, *args, **kwargs):
         media = mutagen.File(self.file)
