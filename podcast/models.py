@@ -2,6 +2,7 @@ from __future__ import division
 from __future__ import unicode_literals
 
 import hashlib
+import re
 from ast import literal_eval
 from datetime import timedelta
 
@@ -12,6 +13,7 @@ from django.db import models
 from django.utils import timezone
 from django.utils.html import escape
 from django.utils.encoding import force_bytes, python_2_unicode_compatible
+from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 
 import bleach
@@ -147,6 +149,9 @@ class Show(models.Model):
         title = escape(self.copyright or self.title)
         return "&#x2117; &amp; &#xA9; %s %s" % (year, title)
 
+    def get_categories(self):
+        return ", ".join([c.get_full(c) for c in self.categories.all()])
+
     def get_categories_dict(self):
         old_dicts = [literal_eval(c.json) for c in self.categories.all()]
         new_dict = {}
@@ -169,6 +174,10 @@ class Show(models.Model):
             return sorted(new_dict.iteritems())
         except AttributeError:  # Python 3
             return sorted(new_dict.items())
+
+    def get_keywords(self):
+        value = " ".join([slugify(c.title) for c in self.categories.all()])
+        return re.sub(r"-", " ", value)
 
     def get_explicit(self):
         return "yes" if self.explicit else "no"
