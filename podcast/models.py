@@ -145,7 +145,7 @@ class Show(models.Model):
     def get_copyright(self):
         year = timezone.now().year
         title = escape(self.copyright or self.title)
-        return '&#x2117; &amp; &#xA9; %s %s' % (year, title)
+        return "&#x2117; &amp; &#xA9; %s %s" % (year, title)
 
     def get_categories_dict(self):
         old_dicts = [literal_eval(c.json) for c in self.categories.all()]
@@ -232,7 +232,7 @@ class Episode(models.Model):
         if not self.guid:
             bytes_id = force_bytes(self.id)
             self.guid = hashlib.sha256(bytes_id).hexdigest()
-            self.save(update_fields=['guid'])
+            self.save(update_fields=["guid"])
 
     def get_absolute_url(self):
         if settings.PODCAST_SINGULAR:
