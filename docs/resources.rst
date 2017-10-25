@@ -17,6 +17,8 @@ Specifications
 * `Podcasts Connect help (iTunes-specific tags) <https://help.apple.com/itc/podcasts_connect/#/itcb54353390>`_
 * `iOS 11 specification update <http://podcasts.apple.com/resources/spec/ApplePodcastsSpecUpdatesiOS11.pdf>`_
 * `Google Play Music <https://support.google.com/googleplay/podcasts/answer/6260341>`_
+* `ID3 standards <http://id3.org/Developer%20Information>`_
+* `iTunes metadata <http://forums.whirlpool.net.au/archive/928786>`_
 
 Validators
 ==========
