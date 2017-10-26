@@ -31,7 +31,7 @@ class ShowAdmin(admin.ModelAdmin):
         ('iTunes', {
             'fields': ('subtitle', 'summary', 'author_name', 'author_email', 'owner_name', 'owner_email', 'copyright', 'categories', 'explicit', 'block', 'complete', 'itunes',),
         }),
-        ('Arrivals & departures', {
+        ('Redirects', {
             'classes': ('collapse',),
             'fields': ('coming', 'going',),
         }),
