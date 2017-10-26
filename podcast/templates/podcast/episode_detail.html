@@ -10,6 +10,12 @@
 <link rel="alternate" type="application/rss+xml" href="{{ episode.show.get_absolute_feed_url }}" title="{{ episode.show.title }}">
 {% endblock %}
 
+{% block extra_head %}
+{% if episode.is_secret %}
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+{% endif %}
+{% endblock %}
+
 
 {% block content %}
 

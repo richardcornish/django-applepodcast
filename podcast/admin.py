@@ -26,7 +26,7 @@ class ShowAdmin(admin.ModelAdmin):
     filter_horizontal = ('categories', 'hosts',)
     fieldsets = (
         (None, {
-            'fields': ('type', 'title', 'slug', 'image', 'description',)
+            'fields': ('type', 'title', 'slug', 'image', 'description',),
         }),
         ('iTunes', {
             'fields': ('subtitle', 'summary', 'author_name', 'author_email', 'owner_name', 'owner_email', 'copyright', 'categories', 'explicit', 'block', 'complete', 'itunes',),
@@ -43,12 +43,16 @@ class ShowAdmin(admin.ModelAdmin):
 
 
 class EpisodeAdmin(admin.ModelAdmin):
-    list_display = ('title', 'get_duration', 'pub_date', 'show', 'explicit',)
-    list_filter = ('show',)
+    list_display = ('title', 'get_duration', 'pub_date', 'show', 'explicit', 'status',)
+    list_filter = ('show', 'status',)
     prepopulated_fields = {'slug': ('title',)}
+    radio_fields = {'status': admin.VERTICAL}
     fieldsets = (
         (None, {
-            'fields': ('show', 'title', 'slug', 'description', 'pub_date',)
+            'fields': ('show', 'title', 'slug', 'description',),
+        }),
+        ('Visibility', {
+            'fields': ('pub_date', 'status',),
         }),
         ('iTunes', {
             'fields': ('type', 'season', 'number', 'itunes_title', 'summary', 'notes', 'author_name', 'author_email', 'image', 'explicit', 'block',),

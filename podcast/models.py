@@ -19,6 +19,7 @@ from django.utils.translation import ugettext_lazy as _
 import bleach
 import mutagen
 
+from .managers import EpisodeManager
 from . import settings
 
 
@@ -201,6 +202,11 @@ class Show(models.Model):
 
 @python_2_unicode_compatible
 class Episode(models.Model):
+    STATUS_CHOICES = (
+        ("public", _("Public")),
+        ("secret", _("Secret")),
+        ("private", _("Private")),
+    )
     TYPE_CHOICES = (
         ("full", _("Full")),
         ("trailer", _("Trailer")),
@@ -210,7 +216,8 @@ class Episode(models.Model):
     title = models.CharField(_("title"), max_length=255)
     slug = models.SlugField(_("slug"),)
     description = models.TextField(_("description"), help_text=_("Accepts HTML"))
-    pub_date = models.DateTimeField(_("pub date"),)
+    pub_date = models.DateTimeField(_("pub date"), help_text=_("If in future, episode hidden until date arrives (unless status is secret)"))
+    status = models.CharField(_("status"), max_length=255, choices=STATUS_CHOICES, default="public", help_text=_("Public is openly visible; secret is visibile but unlisted; private is not visible"))
     type = models.CharField(_("type"), max_length=255, choices=TYPE_CHOICES, default="full", help_text=_("Full is for episodes, trailer is for promotional previews, and bonus is for extra content"))
     season = models.PositiveIntegerField(_("season"), null=True, blank=True, help_text=_("If a serialized show, number of the season"))
     number = models.PositiveIntegerField(_("number"), null=True, blank=True, help_text=_("If a serialized show, number of the episode within the season"))
@@ -226,8 +233,10 @@ class Episode(models.Model):
     guests = models.ManyToManyField(Speaker, verbose_name=_("guests"), related_name="guest", blank=True)
     guid = models.CharField(_("GUID"), max_length=64, editable=False)
 
+    objects = EpisodeManager()
+
     class Meta:
-        ordering = ["-pub_date"]
+        ordering = ["-pub_date", "-id"]
         verbose_name = _("episode")
         verbose_name_plural = _("episodes")
 
@@ -299,14 +308,23 @@ class Episode(models.Model):
         return "yes" if self.block else "no"
 
     def get_previous(self):
-        return self.get_previous_by_pub_date(show=self.show)
+        return self.get_previous_by_pub_date(show=self.show, status='public', pub_date__lte=timezone.now())
 
     def get_next(self):
-        return self.get_next_by_pub_date(show=self.show)
+        return self.get_next_by_pub_date(show=self.show, status='public', pub_date__lte=timezone.now())
 
     def get_duration(self):
         return self.enclosure.get_duration()
     get_duration.short_description = _("duration")
+
+    def is_public(self):
+        return self.status == "public"
+
+    def is_secret(self):
+        return self.status == "secret"
+
+    def is_private(self):
+        return self.status == "private"
 
 
 @python_2_unicode_compatible

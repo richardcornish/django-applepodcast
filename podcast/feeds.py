@@ -134,7 +134,7 @@ class ShowFeed(Feed):
         }
 
     def items(self, obj):
-        return Episode.objects.filter(show=obj)[:settings.PODCAST_EPISODE_LIMIT]
+        return Episode.objects.is_public().filter(show=obj)[:settings.PODCAST_EPISODE_LIMIT]
 
     def item_title(self, item):
         return '%s' % item.title

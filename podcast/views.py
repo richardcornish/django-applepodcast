@@ -27,7 +27,7 @@ class ShowDetailView(SingleObjectMixin, MultipleObjectMixin, TemplateView):
 
     def get_queryset(self):
         """Return list with episode number attached to each episode."""
-        queryset = self.get_object().episode_set.all()
+        queryset = self.get_object().episode_set.is_public()
         pub_list = list(queryset.order_by('pub_date'))
         for index, item in enumerate(pub_list):
             item.index = index + 1
@@ -61,8 +61,8 @@ class EpisodeDetailView(DetailView):
             show = get_object_or_404(Show, id=settings.PODCAST_ID)
         else:
             show = get_object_or_404(Show, slug=self.kwargs['show_slug'])
-        episode = get_object_or_404(Episode, show=show, slug=self.kwargs['slug'])
-        index = Episode.objects.filter(show=show, pub_date__lt=episode.pub_date).count()
+        episode = get_object_or_404(Episode.objects.is_public_or_secret(), show=show, slug=self.kwargs['slug'])
+        index = Episode.objects.is_public_or_secret().filter(show=show, pub_date__lt=episode.pub_date).count()
         episode.index = index + 1
         episode.index_next = episode.index + 1
         episode.index_previous = episode.index - 1
@@ -75,7 +75,7 @@ class EpisodeDownloadView(RedirectView):
             show = get_object_or_404(Show, id=settings.PODCAST_ID)
         else:
             show = get_object_or_404(Show, slug=self.kwargs['show_slug'])
-        episode = get_object_or_404(Episode, show=show, slug=self.kwargs['slug'])
+        episode = get_object_or_404(Episode.objects.is_public_or_secret(), show=show, slug=self.kwargs['slug'])
         try:
             enclosure = Enclosure.objects.get(episode=episode)
         except Enclosure.DoesNotExist:
