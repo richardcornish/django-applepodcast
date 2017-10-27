@@ -20,6 +20,7 @@ import bleach
 import mutagen
 
 from .managers import EpisodeManager
+from .utils import enclosure_file_path, enclosure_poster_path, episode_image_path, show_image_path, speaker_photo_path
 from . import settings
 
 
@@ -27,7 +28,7 @@ from . import settings
 class Speaker(models.Model):
     name = models.CharField(_("Name"), max_length=255)
     email = models.EmailField(_("E-mail"), unique=True)
-    photo = models.ImageField(_("Photo"), upload_to="podcast/speakers/", blank=True)
+    photo = models.ImageField(_("Photo"), upload_to=speaker_photo_path, blank=True)
     bio = models.TextField(_("Bio"), blank=True)
 
     class Meta:
@@ -85,7 +86,7 @@ class Show(models.Model):
     type = models.CharField(_("type"), max_length=255, choices=TYPE_CHOICES, default="episodic", help_text=_("Episodic presents episodes by latest, serial presents episodes by episode number; both support seasons"))
     title = models.CharField(_("title"), max_length=255)
     slug = models.SlugField(_("slug"), unique=True)
-    image = models.ImageField(_("image"), upload_to="podcast/shows/", blank=True, help_text=_("1400&times;1400&ndash;3000&times;3000px; 72DPI; JPG, PNG; RGB; if blank, default <a href=\"%s\">no artwork</a> is used") % staticfiles_storage.url(settings.PODCAST_NO_ARTWORK))
+    image = models.ImageField(_("image"), upload_to=show_image_path, blank=True, help_text=_("1400&times;1400&ndash;3000&times;3000px; 72DPI; JPG, PNG; RGB; if blank, default <a href=\"%s\">no artwork</a> is used") % staticfiles_storage.url(settings.PODCAST_NO_ARTWORK))
     description = models.TextField(_("description"), help_text=_("Accepts HTML"))
     subtitle = models.CharField(_("subtitle"), max_length=255, help_text=_("A single, descriptive sentence of the show"))
     summary = models.TextField(_("summary"), blank=True, max_length=4000, help_text=_("Max length of 4,000 characters; accepts HTML; if blank, uses show's description"))
@@ -226,7 +227,7 @@ class Episode(models.Model):
     notes = models.TextField(_("notes"), blank=True, max_length=4000, help_text=_("Max length of 4,000 characters; accepts &lt;p&gt; &lt;ol&gt; &lt;ul&gt; &lt;li&gt; &lt;a&gt; &lt;em&gt; &lt;i&gt; &lt;b&gt; &lt;strong&gt;; if blank, uses description"))
     author_name = models.CharField(_("author name"), max_length=255, blank=True, help_text=_("Appears as the \"artist\" of the episode; if blank, uses show's author name"))
     author_email = models.EmailField(_("author e-mail"), blank=True, help_text=_("If blank, uses show's author email"))
-    image = models.ImageField(_("image"), upload_to="podcast/episodes/", blank=True, help_text=_("1400&times;1400&ndash;3000&times;3000px, 72DPI, JPG/PNG, RGB; if blank, uses show's image"))
+    image = models.ImageField(_("image"), upload_to=episode_image_path, blank=True, help_text=_("1400&times;1400&ndash;3000&times;3000px, 72DPI, JPG/PNG, RGB; if blank, uses show's image"))
     explicit = models.BooleanField(_("explicit?"), default=False, help_text=_("Indicates explicit language or adult content"))
     block = models.BooleanField(_("block?"), default=False, help_text=_("Prevents episode from appearing on the iTunes Store"))
     hosts = models.ManyToManyField(Speaker, verbose_name=_("hosts"), related_name="host", blank=True, help_text=_("If different from show hosts"))
@@ -339,10 +340,10 @@ class Enclosure(models.Model):
         ("document/x-epub", _("ePub file")),
     )
     episode = models.OneToOneField(Episode, verbose_name=_("episode"))
-    file = models.FileField(_("file"), upload_to="podcast/enclosures/files/", help_text=_("Supported formats: M4A, MP3, MOV, MP4, M4V, PDF, and EPUB"))
+    file = models.FileField(_("file"), upload_to=enclosure_file_path, help_text=_("Supported formats: M4A, MP3, MOV, MP4, M4V, PDF, and EPUB"))
     timedelta = models.DurationField(_("time delta"), null=True)
     type = models.CharField(_("type"), max_length=255, choices=TYPE_CHOICES, default="audio/mpeg")
-    poster = models.ImageField(_("poster"), upload_to="podcast/enclosures/posters/", blank=True, help_text=_("For video files"))
+    poster = models.ImageField(_("poster"), upload_to=enclosure_poster_path, blank=True, help_text=_("For video files"))
     cc = models.BooleanField(_("closed captions?"), default=False, help_text=_("For video files with closed captions"))
 
     class Meta:

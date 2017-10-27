@@ -1,9 +1,13 @@
 from __future__ import unicode_literals
 
+import os
 import re
 from collections import OrderedDict
+from datetime import datetime
 from xml.sax.saxutils import escape as _escape
 
+from django.utils import timezone
+from django.utils.text import slugify
 from django.utils.xmlutils import SimplerXMLGenerator
 
 try:
@@ -71,3 +75,41 @@ class EscapeFriendlyXMLGenerator(SimplerXMLGenerator, object):
             super().startElement(name, sorted_attrs)
         except TypeError:
             super(EscapeFriendlyXMLGenerator, self).startElement(name, sorted_attrs)
+
+
+def speaker_photo_path(instance, filename):
+    name = re.sub(r"-", "_", slugify(instance.name))
+    timestamp = datetime.strftime(timezone.now(), '%Y_%m_%d-%H_%M_%S')
+    extension = os.path.splitext(filename)[1]
+    return 'podcast/speakers/%s-%s%s' % (name, timestamp, extension)
+
+
+def show_image_path(instance, filename):
+    show = re.sub(r"-", "_", instance.slug)
+    timestamp = datetime.strftime(timezone.now(), '%Y_%m_%d-%H_%M_%S')
+    extension = os.path.splitext(filename)[1]
+    return 'podcast/shows/%s-%s%s' % (show, timestamp, extension)
+
+
+def episode_image_path(instance, filename):
+    show = re.sub(r"-", "_", instance.show.slug)
+    episode = re.sub(r"-", "_", instance.slug)
+    timestamp = datetime.strftime(timezone.now(), '%Y_%m_%d-%H_%M_%S')
+    extension = os.path.splitext(filename)[1]
+    return 'podcast/episodes/%s-%s-%s%s' % (show, episode, timestamp, extension)
+
+
+def enclosure_file_path(instance, filename):
+    show = re.sub(r"-", "_", instance.episode.show.slug)
+    episode = re.sub(r"-", "_", instance.episode.slug)
+    timestamp = datetime.strftime(timezone.now(), '%Y_%m_%d-%H_%M_%S')
+    extension = os.path.splitext(filename)[1]
+    return 'podcast/enclosures/files/%s-%s-%s%s' % (show, episode, timestamp, extension)
+
+
+def enclosure_poster_path(instance, filename):
+    show = re.sub(r"-", "_", instance.episode.show.slug)
+    episode = re.sub(r"-", "_", instance.episode.slug)
+    timestamp = datetime.strftime(timezone.now(), '%Y_%m_%d-%H_%M_%S')
+    extension = os.path.splitext(filename)[1]
+    return 'podcast/enclosures/posters/%s-%s-%s%s' % (show, episode, timestamp, extension)
