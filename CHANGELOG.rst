@@ -1,3 +1,13 @@
+0.3.3 (2017-10-27)
+******************
+
+- Added public/secret/private status to episodes
+- Added dedicated episode download URL
+- Added image tag to channel tag
+- Added docs tag to channel tag
+- Updated sample artwork with newest logo
+- Added changelog (meta!)
+
 0.3.2 (2017-09-24)
 ******************
 
@@ -82,9 +92,30 @@
 
 - Removed pytz dependency
 
-0.1.4 (2016-10-12)
+0.1.3 (2016-10-12)
 ******************
 
 - Changed utils for Python 2/3 compatibility
 - Removed six dependency
-- Added namespacing to URLs
+- Updated namespacing of URLs
+- Added episode GUIDs
+- Removed show categories, TTL, and image
+- Removed episode categories
+- Added new logo
+
+0.1.2 (2016-09-30)
+******************
+
+- Removed manual episode numbers
+
+0.1.1 (2016-09-30)
+******************
+
+- Added episode numbers
+- Added namespacing of URLs
+- Used SVGs for graphics
+
+0.1.0 (2016-09-28)
+******************
+
+- First release
