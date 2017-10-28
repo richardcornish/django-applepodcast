@@ -5,6 +5,13 @@ from __future__ import unicode_literals
 from django.db import migrations, models
 
 
+def get_type(apps, schema_editor):
+    Show = apps.get_model('podcast', 'Show')
+    for show in Show.objects.all():
+        show.type = 'episodic'
+        show.save(update_fields=['type'])
+
+
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -17,4 +24,5 @@ class Migration(migrations.Migration):
             name='type',
             field=models.CharField(choices=[('episodic', 'Episodic'), ('serial', 'Serial')], default='episodic', help_text='Episodic presents episodes by latest, serial presents episodes by episode number; both support seasons', max_length=255, verbose_name='type'),
         ),
+        migrations.RunPython(get_type, reverse_code=migrations.RunPython.noop),
     ]
