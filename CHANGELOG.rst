@@ -1,3 +1,8 @@
+0.3.4 (2017-10-28)
+******************
+
+- Renamed file uploads with slugs and timestamps
+
 0.3.3 (2017-10-27)
 ******************
 
