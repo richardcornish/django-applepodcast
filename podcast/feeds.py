@@ -2,7 +2,9 @@ from __future__ import unicode_literals
 
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.syndication.views import Feed, add_domain
-from django.utils.feedgenerator import Rss201rev2Feed
+from django.utils import timezone
+from django.utils.feedgenerator import rfc2822_date, Rss201rev2Feed
+from django.utils.html import escape
 
 from .models import Enclosure, Episode, Show
 from .utils import EscapeFriendlyXMLGenerator
@@ -37,14 +39,15 @@ class ItunesFeed(Rss201rev2Feed):
     def add_root_elements(self, handler):
         super(ItunesFeed, self).add_root_elements(handler)
         handler.addQuickElement('copyright', self.feed['copyright'], escape=False, cdata=False)
-        handler.addQuickElement('managingEditor', self.feed['managing_editor'])
-        handler.addQuickElement('webMaster', self.feed['web_master'])
         handler.addQuickElement('docs', self.feed['docs'])
         handler.startElement('image', {})
         handler.addQuickElement('url', self.feed['image'])
         handler.addQuickElement('title', self.feed['title'])
         handler.addQuickElement('link', self.feed['link'])
         handler.endElement('image')
+        handler.addQuickElement('managingEditor', self.feed['managing_editor'])
+        handler.addQuickElement('pubDate', rfc2822_date(self.latest_post_date()))
+        handler.addQuickElement('webMaster', self.feed['web_master'])
         handler.addQuickElement('itunes:type', self.feed['itunes']['type'])
         handler.addQuickElement('itunes:subtitle', self.feed['itunes']['subtitle'])
         handler.addQuickElement('itunes:summary', self.feed['itunes']['summary'], escape=False, cdata=True)
@@ -86,6 +89,7 @@ class ItunesFeed(Rss201rev2Feed):
 
 class ShowFeed(Feed):
     feed_type = ItunesFeed
+    docs = 'https://cyber.harvard.edu/rss/rss.html'
 
     def get_object(self, request, *args, **kwargs):
         self.request = request
@@ -103,20 +107,34 @@ class ShowFeed(Feed):
     def description(self, obj):
         return '%s' % obj.description
 
+    def categories(self, obj):
+        return [c.get_full(c) for c in obj.categories.all()]
+
+    def ttl(self, obj):
+        return 60
+
+    def managing_editor(self, obj):
+        return obj.author_email
+
+    def web_master(self, obj):
+        return obj.get_owner_email()
+
+    def copyright(self, obj):
+        year = timezone.now().year
+        title = escape(obj.copyright or obj.title)
+        return "&#x2117; &amp; &#xA9; %s %s" % (year, title)
+
     def image(self, obj):
         current_site = get_current_site(self.request)
         return add_domain(current_site.domain, obj.get_image_url(), self.request.is_secure())
 
-    def docs(self, obj):
-        return 'https://cyber.harvard.edu/rss/rss.html'
-
     def feed_extra_kwargs(self, obj):
         return {
-            'copyright': obj.get_copyright(),
-            'managing_editor': obj.author_email,
-            'web_master': obj.get_owner_email(),
-            'docs': self.docs(obj),
+            'docs': self.docs,
             'image': self.image(obj),
+            'copyright': self.copyright(obj),
+            'managing_editor': self.managing_editor(obj),
+            'web_master': self.web_master(obj),
             'itunes': {
                 'type': obj.type,
                 'subtitle': obj.get_subtitle(),
