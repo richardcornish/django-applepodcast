@@ -38,6 +38,7 @@ class ItunesFeed(Rss201rev2Feed):
         super(ItunesFeed, self).add_root_elements(handler)
         handler.addQuickElement('copyright', self.feed['copyright'], escape=False, cdata=False)
         handler.addQuickElement('managingEditor', self.feed['managing_editor'])
+        handler.addQuickElement('webMaster', self.feed['web_master'])
         handler.addQuickElement('docs', self.feed['docs'])
         handler.startElement('image', {})
         handler.addQuickElement('url', self.feed['image'])
@@ -113,6 +114,7 @@ class ShowFeed(Feed):
         return {
             'copyright': obj.get_copyright(),
             'managing_editor': obj.author_email,
+            'web_master': obj.get_owner_email(),
             'docs': self.docs(obj),
             'image': self.image(obj),
             'itunes': {
