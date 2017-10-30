@@ -32,23 +32,6 @@
 {% if show.itunes %}<p><a href="{{ show.itunes }}"><img src="{% static 'podcast/img/badge.svg' %}" alt="{% trans 'Listen on Apple Podcasts' %}"></a></p>{% endif %}
 <p><a href="{{ show.get_absolute_feed_url }}" title="Really Simple Syndication">{% trans 'Subscribe to RSS' %}</a></p>
 
-{% if show.categories %}
-<h2>{% trans 'Categories' %}</h2>
-<ul>
-    {% for key, value in show.get_categories_dict %}
-    <li>{{ key }}
-        {% if value %}
-        <ul>
-            {% for sub in value %}
-            <li>{{ sub }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-    </li>
-    {% endfor %}
-</ul>
-{% endif %}
-
 {% if episode_list %}
 
     <h2>{% trans 'Episodes' %}</h2>
