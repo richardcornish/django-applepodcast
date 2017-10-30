@@ -37,6 +37,7 @@ class ItunesFeed(Rss201rev2Feed):
     def add_root_elements(self, handler):
         super(ItunesFeed, self).add_root_elements(handler)
         handler.addQuickElement('copyright', self.feed['copyright'], escape=False, cdata=False)
+        handler.addQuickElement('managingEditor', self.feed['managing_editor'])
         handler.addQuickElement('docs', self.feed['docs'])
         handler.startElement('image', {})
         handler.addQuickElement('url', self.feed['image'])
@@ -111,8 +112,9 @@ class ShowFeed(Feed):
     def feed_extra_kwargs(self, obj):
         return {
             'copyright': obj.get_copyright(),
-            'image': self.image(obj),
+            'managing_editor': obj.author_email,
             'docs': self.docs(obj),
+            'image': self.image(obj),
             'itunes': {
                 'type': obj.type,
                 'subtitle': obj.get_subtitle(),
