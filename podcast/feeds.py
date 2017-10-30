@@ -106,7 +106,7 @@ class ShowFeed(Feed):
         return add_domain(current_site.domain, obj.get_image_url(), self.request.is_secure())
 
     def docs(self, obj):
-        return 'http://blogs.law.harvard.edu/tech/rss'
+        return 'https://cyber.harvard.edu/rss/rss.html'
 
     def feed_extra_kwargs(self, obj):
         return {
