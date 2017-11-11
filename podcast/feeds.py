@@ -114,10 +114,10 @@ class ShowFeed(Feed):
         return 60
 
     def managing_editor(self, obj):
-        return obj.author_email
+        return '%s' % obj.author_email
 
     def web_master(self, obj):
-        return obj.get_owner_email()
+        return '%s' % obj.get_owner_email()
 
     def copyright(self, obj):
         year = timezone.now().year
@@ -165,7 +165,7 @@ class ShowFeed(Feed):
         return '%s' % item.description
 
     def item_guid(self, item):
-        return item.guid
+        return '%s' % item.guid
 
     def item_guid_is_permalink(self, item):
         return False
