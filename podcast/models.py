@@ -34,7 +34,7 @@ class Speaker(models.Model):
         verbose_name_plural = _("speakers")
 
     def __str__(self):
-        return self.name
+        return "%s" % self.name
 
 
 @python_2_unicode_compatible
@@ -51,7 +51,7 @@ class Category(models.Model):
         verbose_name_plural = _("categories")
 
     def __str__(self):
-        return self.get_full(self)
+        return "%s" % self.get_full(self)
 
     def save(self, *args, **kwargs):
         self.full = self.get_full(self)
