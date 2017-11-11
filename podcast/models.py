@@ -150,23 +150,20 @@ class Show(models.Model):
         new_dict = {}
         for old_dict in old_dicts:
             try:
-                for key, value in old_dict.iteritems():
-                    if key not in new_dict:
-                        new_dict[key] = value
-                    else:
-                        for sub in value:
-                            new_dict[key].append(sub)
+                o = old_dict.iteritems()
             except AttributeError:  # Python 3
-                for key, value in old_dict.items():
-                    if key not in new_dict:
-                        new_dict[key] = value
-                    else:
-                        for sub in value:
-                            new_dict[key].append(sub)
+                o = old_dict.items()
+            for key, value in o:
+                if key not in new_dict:
+                    new_dict[key] = value
+                else:
+                    for sub in value:
+                        new_dict[key].append(sub)
         try:
-            return sorted(new_dict.iteritems())
+            n = new_dict.iteritems()
         except AttributeError:  # Python 3
-            return sorted(new_dict.items())
+            n = new_dict.items()
+        return sorted(n)
 
     def get_explicit(self):
         return "yes" if self.explicit else "no"
