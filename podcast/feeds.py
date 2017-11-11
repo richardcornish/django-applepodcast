@@ -91,6 +91,7 @@ class ItunesFeed(Rss201rev2Feed):
 class ShowFeed(Feed):
     feed_type = ItunesFeed
     docs = 'https://cyber.harvard.edu/rss/rss.html'
+    item_guid_is_permalink = False
 
     def get_object(self, request, *args, **kwargs):
         self.request = request
@@ -167,9 +168,6 @@ class ShowFeed(Feed):
 
     def item_guid(self, item):
         return '%s' % item.guid
-
-    def item_guid_is_permalink(self, item):
-        return False
 
     def item_pubdate(self, item):
         return item.pub_date
