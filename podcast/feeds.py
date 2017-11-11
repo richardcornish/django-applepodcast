@@ -94,9 +94,9 @@ class ShowFeed(Feed):
     def get_object(self, request, *args, **kwargs):
         self.request = request
         if settings.PODCAST_SINGULAR:
-            return Show.objects.get(id=settings.PODCAST_ID)
+            return get_object_or_404(Show, id=settings.PODCAST_ID)
         else:
-            return Show.objects.get(slug=kwargs['show_slug'])
+            return get_object_or_404(Show, slug=self.kwargs['show_slug'])
 
     def title(self, obj):
         return '%s' % obj.title
