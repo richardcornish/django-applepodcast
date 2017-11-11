@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.syndication.views import Feed, add_domain
+from django.shortcuts import get_object_or_404
 from django.utils import timezone
 from django.utils.feedgenerator import rfc2822_date, Rss201rev2Feed
 from django.utils.html import escape
