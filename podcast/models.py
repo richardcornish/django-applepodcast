@@ -2,7 +2,6 @@ from __future__ import division
 from __future__ import unicode_literals
 
 import hashlib
-import re
 from ast import literal_eval
 from datetime import timedelta
 
@@ -12,7 +11,6 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils import timezone
 from django.utils.encoding import force_bytes, python_2_unicode_compatible
-from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 
 import bleach
