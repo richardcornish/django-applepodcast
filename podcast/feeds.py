@@ -124,7 +124,7 @@ class ShowFeed(Feed):
     def copyright(self, obj):
         year = timezone.now().year
         title = escape(obj.copyright or obj.title)
-        return "&#x2117; &amp; &#xA9; %s %s" % (year, title)
+        return '&#x2117; &amp; &#xA9; %s %s' % (year, title)
 
     def image(self, obj):
         current_site = get_current_site(self.request)
