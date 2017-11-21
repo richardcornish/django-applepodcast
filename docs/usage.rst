@@ -95,11 +95,11 @@ Result:
 
    itpc://127.0.0.1:8000/podcast/feed/
 
-Beware that these URLs are purely interaction based; you would not be required to submit the show feed to Apple Podcasts, but you would also not be able to track users' behavior in Podcasts Connect. For this reason, you're probably better off in a traditional submission to Apple Podcasts, saving your new URL in the ``Show`` model, and using the ``show.itunes`` variable in your template.
+Beware that these URLs are purely interaction based; you would not be required to submit the show feed to Apple Podcasts, but you would also not be able to track users' behavior in Podcasts Connect. For this reason, you're probably better off in a traditional submission to Apple Podcasts, saving your new URL in the ``Show`` model, and using the ``show.apple`` variable in your template.
 
 .. code-block:: django
 
-   {{ show.itunes }}
+   {{ show.apple }}
 
 Submission
 ==========

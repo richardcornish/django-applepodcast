@@ -62,7 +62,7 @@
 {% endwith %}
 {% endif %}
 
-{% if episode.show.itunes %}<p><a href="{{ episode.show.itunes }}"><img src="{% static 'podcast/img/badge.svg' %}" alt="{% trans 'Listen on Apple Podcasts' %}"></a></p>{% endif %}
+{% if episode.show.apple %}<p><a href="{{ episode.show.apple }}"><img src="{% static 'podcast/img/badge.svg' %}" alt="{% trans 'Listen on Apple Podcasts' %}"></a></p>{% endif %}
 <p><a href="{{ episode.show.get_absolute_feed_url }}" title="Really Simple Syndication">{% trans 'Subscribe to RSS' %}</a></p>
 
 {% if episode.get_previous or episode.get_next %}

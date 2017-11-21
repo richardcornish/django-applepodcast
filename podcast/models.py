@@ -84,9 +84,9 @@ class Show(models.Model):
     copyright = models.CharField(_("copyright"), max_length=255, blank=True, help_text=_("Organization name; &copy; and %s will be prepended automatically; if blank, uses show's title" % timezone.now().year))
     categories = models.ManyToManyField(Category, verbose_name=_("categories"), help_text=_("Please select parent category if selecting a subcategory, e.g. <strong>Arts</strong> if <strong>Arts / Design</strong>"))
     explicit = models.BooleanField(_("explicit?"), default=False, help_text=_("Indicates explicit language or adult content"))
-    block = models.BooleanField(_("block?"), default=False, help_text=_("Prevents entire podcast from appearing on the iTunes Store"))
+    block = models.BooleanField(_("block?"), default=False, help_text=_("Prevents entire podcast from appearing on Apple Podcasts"))
     complete = models.BooleanField(_("complete?"), default=False, help_text=_("Indicates entire podcast is complete and no future episodes will be created"))
-    itunes = models.URLField(_("iTunes URL"), blank=True, help_text=_("Paste iTunes URL here after submission of show feed URL to <a href=\"https://podcastsconnect.apple.com/\">iTunes Connect</a>"))
+    apple = models.URLField(_("Apple Podcasts URL"), blank=True, help_text=_("Paste Apple Podcasts URL here after submission of show feed URL to <a href=\"https://podcastsconnect.apple.com/\">Podcasts Connect</a>"))
     coming = models.BooleanField(_("coming"), default=False, help_text=_("Indicates whether users are coming from an old feed; if set, leave for four weeks; see <a href=\"https://help.apple.com/itc/podcasts_connect/#/itca489031e0\">documentation</a>"))
     going = models.URLField(_("going"), blank=True, help_text=_("Permanently redirect users to URL of a new feed; see <a href=\"https://help.apple.com/itc/podcasts_connect/#/itca489031e0\">documentation</a>"))
     hosts = models.ManyToManyField(Speaker, verbose_name=_("hosts"), blank=True)
@@ -140,7 +140,7 @@ class Show(models.Model):
             return {obj.title: trail}
 
     def get_categories(self):
-        # iTunes-friendly categories; i.e. not recursive
+        # Apple Podcasts-friendly categories; i.e. not recursive
         # e.g.: {'Arts': ['Food'], 'TV & Film': [], 'Technology': ['Gadgets']}
         categories = {}
         for item in [self.get_category(obj) for obj in self.categories.all()]:
@@ -200,7 +200,7 @@ class Episode(models.Model):
     author_email = models.EmailField(_("author e-mail"), blank=True, help_text=_("If blank, uses show's author email"))
     image = models.ImageField(_("image"), upload_to=episode_image_path, blank=True, help_text=_("1400&times;1400&ndash;3000&times;3000px, 72DPI, JPG/PNG, RGB; if blank, uses show's image"))
     explicit = models.BooleanField(_("explicit?"), default=False, help_text=_("Indicates explicit language or adult content"))
-    block = models.BooleanField(_("block?"), default=False, help_text=_("Prevents episode from appearing on the iTunes Store"))
+    block = models.BooleanField(_("block?"), default=False, help_text=_("Prevents episode from appearing on Apple Podcasts"))
     hosts = models.ManyToManyField(Speaker, verbose_name=_("hosts"), related_name="host", blank=True, help_text=_("If different from show hosts"))
     guests = models.ManyToManyField(Speaker, verbose_name=_("guests"), related_name="guest", blank=True)
     guid = models.CharField(_("GUID"), max_length=64, editable=False)

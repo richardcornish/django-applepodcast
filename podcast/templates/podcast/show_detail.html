@@ -29,7 +29,7 @@
 <p>{{ show.description }}</p>
 {% endif %}
 
-{% if show.itunes %}<p><a href="{{ show.itunes }}"><img src="{% static 'podcast/img/badge.svg' %}" alt="{% trans 'Listen on Apple Podcasts' %}"></a></p>{% endif %}
+{% if show.apple %}<p><a href="{{ show.apple }}"><img src="{% static 'podcast/img/badge.svg' %}" alt="{% trans 'Listen on Apple Podcasts' %}"></a></p>{% endif %}
 <p><a href="{{ show.get_absolute_feed_url }}" title="Really Simple Syndication">{% trans 'Subscribe to RSS' %}</a></p>
 
 {% if episode_list %}
