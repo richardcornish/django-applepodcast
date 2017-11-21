@@ -58,10 +58,10 @@ class ItunesFeed(Rss201rev2Feed):
         handler.addQuickElement('itunes:email', self.feed['itunes']['owner']['email'])
         handler.endElement('itunes:owner')
         handler.addQuickElement('itunes:image', '', {'href': self.feed['image']})
-        for key, value in self.feed['itunes']['categories']:
+        for key in self.feed['itunes']['categories']:
             handler.startElement('itunes:category', {'text': key})
-            for sub in value:
-                handler.addQuickElement('itunes:category', '', {'text': sub})
+            for k in self.feed['itunes']['categories'][key]:
+                handler.addQuickElement('itunes:category', '', {'text': k})
             handler.endElement('itunes:category')
         handler.addQuickElement('itunes:explicit', self.feed['itunes']['explicit'])
         handler.addQuickElement('itunes:block', self.feed['itunes']['block'])
@@ -110,7 +110,7 @@ class ShowFeed(Feed):
         return '%s' % obj.description
 
     def categories(self, obj):
-        return [c.get_full(c) for c in obj.categories.all()]
+        return [c.full for c in obj.categories.all()]
 
     def ttl(self, obj):
         return 60
@@ -149,7 +149,7 @@ class ShowFeed(Feed):
                     'name': obj.get_owner_name(),
                     'email': obj.get_owner_email(),
                 },
-                'categories': obj.get_categories_dict(),
+                'categories': obj.get_categories(),
                 'explicit': obj.get_explicit(),
                 'block': obj.get_block(),
                 'complete': obj.get_complete(),

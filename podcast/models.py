@@ -43,7 +43,6 @@ class Category(models.Model):
     title = models.CharField(_("title"), max_length=255)
     slug = models.SlugField(_("slug"), unique=True)
     full = models.CharField(_("full title"), max_length=255, editable=False)
-    json = models.TextField(_("JSON"), editable=False)
 
     class Meta:
         ordering = ["full"]
@@ -51,27 +50,18 @@ class Category(models.Model):
         verbose_name_plural = _("categories")
 
     def __str__(self):
-        return "%s" % self.get_full(self)
+        return "%s" % self.get_str(self)
 
     def save(self, *args, **kwargs):
-        self.full = self.get_full(self)
-        self.json = self.get_json(self)
+        self.full = self.get_str(self)
         super(Category, self).save(*args, **kwargs)
 
-    def get_full(self, obj):
-        if obj.parent is None:
-            return obj.title
+    def get_str(self, obj, delimiter=" | ", trail=""):
+        delimiter = delimiter if trail else ""
+        if obj.parent:
+            return self.get_str(obj.parent, trail="%s%s%s" % (obj.title, delimiter, trail))
         else:
-            return "%s / %s" % (self.get_full(obj.parent), obj.title)
-
-    def get_json(self, obj, children=False):
-        if obj.parent is None:
-            if not children:
-                return '{"%s": []}' % obj.title
-            else:
-                return "%s" % obj.title
-        else:
-            return '{"%s": ["%s"]}' % (self.get_json(obj.parent, children=True), obj.title)
+            return "%s%s%s" % (obj.title, delimiter, trail)
 
 
 @python_2_unicode_compatible
@@ -143,25 +133,24 @@ class Show(models.Model):
     def get_owner_email(self):
         return self.owner_email if self.owner_email else self.author_email
 
-    def get_categories_dict(self):
-        old_dicts = [literal_eval(c.json) for c in self.categories.all()]
-        new_dict = {}
-        for old_dict in old_dicts:
-            try:
-                o = old_dict.iteritems()
-            except AttributeError:  # Python 3
-                o = old_dict.items()
-            for key, value in o:
-                if key not in new_dict:
-                    new_dict[key] = value
+    def get_category(self, obj, trail={}):
+        if obj.parent:
+            return self.get_category(obj.parent, trail={obj.title: trail})
+        else:
+            return {obj.title: trail}
+
+    def get_categories(self):
+        # iTunes-friendly categories; i.e. not recursive
+        # e.g.: {'Arts': ['Food'], 'TV & Film': [], 'Technology': ['Gadgets']}
+        categories = {}
+        for item in [self.get_category(obj) for obj in self.categories.all()]:
+            for key in item:
+                if not key in categories:
+                    categories[key] = []
                 else:
-                    for sub in value:
-                        new_dict[key].append(sub)
-        try:
-            n = new_dict.iteritems()
-        except AttributeError:  # Python 3
-            n = new_dict.items()
-        return sorted(n)
+                    for k in item[key]:
+                        categories[key].append(k)
+        return categories
 
     def get_explicit(self):
         return "yes" if self.explicit else "no"
