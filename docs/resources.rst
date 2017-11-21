@@ -31,8 +31,8 @@ Validators
 Resources
 =========
 
-* `iTunes Connect resources <https://itunespartner.apple.com/en/podcasts/overview>`_
-* `Podcasts Connect help <https://help.apple.com/itc/podcasts_connect/>`_
+* `iTunes Connect Resources and Help <https://itunespartner.apple.com/en/podcasts/overview>`_
+* `Podcasts Connect Help <https://help.apple.com/itc/podcasts_connect/>`_
 
 Marketing
 =========
@@ -42,5 +42,5 @@ Marketing
 Submission
 ==========
 
-* `iTunes Connect <https://itunesconnect.apple.com/login>`_
+* `Podcasts Connect <https://podcastsconnect.apple.com/>`_
 * `Google Play Music Podcast Portal <https://play.google.com/music/podcasts/portal>`_
