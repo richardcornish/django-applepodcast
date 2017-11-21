@@ -280,10 +280,10 @@ class Episode(models.Model):
         return "yes" if self.block else "no"
 
     def get_previous(self):
-        return self.get_previous_by_pub_date(show=self.show, status='public', pub_date__lte=timezone.now())
+        return self.get_previous_by_pub_date(show=self.show, status="public", pub_date__lte=timezone.now())
 
     def get_next(self):
-        return self.get_next_by_pub_date(show=self.show, status='public', pub_date__lte=timezone.now())
+        return self.get_next_by_pub_date(show=self.show, status="public", pub_date__lte=timezone.now())
 
     def get_duration(self):
         return self.enclosure.get_duration()
