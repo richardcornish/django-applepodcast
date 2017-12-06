@@ -10,7 +10,7 @@ from ..models import Show, Episode, Enclosure
 
 try:
     from django.core.urlresolvers import reverse
-except ModuleNotFoundError:  # >= Django 2.0
+except ImportError:  # >= Django 2.0
     from django.urls import reverse
 
 
