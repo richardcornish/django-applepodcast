@@ -3,11 +3,15 @@ from __future__ import unicode_literals
 import os
 import datetime
 
-from django.core.urlresolvers import reverse
 from django.test import TestCase, Client, override_settings
 from django.utils import timezone
 
 from ..models import Show, Episode, Enclosure
+
+try:
+    from django.core.urlresolvers import reverse
+except ModuleNotFoundError:  # >= Django 2.0
+    from django.urls import reverse
 
 
 @override_settings(PODCAST_SINGULAR=False)

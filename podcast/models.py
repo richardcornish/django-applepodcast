@@ -7,7 +7,6 @@ from datetime import timedelta
 
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.core.exceptions import ValidationError
-from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils import timezone
 from django.utils.encoding import force_bytes, python_2_unicode_compatible
@@ -19,6 +18,11 @@ import mutagen
 from .managers import EpisodeManager
 from .utils import enclosure_file_path, enclosure_poster_path, episode_image_path, show_image_path, speaker_photo_path
 from . import settings
+
+try:
+    from django.core.urlresolvers import reverse
+except ModuleNotFoundError:  # >= Django 2.0
+    from django.urls import reverse
 
 
 @python_2_unicode_compatible

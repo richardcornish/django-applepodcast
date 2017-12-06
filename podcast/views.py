@@ -70,6 +70,8 @@ class EpisodeDetailView(DetailView):
 
 
 class EpisodeDownloadView(RedirectView):
+    permanent = True
+
     def get_redirect_url(self, *args, **kwargs):
         if settings.PODCAST_SINGULAR:
             show = get_object_or_404(Show, id=settings.PODCAST_ID)
