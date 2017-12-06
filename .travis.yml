@@ -9,7 +9,8 @@ env:
     - DJANGO_VERSION=1.8.18
     - DJANGO_VERSION=1.9.13
     - DJANGO_VERSION=1.10.7
-    - DJANGO_VERSION=1.11
+    - DJANGO_VERSION=1.11.8
+    - DJANGO_VERSION=2.0
 matrix:
   exclude:
     - python: "3.6"
@@ -23,7 +24,11 @@ matrix:
     - python: "3.6"
       env: DJANGO_VERSION=1.10.7
     - python: "3.3"
-      env: DJANGO_VERSION=1.11
+      env: DJANGO_VERSION=1.11.8
+    - python: "2.7"
+      env: DJANGO_VERSION=2.0
+    - python: "3.3"
+      env: DJANGO_VERSION=2.0
 before_install:
     - export DJANGO_SETTINGS_MODULE="podcast.tests.settings"
     - if [ $TRAVIS_PYTHON_VERSION = 3.3 ] && [ $DJANGO_VERSION = 1.8.18 ]; then pip uninstall --yes setuptools; pip install setuptools; fi
