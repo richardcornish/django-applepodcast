@@ -188,7 +188,7 @@ class Episode(models.Model):
         ("trailer", _("Trailer")),
         ("bonus", _("Bonus")),
     )
-    show = models.ForeignKey(Show, verbose_name=_("show"))
+    show = models.ForeignKey(Show, verbose_name=_("show"), on_delete=models.CASCADE)
     title = models.CharField(_("title"), max_length=255)
     slug = models.SlugField(_("slug"),)
     description = models.TextField(_("description"), help_text=_("Accepts HTML"))
@@ -314,7 +314,7 @@ class Enclosure(models.Model):
         ("application/pdf", _("PDF file")),
         ("document/x-epub", _("ePub file")),
     )
-    episode = models.OneToOneField(Episode, verbose_name=_("episode"))
+    episode = models.OneToOneField(Episode, verbose_name=_("episode"), on_delete=models.CASCADE)
     file = models.FileField(_("file"), upload_to=enclosure_file_path, help_text=_("Supported formats: M4A, MP3, MOV, MP4, M4V, PDF, and EPUB"))
     timedelta = models.DurationField(_("time delta"), null=True)
     type = models.CharField(_("type"), max_length=255, choices=TYPE_CHOICES, default="audio/mpeg")
