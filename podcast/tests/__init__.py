@@ -132,4 +132,5 @@ class PodcastTestCase(TestCase):
         with open(os.path.join(os.path.dirname(__file__), 'feed.xml'), 'r') as file_1:
             xml_1 = file_1.read()
             xml_2 = response.content.decode('utf-8').replace('http://testserverpodcast', 'http://testserver/podcast')
+            self.maxDiff = None
             self.assertXMLEqual(xml_1, xml_2)
