@@ -90,7 +90,7 @@ class ItunesFeed(Rss201rev2Feed):
 
 class ShowFeed(Feed):
     feed_type = ItunesFeed
-    docs = 'https://cyber.harvard.edu/rss/rss.html'
+    docs = 'http://cyber.harvard.edu/rss/rss.html'
     item_guid_is_permalink = False
 
     def get_object(self, request, *args, **kwargs):
