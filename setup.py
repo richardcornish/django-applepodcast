@@ -18,9 +18,9 @@ setup(
     include_package_data=True,
     packages=find_packages(exclude=('tests',)),
     install_requires=[
+        'bleach',
         'mutagen',
         'pillow',
-        'bleach',
     ],
     test_suite='podcast.tests',
     classifiers=[
