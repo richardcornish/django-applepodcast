@@ -20,9 +20,9 @@ from .utils import enclosure_file_path, enclosure_poster_path, episode_image_pat
 from . import settings
 
 try:
-    from django.core.urlresolvers import reverse
-except ImportError:  # >= Django 2.0
     from django.urls import reverse
+except ImportError:
+    from django.core.urlresolvers import reverse
 
 
 @python_2_unicode_compatible

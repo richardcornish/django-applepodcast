@@ -9,9 +9,9 @@ from django.utils import timezone
 from ..models import Show, Episode, Enclosure
 
 try:
-    from django.core.urlresolvers import reverse
-except ImportError:  # >= Django 2.0
     from django.urls import reverse
+except ImportError:
+    from django.core.urlresolvers import reverse
 
 
 @override_settings(PODCAST_SINGULAR=False)

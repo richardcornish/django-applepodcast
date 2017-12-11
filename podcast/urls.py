@@ -1,6 +1,9 @@
 from __future__ import unicode_literals
 
-from django.conf.urls import url, include
+try:
+    from django.urls import include, path, re_path as url
+except ImportError:
+    from django.conf.urls import include, url
 
 from .views import EpisodeDetailView, EpisodeDownloadView, ShowDetailView, ShowFeedView, ShowListView
 from . import settings
