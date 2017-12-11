@@ -29,7 +29,7 @@ class ShowAdmin(admin.ModelAdmin):
             'fields': ('type', 'title', 'slug', 'image', 'description',),
         }),
         ('iTunes', {
-            'fields': ('subtitle', 'summary', 'author_name', 'author_email', 'owner_name', 'owner_email', 'copyright', 'categories', 'explicit', 'block', 'complete', 'itunes',),
+            'fields': ('subtitle', 'summary', 'author_name', 'author_email', 'owner_name', 'owner_email', 'copyright', 'categories', 'explicit', 'block', 'complete', 'apple',),
         }),
         ('Redirects', {
             'classes': ('collapse',),
