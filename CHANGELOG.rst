@@ -1,3 +1,14 @@
+0.3.5 (2017-12-10)
+******************
+
+- Updated to Django 2.0
+- Added managing editor field to show (copied existing author value to field)
+- Added webmaster field to show
+- Added TTL field to show
+- Added display of RSS categories
+- Added display of RSS docs
+- Altered display of show categories, e.g. from "Arts > Food" to "Arts | Food"
+
 0.3.4 (2017-10-28)
 ******************
 
