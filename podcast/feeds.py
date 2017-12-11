@@ -58,10 +58,10 @@ class ItunesFeed(Rss201rev2Feed):
         handler.addQuickElement('itunes:email', self.feed['itunes']['owner']['email'])
         handler.endElement('itunes:owner')
         handler.addQuickElement('itunes:image', '', {'href': self.feed['image']})
-        for key in self.feed['itunes']['categories']:
+        for key in sorted(self.feed['itunes']['categories']):
             handler.startElement('itunes:category', {'text': key})
-            for k in self.feed['itunes']['categories'][key]:
-                handler.addQuickElement('itunes:category', '', {'text': k})
+            for item in self.feed['itunes']['categories'][key]:
+                handler.addQuickElement('itunes:category', '', {'text': item})
             handler.endElement('itunes:category')
         handler.addQuickElement('itunes:explicit', self.feed['itunes']['explicit'])
         handler.addQuickElement('itunes:block', self.feed['itunes']['block'])
