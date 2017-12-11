@@ -59,13 +59,13 @@ Migrate the database.
 
 .. code-block:: bash
 
-   $ python manage.py migrate
+   $ pipenv run python manage.py migrate
 
 Load the fixtures.
 
 .. code-block:: bash
 
-   $ python manage.py loaddata podcast_category.json
+   $ pipenv run python manage.py loaddata podcast_category.json
 
 Usage
 =====
@@ -74,7 +74,7 @@ Run the local server.
 
 .. code-block:: bash
 
-   $ python manage.py runserver
+   $ pipenv run python manage.py runserver
 
 Visit either the show view or the admin.
 
