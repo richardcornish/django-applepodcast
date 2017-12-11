@@ -43,10 +43,10 @@ If you have multiple shows, you might want to edit the URL pattern in ``urls.py`
 ``PODCAST_ID``
 ==============
 
-An integer indicating the primary key of the show to display; used when ``PODCAST_SINGULAR`` is ``True``. Concept modeled after the |SITE_ID|_ setting used in the `Sites <https://docs.djangoproject.com/en/1.11/ref/contrib/sites/>`_ application.
+An integer indicating the primary key of the show to display; used when ``PODCAST_SINGULAR`` is ``True``. Concept modeled after the |SITE_ID|_ setting used in the `Sites <https://docs.djangoproject.com/en/2.0/ref/contrib/sites/>`_ application.
 
 .. |SITE_ID| replace:: ``SITE_ID``
-.. _SITE_ID: https://docs.djangoproject.com/en/1.11/ref/settings/#site-id
+.. _SITE_ID: https://docs.djangoproject.com/en/2.0/ref/settings/#site-id
 
 The app displays the first show by default.
 

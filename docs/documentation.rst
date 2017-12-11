@@ -5,11 +5,7 @@ Documentation
 
 `Full documentation <https://django-applepodcast.readthedocs.io/>`_ is available online.
 
-However, you can also build the documentation from source. Enter your `virtual environment <https://virtualenv.pypa.io/>`_.
-
-.. code-block:: bash
-
-   $ workon myvenv
+However, you can also build the documentation from source.
 
 Clone the code repository.
 
@@ -28,7 +24,7 @@ Install `Sphinx <http://www.sphinx-doc.org/>`_, |sphinx-autobuild|_, and |sphinx
 
 .. code-block:: bash
 
-   $ pip install sphinx sphinx-autobuild sphinx_rtd_theme
+   $ pipenv install sphinx sphinx-autobuild sphinx_rtd_theme --three
 
 Create an HTML build.
 

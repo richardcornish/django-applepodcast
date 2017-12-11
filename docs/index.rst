@@ -16,7 +16,7 @@ Django Apple Podcast
    https://travis-ci.org/richardcornish/django-applepodcast.svg?branch=master
 .. _Build status: https://travis-ci.org/richardcornish/django-applepodcast
 
-**Django Apple Podcast** is a `Django <https://www.djangoproject.com/>`_ podcast `application <https://docs.djangoproject.com/en/1.11/intro/reusable-apps/>`_ optimized for `Apple Podcasts <https://podcastsconnect.apple.com/>`_. Formerly *Django iTunes Podcast*.
+**Django Apple Podcast** is a `Django <https://www.djangoproject.com/>`_ podcast `application <https://docs.djangoproject.com/en/2.0/intro/reusable-apps/>`_ optimized for `Apple Podcasts <https://podcastsconnect.apple.com/>`_. Formerly *Django iTunes Podcast*.
 
 * `Package distribution <https://pypi.python.org/pypi/django-applepodcast>`_
 * `Code repository <https://github.com/richardcornish/django-applepodcast>`_
@@ -33,7 +33,7 @@ Install
 
 .. code-block:: bash
 
-   $ pip install django-applepodcast
+   $ pipenv install django-applepodcast
 
 Add to ``settings.py``.
 
@@ -48,11 +48,11 @@ Add to ``urls.py``.
 
 .. code-block:: python
 
-   from django.conf.urls import url, include
+   from django.urls import include, path
 
    urlpatterns = [
        # ...
-       url(r'^podcast/', include('podcast.urls')),
+       path('podcast/', include('podcast.urls')),
    ]
 
 Migrate the database.

@@ -30,13 +30,13 @@ URL                                                 URL name                    
 Enclosures
 ==========
 
-The show feed is a subclass of Django's |Rss201rev2Feed|_ feed generator class, which `prohibits the use of more than one enclosure <https://github.com/django/django/blob/1.11/django/utils/feedgenerator.py#L338>`_. Although Django's syndication documentation doesn't directly state it, the `use of multiple enclosures <https://docs.djangoproject.com/en/1.11/ref/contrib/syndication/#enclosures>`_ are meant for only subclasses of Django's |Atom1Feed|_ feed generator class.
+The show feed is a subclass of Django's |Rss201rev2Feed|_ feed generator class, which `prohibits the use of more than one enclosure <https://github.com/django/django/blob/2.0/django/utils/feedgenerator.py#L303>`_. Although Django's syndication documentation doesn't directly state it, the `use of multiple enclosures <https://docs.djangoproject.com/en/2.0/ref/contrib/syndication/#enclosures>`_ are meant for only subclasses of Django's |Atom1Feed|_ feed generator class.
 
 .. |Rss201rev2Feed| replace:: ``Rss201rev2Feed``
-.. _Rss201rev2Feed: https://docs.djangoproject.com/en/1.11/ref/contrib/syndication/#syndicationfeed-classes
+.. _Rss201rev2Feed: https://docs.djangoproject.com/en/2.0/ref/contrib/syndication/#syndicationfeed-classes
 
 .. |Atom1Feed| replace:: ``Atom1Feed``
-.. _Atom1Feed: https://docs.djangoproject.com/en/1.11/ref/contrib/syndication/#syndicationfeed-classes
+.. _Atom1Feed: https://docs.djangoproject.com/en/2.0/ref/contrib/syndication/#syndicationfeed-classes
 
 The `RSS Advisory Board <http://www.rssboard.org/rss-profile#element-channel-item-enclosure>`_ states:
 
@@ -47,31 +47,32 @@ The `RSS Advisory Board <http://www.rssboard.org/rss-profile#element-channel-ite
 Therefore, enclosures are modeled as |OneToOneField|_ s off of episodes, limiting episodes to one and only one enclosure.
 
 .. |OneToOneField| replace:: ``OneToOneField``
-.. _OneToOneField: https://docs.djangoproject.com/en/1.11/ref/models/fields/#onetoonefield
+.. _OneToOneField: https://docs.djangoproject.com/en/2.0/ref/models/fields/#onetoonefield
 
 Apple Podcasts does not host enclosure files; it is the responsibility of the developer to host them. Because an enclosure's file is a |FileField|_, files are uploaded to your |MEDIA_ROOT|_ setting. If you haven't already, your ``urls.py`` should include patterns for interfacing with files in local development.
 
 .. |FileField| replace:: ``FileField``
-.. _FileField: https://docs.djangoproject.com/en/1.11/ref/models/fields/#django.db.models.FileField
+.. _FileField: https://docs.djangoproject.com/en/2.0/ref/models/fields/#django.db.models.FileField
 
 .. |MEDIA_ROOT| replace:: ``MEDIA_ROOT``
-.. _MEDIA_ROOT: https://docs.djangoproject.com/en/1.11/ref/settings/#std:setting-MEDIA_ROOT
+.. _MEDIA_ROOT: https://docs.djangoproject.com/en/2.0/ref/settings/#std:setting-MEDIA_ROOT
 
 .. code-block:: python
 
    from django.conf import settings
-   from django.conf.urls import url, include
    from django.conf.urls.static import static
    from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+   from django.urls import include, path
 
    urlpatterns = [
        # ...
-       url(r'^podcast/', include('podcast.urls')),
+       path('podcast/', include('podcast.urls')),
    ]
 
-   # Static/Media assets for local development
+   # Static/media for local development
    if getattr(settings, 'DEBUG', False):
-       urlpatterns += staticfiles_urlpatterns() + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+       urlpatterns += staticfiles_urlpatterns()
+       urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 Although file management in production is out of scope of this documentation, consider using Amazon Web Service's `S3 (Simple Storage Service) <https://console.aws.amazon.com/s3/home>`_ to host files and `Django Storages <https://pypi.python.org/pypi/django-storages>`_ and `Boto <https://pypi.python.org/pypi/boto>`_ (and, if using Python 3, `Boto 3 <https://pypi.python.org/pypi/boto3>`_), to interface with them.
 

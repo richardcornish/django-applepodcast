@@ -9,8 +9,7 @@ However, you can also test the source code. Note that because the app stores med
 
 .. code-block:: bash
 
-   $ workon myvenv
-   $ cdsitepackages
+   $ cd ~/.virtualenvs/myenv/lib/python3.6/site-packages/podcast/
    $ django-admin test podcast.tests --settings="podcast.tests.settings"
    
    Creating test database for alias 'default'...
