@@ -14,8 +14,8 @@ Specifications
 ==============
 
 * `RSS 2.0 specification <http://cyber.harvard.edu/rss/rss.html>`_
-* `Podcasts Connect help (iTunes-specific tags) <https://help.apple.com/itc/podcasts_connect/#/itcb54353390>`_
-* `iOS 11 specification update <http://podcasts.apple.com/resources/spec/ApplePodcastsSpecUpdatesiOS11.pdf>`_
+* `RSS tags for Podcasts Connect <https://help.apple.com/itc/podcasts_connect/#/itcb54353390>`_
+* `Apple iOS 11 specification update <http://podcasts.apple.com/resources/spec/ApplePodcastsSpecUpdatesiOS11.pdf>`_
 * `Google Play Music <https://support.google.com/googleplay/podcasts/answer/6260341>`_
 * `ID3 standards <http://id3.org/Developer%20Information>`_
 * `iTunes metadata <http://forums.whirlpool.net.au/archive/928786>`_
@@ -31,8 +31,8 @@ Validators
 Resources
 =========
 
-* `iTunes Connect Resources and Help <https://itunespartner.apple.com/en/podcasts/overview>`_
-* `Podcasts Connect Help <https://help.apple.com/itc/podcasts_connect/>`_
+* `Apple iTunes Connect Resources and Help <https://itunespartner.apple.com/en/podcasts/overview>`_
+* `Apple Podcasts Connect Help <https://help.apple.com/itc/podcasts_connect/>`_
 
 Marketing
 =========
@@ -42,5 +42,5 @@ Marketing
 Submission
 ==========
 
-* `Podcasts Connect <https://podcastsconnect.apple.com/>`_
+* `Apple Podcasts Connect <https://podcastsconnect.apple.com/>`_
 * `Google Play Music Podcast Portal <https://play.google.com/music/podcasts/portal>`_

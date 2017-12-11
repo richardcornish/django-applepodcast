@@ -18,7 +18,7 @@ After `creating a project <https://docs.djangoproject.com/en/2.0/intro/tutorial0
        'podcast',
    ]
 
-Because the app is primarily model driven, you will want to expose the URL of the show's feed for submission to Apple Podcasts. Add the URL conf to ``urls.py``.
+Because the app is primarily model driven, you will want to expose the URL of the show's feed for submission to Apple Podcasts. `Add the URL conf <https://docs.djangoproject.com/en/2.0/topics/http/urls/#including-other-urlconfs>`_ to ``urls.py``.
 
 .. code-block:: python
 
@@ -29,7 +29,7 @@ Because the app is primarily model driven, you will want to expose the URL of th
        path('podcast/', include('podcast.urls')),
    ]
 
-If you're on Django 1.11, 1.10, or 1.9, use the older regex-based syntax instead.
+If you're on Django 1.11, 1.10, or 1.9, use the older, `regex-based syntax <https://docs.djangoproject.com/en/1.11/topics/http/urls/#including-other-urlconfs>`_ instead.
 
 .. code-block:: python
 
@@ -40,7 +40,7 @@ If you're on Django 1.11, 1.10, or 1.9, use the older regex-based syntax instead
        url(r'^podcast/', include('podcast.urls')),
    ]
 
-If you're on Django 1.8, you will additionally need to add the ``namespace`` keyword argument to the ``include()`` method manually because the convenient ``app_name`` attribute in ``urls.py`` wasn't `added until Django 1.9 <https://docs.djangoproject.com/en/1.9/releases/1.9/#urls>`_.
+If you're on Django 1.8, you will `additionally <https://docs.djangoproject.com/en/1.8/topics/http/urls/#url-namespaces-and-included-urlconfs>`_ need to add the ``namespace`` keyword argument to the ``include()`` method manually because the convenient ``app_name`` attribute in ``urls.py`` wasn't `added until Django 1.9 <https://docs.djangoproject.com/en/1.9/releases/1.9/#urls>`_.
 
 .. code-block:: python
 

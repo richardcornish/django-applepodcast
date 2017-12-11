@@ -8,24 +8,26 @@ Structure
 
 The best way to understand the app is to simply browse the `online demo <https://djangoapplepodcastdemo.herokuapp.com/podcast/>`_ or locally after adding a show and a few episodes in the admin. But for reference, assuming you chose ``podcast`` as the base of your URL conf, the structure is:
 
-=====================================  ============================  ===================================== =========== =============================== ========================== =====================================
+=====================================  ============================  ===================================== =========== =============================== ========================== ===========================================
 URL                                    URL name                      View                                  Model       Template                        Context                    Absolute URLs
-=====================================  ============================  ===================================== =========== =============================== ========================== =====================================
+=====================================  ============================  ===================================== =========== =============================== ========================== ===========================================
 ``/podcast/``                          ``podcast:show_detail``       ``podcast.views.ShowDetailView``      ``Show``    ``podcast/show_detail.html``    ``show``, ``episode_list`` ``{{ show.get_absolute_url }}``
 ``/podcast/feed/``                     ``podcast:show_feed``         ``podcast.views.ShowFeed``            ``Show``                                                               ``{{ show.get_absolute_feed_url }}``
 ``/podcast/<episode-slug>/``           ``podcast:episode_detail``    ``podcast.views.EpisodeDetailView``   ``Episode`` ``podcast/episode_detail.html`` ``episode``                ``{{ episode.get_absolute_url }}``
-=====================================  ============================  ===================================== =========== =============================== ========================== =====================================
+``/podcast/<episode-slug>/download/``  ``podcast:episode_download``  ``podcast.views.EpisodeDownloadView`` ``Episode``                                                            ``{{ episode.get_absolute_download_url }}``
+=====================================  ============================  ===================================== =========== =============================== ========================== ===========================================
 
 And if you chose ``podcasts`` and set ``PODCAST_SINGULAR = False`` to display multiple shows:
 
-==================================================  ============================  ===================================== =========== =============================== ========================== =====================================
+==================================================  ============================  ===================================== =========== =============================== ========================== ===========================================
 URL                                                 URL name                      View                                  Model       Template                        Context                    Absolute URLs
-==================================================  ============================  ===================================== =========== =============================== ========================== =====================================
+==================================================  ============================  ===================================== =========== =============================== ========================== ===========================================
 ``/podcasts/``                                      ``podcast:show_list``         ``podcast.views.ShowListView``        ``Show``    ``podcast/show_list.html``      ``show_list``
 ``/podcasts/<show-slug>/``                          ``podcast:show_detail``       ``podcast.views.ShowDetailView``      ``Show``    ``podcast/show_detail.html``    ``show``, ``episode_list`` ``{{ show.get_absolute_url }}``
 ``/podcasts/<show-slug>/feed/``                     ``podcast:show_feed``         ``podcast.views.ShowFeed``            ``Show``                                                               ``{{ show.get_absolute_feed_url }}``
 ``/podcasts/<show-slug>/<episode-slug>/``           ``podcast:episode_detail``    ``podcast.views.EpisodeDetailView``   ``Episode`` ``podcast/episode_detail.html`` ``episode``                ``{{ episode.get_absolute_url }}``
-==================================================  ============================  ===================================== =========== =============================== ========================== =====================================
+``/podcasts/<show-slug>/<episode-slug>/download/``  ``podcast:episode_download``  ``podcast.views.EpisodeDownloadView`` ``Episode``                                                            ``{{ episode.get_absolute_download_url }}``
+==================================================  ============================  ===================================== =========== =============================== ========================== ===========================================
 
 Enclosures
 ==========

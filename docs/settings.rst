@@ -35,9 +35,11 @@ If you have multiple shows, you might want to edit the URL pattern in ``urls.py`
 
 .. code-block:: python
 
+   from django.urls import include, path
+
    urlpatterns = [
        # ...
-       url(r'^podcasts/', include('podcast.urls')),
+       path('podcasts/', include('podcast.urls')),
    ]
 
 ``PODCAST_ID``
@@ -74,4 +76,4 @@ An integer indicating how many items to display in a list view or in a detail vi
 
 A list indicating which HTML tags are allowed for display in output; used for show summaries and episode notes. The database can store HTML, but tags not specified in the list are stripped out, and the remaining output is wrapped in ``<![CDATA[...]]>`` tags. Uses the `Bleach <https://pypi.python.org/pypi/bleach>`_ Python package.
 
-The list allows HTML tags as specified by the iOS 11 `Apple Podcasts specification <http://podcasts.apple.com/resources/spec/ApplePodcastsSpecUpdatesiOS11.pdf>`_ by default. The list also includes the conspicuously absent ``<li>`` and ``<strong>`` tags, which appear to be an oversight on Apple's part because ``<ol>``, ``<ul>``, and ``<b>`` are present in the original list.
+The list includes HTML tags specified in the `iOS 11 Apple Podcasts update <http://podcasts.apple.com/resources/spec/ApplePodcastsSpecUpdatesiOS11.pdf>`_ by default. The list also includes the conspicuously absent ``<li>`` and ``<strong>`` tags, which appear to be an oversight on Apple's part because ``<ol>``, ``<ul>``, and ``<b>`` are present in the original list. Note that the `specification <https://help.apple.com/itc/podcasts_connect/#/itcb54353390>`_ confusingly specifies a subset of fewer tags: ``<p>``, ``<ol>``, ``<ul>``, and ``<a>``.
