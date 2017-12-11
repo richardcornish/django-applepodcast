@@ -48,7 +48,7 @@ class ItunesFeed(Rss201rev2Feed):
         handler.endElement('image')
         handler.addQuickElement('managingEditor', self.feed['managing_editor'])
         handler.addQuickElement('pubDate', rfc2822_date(self.latest_post_date()))
-        handler.addQuickElement('webMaster', self.feed['web_master'])
+        handler.addQuickElement('webMaster', self.feed['webmaster'])
         handler.addQuickElement('itunes:type', self.feed['itunes']['type'])
         handler.addQuickElement('itunes:subtitle', self.feed['itunes']['subtitle'])
         handler.addQuickElement('itunes:summary', self.feed['itunes']['summary'], escape=False, cdata=True)
@@ -115,12 +115,6 @@ class ShowFeed(Feed):
     def ttl(self, obj):
         return '%s' % obj.get_ttl()
 
-    def managing_editor(self, obj):
-        return '%s' % obj.author_email
-
-    def web_master(self, obj):
-        return '%s' % obj.get_owner_email()
-
     def copyright(self, obj):
         year = timezone.now().year
         title = escape(obj.copyright or obj.title)
@@ -135,15 +129,15 @@ class ShowFeed(Feed):
             'docs': self.docs,
             'image': self.image(obj),
             'copyright': self.copyright(obj),
-            'managing_editor': self.managing_editor(obj),
-            'web_master': self.web_master(obj),
+            'managing_editor': obj.managing_editor,
+            'webmaster': obj.get_webmaster(),
             'itunes': {
                 'type': obj.type,
                 'subtitle': obj.get_subtitle(),
                 'summary': obj.get_summary(),
                 'author': {
-                    'name': obj.author_name,
-                    'email': obj.author_email,
+                    'name': obj.get_author_name(),
+                    'email': obj.get_author_email(),
                 },
                 'owner': {
                     'name': obj.get_owner_name(),

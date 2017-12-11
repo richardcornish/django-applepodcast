@@ -79,13 +79,15 @@ class Show(models.Model):
     slug = models.SlugField(_("slug"), unique=True)
     image = models.ImageField(_("image"), upload_to=show_image_path, blank=True, help_text=_("1400&times;1400&ndash;3000&times;3000px; 72DPI; JPG, PNG; RGB; if blank, default <a href=\"%s\">no artwork</a> is used") % staticfiles_storage.url(settings.PODCAST_NO_ARTWORK))
     description = models.TextField(_("description"), help_text=_("Accepts HTML"))
+    managing_editor = models.EmailField(_("editor e-mail"), max_length=255, default="", help_text=_("E-mail of administrative contact"))
+    webmaster = models.EmailField(_("webmaster e-mail"), max_length=255, blank=True, help_text=_("E-mail of technical contact; if blank, uses editor e-mail"))
     ttl = models.PositiveIntegerField(_("TTL"), default=60, help_text=_("Time to live; minutes until cached feed refreshed"))
     subtitle = models.CharField(_("subtitle"), max_length=255, help_text=_("A single, descriptive sentence of the show"))
     summary = models.TextField(_("summary"), blank=True, max_length=4000, help_text=_("Max length of 4,000 characters; accepts HTML; if blank, uses show's description"))
-    author_name = models.CharField(_("author name"), max_length=255, help_text=_("Appears as the \"artist\" of the podcast"))
-    author_email = models.EmailField(_("author e-mail"))
-    owner_name = models.CharField(_("owner name"), max_length=255, blank=True, help_text=_("Administrative contact of the podcast; if blank, uses author name"))
-    owner_email = models.EmailField(_("owner e-mail"), blank=True, max_length=255, help_text=_("Administrative contact of the podcast; if blank, uses author email"))
+    author_name = models.CharField(_("author name"), max_length=255, blank=True, help_text=_("Name of \"artist\" of the podcast; if blank, uses show title"))
+    author_email = models.EmailField(_("author e-mail"), blank=True, help_text=_("E-mail of administrative contact; if blank, uses editor e-mail"))
+    owner_name = models.CharField(_("owner name"), max_length=255, blank=True, help_text=_("Name of technical contact; if blank, uses show title"))
+    owner_email = models.EmailField(_("owner e-mail"), blank=True, help_text=_("E-mail of technical contact; if blank, uses webmaster e-mail"))
     copyright = models.CharField(_("copyright"), max_length=255, blank=True, help_text=_("Organization name; &copy; and %s will be prepended automatically; if blank, uses show's title" % timezone.now().year))
     categories = models.ManyToManyField(Category, verbose_name=_("categories"), help_text=_("Please select parent category if selecting a subcategory, e.g. <strong>Arts</strong> if <strong>Arts / Design</strong>"))
     explicit = models.BooleanField(_("explicit?"), default=False, help_text=_("Indicates explicit language or adult content"))
@@ -135,11 +137,20 @@ class Show(models.Model):
         tags = settings.PODCAST_ALLOWED_TAGS
         return bleach.clean(text, tags=tags, strip=True)
 
+    def get_webmaster(self):
+        return self.webmaster if self.webmaster else self.managing_editor
+
+    def get_author_name(self):
+        return self.author_name if self.author_name else self.title
+
+    def get_author_email(self):
+        return self.author_email if self.author_email else self.managing_editor
+
     def get_owner_name(self):
-        return self.owner_name if self.owner_name else self.author_name
+        return self.owner_name if self.owner_name else self.title
 
     def get_owner_email(self):
-        return self.owner_email if self.owner_email else self.author_email
+        return self.owner_email if self.owner_email else self.get_webmaster()
 
     def get_category(self, obj, trail={}):
         if obj.parent:

@@ -26,7 +26,7 @@ class ShowAdmin(admin.ModelAdmin):
     filter_horizontal = ('categories', 'hosts',)
     fieldsets = (
         (None, {
-            'fields': ('type', 'title', 'slug', 'image', 'description', 'ttl',),
+            'fields': ('type', 'title', 'slug', 'image', 'description', 'managing_editor', 'webmaster', 'ttl',),
         }),
         ('iTunes', {
             'fields': ('subtitle', 'summary', 'author_name', 'author_email', 'owner_name', 'owner_email', 'copyright', 'categories', 'explicit', 'block', 'complete', 'apple',),
