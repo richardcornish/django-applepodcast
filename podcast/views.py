@@ -70,7 +70,7 @@ class EpisodeDetailView(DetailView):
 
 
 class EpisodeDownloadView(RedirectView):
-    permanent = True
+    permanent = False
 
     def get_redirect_url(self, *args, **kwargs):
         if settings.PODCAST_SINGULAR:
