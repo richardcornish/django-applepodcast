@@ -113,7 +113,7 @@ class ShowFeed(Feed):
         return [c.full for c in obj.categories.all()]
 
     def ttl(self, obj):
-        return 60
+        return '%s' % obj.get_ttl()
 
     def managing_editor(self, obj):
         return '%s' % obj.author_email

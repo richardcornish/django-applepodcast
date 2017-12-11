@@ -79,6 +79,7 @@ class Show(models.Model):
     slug = models.SlugField(_("slug"), unique=True)
     image = models.ImageField(_("image"), upload_to=show_image_path, blank=True, help_text=_("1400&times;1400&ndash;3000&times;3000px; 72DPI; JPG, PNG; RGB; if blank, default <a href=\"%s\">no artwork</a> is used") % staticfiles_storage.url(settings.PODCAST_NO_ARTWORK))
     description = models.TextField(_("description"), help_text=_("Accepts HTML"))
+    ttl = models.PositiveIntegerField(_("TTL"), default=60, help_text=_("Time to live; minutes until cached feed refreshed"))
     subtitle = models.CharField(_("subtitle"), max_length=255, help_text=_("A single, descriptive sentence of the show"))
     summary = models.TextField(_("summary"), blank=True, max_length=4000, help_text=_("Max length of 4,000 characters; accepts HTML; if blank, uses show's description"))
     author_name = models.CharField(_("author name"), max_length=255, help_text=_("Appears as the \"artist\" of the podcast"))
@@ -120,6 +121,9 @@ class Show(models.Model):
             return self.image.url
         else:
             return staticfiles_storage.url(settings.PODCAST_NO_ARTWORK)
+
+    def get_ttl(self):
+        return str(self.ttl) if self.ttl else ""
 
     def get_subtitle(self):
         text = self.subtitle
