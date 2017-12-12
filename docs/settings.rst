@@ -17,7 +17,7 @@ The app offers several settings. By default, they are:
 
    PODCAST_PAGINATE_BY = 10
 
-   PODCAST_ALLOWED_TAGS = ['p', 'ol', 'ul', 'a', 'em', 'i', 'b', 'li', 'strong']
+   PODCAST_ALLOWED_TAGS = ['p', 'ol', 'ul', 'li', 'a', 'i', 'em', 'b', 'strong']
 
 
 ``PODCAST_SINGULAR``
