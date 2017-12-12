@@ -16,8 +16,8 @@ class ItunesFeed(Rss201rev2Feed):
     def write(self, outfile, encoding):
         """Method override to create self-closing elements.
 
-        https://docs.djangoproject.com/en/1.11/ref/utils/#django.utils.feedgenerator.SyndicationFeed.write
-        https://github.com/django/django/blob/1.11/django/utils/feedgenerator.py#L242
+        https://docs.djangoproject.com/en/2.0/ref/utils/#django.utils.feedgenerator.SyndicationFeed.write
+        https://github.com/django/django/blob/2.0/django/utils/feedgenerator.py#L216
         """
         try:
             handler = EscapeFriendlyXMLGenerator(outfile, encoding, short_empty_elements=True)
