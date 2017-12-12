@@ -48,10 +48,7 @@ class ShowDetailView(SingleObjectMixin, MultipleObjectMixin, TemplateView):
 class ShowFeedView(ShowDetailView):
     def get(self, request, *args, **kwargs):
         show = self.get_object()
-        if show.going:
-            return redirect(show.going, permanent=True)
-        else:
-            return ShowFeed()(request)
+        return redirect(show.going, permanent=True) if show.going else ShowFeed()(request)
 
 
 class EpisodeDetailView(DetailView):

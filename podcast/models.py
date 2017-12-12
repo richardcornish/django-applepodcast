@@ -281,16 +281,13 @@ class Episode(models.Model):
         return bleach.clean(text, tags=tags, strip=True)
 
     def get_author_name(self):
-        return self.author_name if self.author_name else self.show.author_name
+        return self.author_name if self.author_name else self.show.get_author_name()
 
     def get_author_email(self):
-        return self.author_email if self.author_email else self.show.author_email
+        return self.author_email if self.author_email else self.show.get_author_email()
 
     def get_image_url(self):
-        if self.image:
-            return self.image.url
-        else:
-            return self.show.get_image_url()
+        return self.image.url if self.image else self.show.get_image_url()
 
     def get_explicit(self):
         return "yes" if self.explicit else "no"
@@ -354,10 +351,7 @@ class Enclosure(models.Model):
         super(Enclosure, self).save(*args, **kwargs)
 
     def get_poster_url(self):
-        if self.poster:
-            return self.poster.url
-        else:
-            return self.episode.get_image_url()
+        return self.poster.url if self.poster else self.episode.get_image_url()
 
     def get_cc(self):
         return "yes" if self.cc else "no"
@@ -367,10 +361,8 @@ class Enclosure(models.Model):
 
     def get_duration(self):
         seconds = self.timedelta.total_seconds()
-        m, s = divmod(seconds, 60)
-        h, m = divmod(m, 60)
-        if h:
-            return "%02d:%02d:%02d" % (h, m, s)
-        else:
-            return "%02d:%02d" % (m, s)
+        mins, secs = divmod(seconds, 60)
+        hours, mins = divmod(mins, 60)
+        duration = "%02d:%02d" % (mins, secs)
+        return "%02d:%s" % (hours, duration) if hours else duration
     get_duration.short_description = _("duration")
