@@ -119,10 +119,7 @@ class Show(models.Model):
             return reverse("podcast:show_feed", args=[self.slug])
 
     def get_image_url(self):
-        if self.image:
-            return self.image.url
-        else:
-            return staticfiles_storage.url(settings.PODCAST_NO_ARTWORK)
+        return self.image.url if self.image else staticfiles_storage.url(settings.PODCAST_NO_ARTWORK)
 
     def get_ttl(self):
         return str(self.ttl) if self.ttl else ""
