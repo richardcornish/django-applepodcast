@@ -363,3 +363,12 @@ class Enclosure(models.Model):
         duration = "%02d:%02d" % (mins, secs)
         return "%02d:%s" % (hours, duration) if hours else duration
     get_duration.short_description = _("duration")
+
+    def is_audio(self):
+        return self.type in ["audio/mpeg", "audio/x-m4a"]
+
+    def is_video(self):
+        return self.type in ["video/mp4", "video/x-m4v", "video/quicktime"]
+
+    def is_document(self):
+        return self.type in ["application/pdf", "document/x-epub"]

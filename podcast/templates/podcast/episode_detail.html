@@ -11,6 +11,17 @@
 {% endblock %}
 
 {% block extra_head %}
+<meta property="og:title" content="{{ episode.title }}">
+{% if episode.enclosure %}
+{% with enclosure=episode.enclosure %}
+    <meta property="og:type" content="{% if enclosure.is_audio %}music.song{% elif enclosure.is_video %}video.other{% endif %}">
+    <meta property="og:image" content="{{ enclosure.get_poster_url }}">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta property="og:description" content="{{ episode.description|striptags }}">
+    <meta property="og:{% if enclosure.is_audio %}audio{% elif enclosure.is_video %}video{% endif %}" content="http{% if request.is_secure %}s{% endif %}://{{ request.get_host }}{{ episode.get_absolute_download_url }}">
+    <meta property="og:{% if enclosure.is_audio %}audio{% elif enclosure.is_video %}video{% endif %}:type" content="{{ enclosure.type }}">
+{% endwith %}
+{% endif %}
 {% if episode.is_secret %}
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
 {% endif %}
@@ -42,14 +53,14 @@
 {% with enclosure=episode.enclosure %}
 
     {# Audio #}
-    {% if enclosure.type == 'audio/mpeg' or enclosure.type == 'audio/x-m4a' %}
+    {% if enclosure.is_audio %}
     <audio src="{{ episode.get_absolute_download_url }}" controls>
         <p><a href="{{ episode.get_absolute_download_url }}">{% trans 'Download the audio' %}</a>.</p>
     </audio>
     <p>{{ enclosure.get_duration }}</p>
 
     {# Video #}
-    {% elif enclosure.type == 'video/mp4' or enclosure.type == 'video/x-m4v' or enclosure.type == 'video/quicktime' %}
+    {% elif enclosure.is_video %}
     <video poster="{{ enclosure.get_poster_url }}" controls>
         <source src="{{ episode.get_absolute_download_url }}" type="{{ enclosure.type }}">
         <p><a href="{{ episode.get_absolute_download_url }}">{% trans 'Download the video' %}</a>.</p>
