@@ -1,8 +1,7 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import get_object_or_404, redirect
-from django.views.generic import DetailView, ListView, RedirectView, TemplateView
-from django.views.generic.detail import SingleObjectMixin
+from django.views.generic import DetailView, ListView
 from django.views.generic.list import MultipleObjectMixin
 
 from .feeds import ShowFeed
@@ -15,40 +14,43 @@ class ShowListView(ListView):
     paginate_by = settings.PODCAST_PAGINATE_BY
 
 
-class ShowDetailView(SingleObjectMixin, MultipleObjectMixin, TemplateView):
+class ShowDetailView(MultipleObjectMixin, DetailView):
     paginate_by = settings.PODCAST_PAGINATE_BY
-    template_name = 'podcast/show_detail.html'
 
     def get_object(self, queryset=None):
+        # DetailView wins
+        print(self.slug_url_kwarg)
         if settings.PODCAST_SINGULAR:
             return get_object_or_404(Show, id=settings.PODCAST_ID)
         else:
             return get_object_or_404(Show, slug=self.kwargs['show_slug'])
 
     def get_queryset(self):
-        """Return list with episode number attached to each episode."""
-        queryset = self.get_object().episode_set.is_public()
-        pub_list = list(queryset.order_by('pub_date'))
-        for index, item in enumerate(pub_list):
-            item.index = index + 1
-        pub_list.reverse()
-        return pub_list
-
-    def get(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        self.object_list = self.get_queryset()
-        return super(ShowDetailView, self).get(request, *args, **kwargs)
+        # MultipleObjectMixin wins
+        queryset = Episode.objects.is_public().filter(show=self.get_object())
+        index = queryset.count()
+        for obj in queryset:
+            obj.index = index
+            index -= 1
+        return queryset
 
     def get_context_data(self, **kwargs):
+        # MultipleObjectMixin wins
         context = super(ShowDetailView, self).get_context_data(**kwargs)
-        context['episode_list'] = context['object_list']
+        context[self.object._meta.model_name] = self.object
         return context
+
+    def get(self, request, *args, **kwargs):
+        # DetailView wins
+        self.object_list = self.get_queryset()
+        return super(ShowDetailView, self).get(request, *args, **kwargs)
 
 
 class ShowFeedView(ShowDetailView):
     def get(self, request, *args, **kwargs):
         show = self.get_object()
-        return redirect(show.going, permanent=True) if show.going else ShowFeed()(request)
+        feed = ShowFeed()
+        return redirect(show.going, permanent=True) if show.going else feed(request)
 
 
 class EpisodeDetailView(DetailView):
@@ -58,25 +60,19 @@ class EpisodeDetailView(DetailView):
             show = get_object_or_404(Show, id=settings.PODCAST_ID)
         else:
             show = get_object_or_404(Show, slug=self.kwargs['show_slug'])
-        episode = get_object_or_404(Episode.objects.is_public_or_secret(), show=show, slug=self.kwargs['slug'])
-        index = Episode.objects.is_public_or_secret().filter(show=show, pub_date__lt=episode.pub_date).count()
-        episode.index = index + 1
-        episode.index_next = episode.index + 1
-        episode.index_previous = episode.index - 1
-        return episode
+        obj = get_object_or_404(Episode, show=show, slug=self.kwargs['slug'])
+        index = Episode.objects.is_public_or_secret().filter(show=show, pub_date__lt=obj.pub_date).count()
+        obj.index = index + 1
+        obj.index_next = obj.index + 1
+        obj.index_previous = obj.index -1
+        return obj
 
 
-class EpisodeDownloadView(RedirectView):
-    permanent = False
-
-    def get_redirect_url(self, *args, **kwargs):
-        if settings.PODCAST_SINGULAR:
-            show = get_object_or_404(Show, id=settings.PODCAST_ID)
-        else:
-            show = get_object_or_404(Show, slug=self.kwargs['show_slug'])
-        episode = get_object_or_404(Episode.objects.is_public_or_secret(), show=show, slug=self.kwargs['slug'])
+class EpisodeDownloadView(EpisodeDetailView):
+    def get(self, request, *args, **kwargs):
+        episode = self.get_object()
         try:
             enclosure = Enclosure.objects.get(episode=episode)
         except Enclosure.DoesNotExist:
             return None
-        return enclosure.file.url
+        return redirect(enclosure.file.url, permanent=False)
