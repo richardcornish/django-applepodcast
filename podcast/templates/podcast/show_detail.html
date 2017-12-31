@@ -44,7 +44,7 @@
 
     {% for episode in episode_list %}
         <h3><a href="{{ episode.get_absolute_url }}">{{ episode.title }}</a></h3>
-        <p>{% trans 'Episode'%} {{ episode.index }}</p>
+        <p>{% trans 'Episode' %} {{ episode.index }}</p>
         <p><time datetime="{{ episode.pub_date|date:'c' }}" title="{{ episode.pub_date|date:'c' }}">{{ episode.pub_date|date:'j F Y' }}</time></p>
         {% if episode.description %}
         <p>{{ episode.description|safe }}</p>
