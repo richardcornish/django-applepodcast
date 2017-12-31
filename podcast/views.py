@@ -18,15 +18,12 @@ class ShowDetailView(MultipleObjectMixin, DetailView):
     paginate_by = settings.PODCAST_PAGINATE_BY
 
     def get_object(self, queryset=None):
-        # DetailView wins
-        print(self.slug_url_kwarg)
         if settings.PODCAST_SINGULAR:
             return get_object_or_404(Show, id=settings.PODCAST_ID)
         else:
             return get_object_or_404(Show, slug=self.kwargs['show_slug'])
 
     def get_queryset(self):
-        # MultipleObjectMixin wins
         queryset = Episode.objects.is_public().filter(show=self.get_object())
         index = queryset.count()
         for obj in queryset:
@@ -35,13 +32,11 @@ class ShowDetailView(MultipleObjectMixin, DetailView):
         return queryset
 
     def get_context_data(self, **kwargs):
-        # MultipleObjectMixin wins
         context = super(ShowDetailView, self).get_context_data(**kwargs)
         context[self.object._meta.model_name] = self.object
         return context
 
     def get(self, request, *args, **kwargs):
-        # DetailView wins
         self.object_list = self.get_queryset()
         return super(ShowDetailView, self).get(request, *args, **kwargs)
 
