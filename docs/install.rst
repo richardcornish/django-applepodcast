@@ -7,7 +7,7 @@ Install with `Pipenv <https://docs.pipenv.org/>`_.
 
 .. code-block:: bash
 
-   $ pipenv install django django-applepodcast --three
+   $ pipenv install django django-applepodcast
 
 After `creating a project <https://docs.djangoproject.com/en/2.0/intro/tutorial01/>`_, add ``podcast`` to ``INSTALLED_APPS`` in ``settings.py``.
 
