@@ -2,6 +2,8 @@ from __future__ import unicode_literals
 
 import os
 
+import django
+
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -35,7 +37,5 @@ USE_TZ = True
 
 ROOT_URLCONF = 'podcast.tests.urls'
 
-
-import django
 if hasattr(django, 'setup'):  # < Django 1.9
     django.setup()

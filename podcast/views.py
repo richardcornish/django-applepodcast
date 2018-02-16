@@ -4,9 +4,9 @@ from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import DetailView, ListView
 from django.views.generic.list import MultipleObjectMixin
 
+from . import settings
 from .feeds import ShowFeed
 from .models import Enclosure, Episode, Show
-from . import settings
 
 
 class ShowListView(ListView):
@@ -59,7 +59,7 @@ class EpisodeDetailView(DetailView):
         index = Episode.objects.is_public_or_secret().filter(show=show, pub_date__lt=obj.pub_date).count()
         obj.index = index + 1
         obj.index_next = obj.index + 1
-        obj.index_previous = obj.index -1
+        obj.index_previous = obj.index - 1
         return obj
 
 

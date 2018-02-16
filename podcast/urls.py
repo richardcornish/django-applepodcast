@@ -1,12 +1,12 @@
 from __future__ import unicode_literals
 
+from . import settings
+from .views import EpisodeDetailView, EpisodeDownloadView, ShowDetailView, ShowFeedView, ShowListView
+
 try:
     from django.urls import include, re_path
 except ImportError:
     from django.conf.urls import include, url as re_path
-
-from .views import EpisodeDetailView, EpisodeDownloadView, ShowDetailView, ShowFeedView, ShowListView
-from . import settings
 
 
 app_name = 'podcast'

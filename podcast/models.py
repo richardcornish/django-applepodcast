@@ -2,7 +2,6 @@ from __future__ import division
 from __future__ import unicode_literals
 
 import hashlib
-from ast import literal_eval
 from datetime import timedelta
 
 from django.contrib.staticfiles.storage import staticfiles_storage
@@ -15,9 +14,9 @@ from django.utils.translation import ugettext_lazy as _
 import bleach
 import mutagen
 
+from . import settings
 from .managers import EpisodeManager
 from .utils import enclosure_file_path, enclosure_poster_path, episode_image_path, show_image_path, speaker_photo_path
-from . import settings
 
 try:
     from django.urls import reverse
@@ -77,14 +76,14 @@ class Show(models.Model):
     type = models.CharField(_("type"), max_length=255, choices=TYPE_CHOICES, default="episodic", help_text=_("Episodic presents episodes by latest, serial presents episodes by episode number; both support seasons"))
     title = models.CharField(_("title"), max_length=255)
     slug = models.SlugField(_("slug"), unique=True)
-    image = models.ImageField(_("image"), upload_to=show_image_path, blank=True, help_text=_("1400&times;1400&ndash;3000&times;3000px; 72DPI; JPG, PNG; RGB; if blank, default <a href=\"%s\">no artwork</a> is used") % staticfiles_storage.url(settings.PODCAST_NO_ARTWORK))
+    image = models.ImageField(_("image"), upload_to=show_image_path, blank=True, help_text=_('1400&times;1400&ndash;3000&times;3000px; 72DPI; JPG, PNG; RGB; if blank, default <a href="%s">no artwork</a> is used') % staticfiles_storage.url(settings.PODCAST_NO_ARTWORK))
     description = models.TextField(_("description"), help_text=_("Accepts HTML"))
     managing_editor = models.EmailField(_("editor e-mail"), max_length=255, default="", help_text=_("E-mail of administrative contact"))
     webmaster = models.EmailField(_("webmaster e-mail"), max_length=255, blank=True, help_text=_("E-mail of technical contact; if blank, uses editor e-mail"))
     ttl = models.PositiveIntegerField(_("TTL"), default=60, help_text=_("Time to live; minutes until cached feed refreshed"))
     subtitle = models.CharField(_("subtitle"), max_length=255, help_text=_("A single, descriptive sentence of the show"))
     summary = models.TextField(_("summary"), blank=True, max_length=4000, help_text=_("Max length of 4,000 characters; accepts HTML; if blank, uses show's description"))
-    author_name = models.CharField(_("author name"), max_length=255, blank=True, help_text=_("Name of \"artist\" of the podcast; if blank, uses show title"))
+    author_name = models.CharField(_("author name"), max_length=255, blank=True, help_text=_('Name of "artist" of the podcast; if blank, uses show title'))
     author_email = models.EmailField(_("author e-mail"), blank=True, help_text=_("E-mail of administrative contact; if blank, uses editor e-mail"))
     owner_name = models.CharField(_("owner name"), max_length=255, blank=True, help_text=_("Name of technical contact; if blank, uses show title"))
     owner_email = models.EmailField(_("owner e-mail"), blank=True, help_text=_("E-mail of technical contact; if blank, uses webmaster e-mail"))
@@ -93,9 +92,9 @@ class Show(models.Model):
     explicit = models.BooleanField(_("explicit?"), default=False, help_text=_("Indicates explicit language or adult content"))
     block = models.BooleanField(_("block?"), default=False, help_text=_("Prevents entire podcast from appearing on Apple Podcasts"))
     complete = models.BooleanField(_("complete?"), default=False, help_text=_("Indicates entire podcast is complete and no future episodes will be created"))
-    apple = models.URLField(_("Apple Podcasts URL"), blank=True, help_text=_("Paste Apple Podcasts URL here after submission of show feed URL to <a href=\"https://podcastsconnect.apple.com/\">Podcasts Connect</a>"))
-    coming = models.BooleanField(_("coming"), default=False, help_text=_("Indicates whether users are coming from an old feed; if set, leave for four weeks; see <a href=\"https://help.apple.com/itc/podcasts_connect/#/itca489031e0\">documentation</a>"))
-    going = models.URLField(_("going"), blank=True, help_text=_("Permanently redirect users to URL of a new feed; see <a href=\"https://help.apple.com/itc/podcasts_connect/#/itca489031e0\">documentation</a>"))
+    apple = models.URLField(_("Apple Podcasts URL"), blank=True, help_text=_('Paste Apple Podcasts URL here after submission of show feed URL to <a href="https://podcastsconnect.apple.com/">Podcasts Connect</a>'))
+    coming = models.BooleanField(_("coming"), default=False, help_text=_('Indicates whether users are coming from an old feed; if set, leave for four weeks; see <a href="https://help.apple.com/itc/podcasts_connect/#/itca489031e0">documentation</a>'))
+    going = models.URLField(_("going"), blank=True, help_text=_('Permanently redirect users to URL of a new feed; see <a href="https://help.apple.com/itc/podcasts_connect/#/itca489031e0">documentation</a>'))
     hosts = models.ManyToManyField(Speaker, verbose_name=_("hosts"), blank=True)
 
     class Meta:
@@ -212,7 +211,7 @@ class Episode(models.Model):
     itunes_title = models.CharField(_("title"), max_length=255, blank=True, help_text=_("Do not specify show title, episode number, or season number; if blank, uses original title"))
     summary = models.CharField(_("summary"), max_length=255, blank=True, help_text=_("A single, descriptive sentence of the episode"))
     notes = models.TextField(_("notes"), blank=True, max_length=4000, help_text=_("Max length of 4,000 characters; accepts &lt;p&gt; &lt;ol&gt; &lt;ul&gt; &lt;li&gt; &lt;a&gt; &lt;em&gt; &lt;i&gt; &lt;b&gt; &lt;strong&gt;; if blank, uses description"))
-    author_name = models.CharField(_("author name"), max_length=255, blank=True, help_text=_("Appears as the \"artist\" of the episode; if blank, uses show's author name"))
+    author_name = models.CharField(_("author name"), max_length=255, blank=True, help_text=_('Appears as the "artist" of the episode; if blank, uses show\'s author name'))
     author_email = models.EmailField(_("author e-mail"), blank=True, help_text=_("If blank, uses show's author email"))
     image = models.ImageField(_("image"), upload_to=episode_image_path, blank=True, help_text=_("1400&times;1400&ndash;3000&times;3000px, 72DPI, JPG/PNG, RGB; if blank, uses show's image"))
     explicit = models.BooleanField(_("explicit?"), default=False, help_text=_("Indicates explicit language or adult content"))

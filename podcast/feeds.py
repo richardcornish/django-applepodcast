@@ -4,12 +4,12 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.syndication.views import Feed, add_domain
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
-from django.utils.feedgenerator import rfc2822_date, Rss201rev2Feed
+from django.utils.feedgenerator import Rss201rev2Feed, rfc2822_date
 from django.utils.html import escape
 
+from . import settings
 from .models import Enclosure, Episode, Show
 from .utils import EscapeFriendlyXMLGenerator
-from . import settings
 
 
 class ItunesFeed(Rss201rev2Feed):
