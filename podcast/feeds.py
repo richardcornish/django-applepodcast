@@ -167,9 +167,12 @@ class ShowFeed(Feed):
         return item.pub_date
 
     def item_enclosure_url(self, item):
+        try:
+            enclosure = Enclosure.objects.get(episode=item)
+        except Enclosure.DoesNotExist:
+            return None
         current_site = get_current_site(self.request)
-        enclosure_url = item.get_absolute_download_url()
-        return add_domain(current_site.domain, enclosure_url, self.request.is_secure())
+        return add_domain(current_site.domain, enclosure.file.url, self.request.is_secure())
 
     def item_enclosure_length(self, item):
         try:
