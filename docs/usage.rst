@@ -133,7 +133,7 @@ Badge
 
 .. code-block:: django
 
-   {% load i18n staticfiles %}
+   {% load i18n static %}
    <img src="{% static 'podcast/img/badge.svg' %}" alt="{% trans 'Listen on Apple Podcasts' %}">
 
 Icon
@@ -143,17 +143,17 @@ Icon
 
 .. code-block:: django
 
-   {% load i18n staticfiles %}
+   {% load i18n static %}
    <img src="{% static 'podcast/img/icon.svg' %}" alt="{% trans 'Listen on Apple Podcasts' %}">
 
 Load the white or black icons similarly.
 
 .. code-block:: django
 
-   {% load i18n staticfiles %}
+   {% load i18n static %}
    <img src="{% static 'podcast/img/icon-white.svg' %}" alt="{% trans 'Listen on Apple Podcasts' %}">
 
 .. code-block:: django
 
-   {% load i18n staticfiles %}
+   {% load i18n static %}
    <img src="{% static 'podcast/img/icon-black.svg' %}" alt="{% trans 'Listen on Apple Podcasts' %}">
