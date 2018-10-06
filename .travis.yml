@@ -28,9 +28,9 @@ matrix:
     - python: "3.4"
       env: DJANGO_VERSION=2.1
 before_install:
-    - export DJANGO_SETTINGS_MODULE="pygmentify.tests.settings"
+    - export DJANGO_SETTINGS_MODULE="podcast.tests.settings"
 install:
     - pip install -q Django==$DJANGO_VERSION
     - python setup.py -q install
 script:
-    - django-admin test pygmentify.tests
+    - django-admin test podcast.tests
